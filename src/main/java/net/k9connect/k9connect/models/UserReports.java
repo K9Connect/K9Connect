@@ -4,7 +4,7 @@ package net.k9connect.k9connect.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "users_details")
+@Table(name = "user_reports")
 public class UserReports {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
