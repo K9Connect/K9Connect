@@ -21,7 +21,7 @@ public class Dog {
     private char gender;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "user_id")
     private User owner;
 
     @Column

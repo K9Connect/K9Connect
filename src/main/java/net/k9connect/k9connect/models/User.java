@@ -1,6 +1,7 @@
 package net.k9connect.k9connect.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -18,6 +19,9 @@ public class User {
 
     @Column(nullable = false)
     private String email;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+    private List<Dog> dogs;
 
     @Column
     private int status_id;

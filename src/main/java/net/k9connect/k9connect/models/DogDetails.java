@@ -8,6 +8,9 @@ import javax.persistence.*;
 public class DogDetails {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
     @OneToOne
     @JoinColumn(name = "id")
     private Dog dog;
@@ -33,6 +36,14 @@ public class DogDetails {
         this.has_certs = has_certs;
         this.cert_url = cert_url;
         this.bio = bio;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public Dog getDog() {
