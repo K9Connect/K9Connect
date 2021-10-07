@@ -9,40 +9,28 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "dogs_details")
+@Table(name = "dog_reports")
 @NoArgsConstructor
 @AllArgsConstructor
-public class DogDetails {
-
+public class DogReport {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
-    @Setter
     private long id;
 
-    @OneToOne
-    @JoinColumn(name = "id")
+    @ManyToOne
+    @JoinColumn(name = "reporting_user_id")
     @Getter
     @Setter
-    private Dog dog;
+    private User reportingUser;
 
-    @Column(nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "reported_dog_id")
     @Getter
     @Setter
-    private int age;
-
-    @Column(nullable = false)
-    @Getter
-    @Setter
-    private boolean has_certs;
-
-    @Column(length = 500)
-    @Getter
-    @Setter
-    private String cert_url;
+    private Dog reportedDog;
 
     @Column(columnDefinition = "TEXT")
     @Getter
     @Setter
-    private String bio;
+    private String reportText;
 }

@@ -8,28 +8,26 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "users_details")
+@Table(name = "user_reviews")
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDetails {
-
+public class UserReview {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter @Setter private long id;
 
-    @OneToOne(mappedBy = "details")
+    @ManyToOne
+    @JoinColumn(name = "reviewed_user_id")
     @Getter @Setter private User user;
 
+    @ManyToOne
+    @JoinColumn(name = "reviewing_user_id")
+    @Getter @Setter private User commenter;
+
     @Column(columnDefinition = "TEXT")
-    @Getter @Setter private String bio;
+    @Getter @Setter private String review;
 
     @Column
-    @Getter @Setter private long zipcode;
-
-    @Column(length = 500)
-    @Getter @Setter private String pfp;
-
-    @Column
-    @Getter @Setter private String phone_number;
+    @Getter @Setter private int stars;
 
 }

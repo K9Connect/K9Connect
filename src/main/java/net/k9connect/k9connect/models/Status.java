@@ -10,12 +10,4 @@ public class Status {
 
     @Enumerated(EnumType.STRING)
     private Statuses name;
-
-
-//    public static void main(String[] args) {
-//        Status newStat = new Status();
-//        newStat.name = Statuses.banned;
-//
-//        System.out.println();
-//    }
 }
