@@ -2,6 +2,7 @@ package net.k9connect.k9connect.models;
 
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "dogs")
@@ -24,32 +25,63 @@ public class Dog {
     @JoinColumn(name = "user_id")
     private User owner;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "dog")
+    private List<Photos> photos;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "reportedDog")
+    private List<DogReports> reportsagainst;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "reportingUser")
+    private List<DogReports> reportsfiled;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "dog")
+    private List<DogReviews> reviews;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "commenter")
+    private List<DogReviews> reviews_made;
+
     @Column
     private int reputation;
 
     @Column
     private int status_id;
 
+    @OneToOne
+    @JoinColumn(name = "dog")
+    private DogDetails details;
+
     public Dog() {
     }
 
-    public Dog(String name, String breed, char gender, User owner, int reputation, int status_id) {
-        this.name = name;
-        this.breed = breed;
-        this.gender = gender;
-        this.owner = owner;
-        this.reputation = reputation;
-        this.status_id = status_id;
-    }
-
-    public Dog(long id, String name, String breed, char gender, User owner, int reputation, int status_id) {
+    public Dog(long id, String name, String breed, char gender, User owner, List<Photos> photos, List<DogReports> reportsagainst, List<DogReports> reportsfiled, List<DogReviews> reviews, List<DogReviews> reviews_made, int reputation, int status_id, DogDetails details) {
         this.id = id;
         this.name = name;
         this.breed = breed;
         this.gender = gender;
         this.owner = owner;
+        this.photos = photos;
+        this.reportsagainst = reportsagainst;
+        this.reportsfiled = reportsfiled;
+        this.reviews = reviews;
+        this.reviews_made = reviews_made;
         this.reputation = reputation;
         this.status_id = status_id;
+        this.details = details;
+    }
+
+    public Dog(String name, String breed, char gender, User owner, List<Photos> photos, List<DogReports> reportsagainst, List<DogReports> reportsfiled, List<DogReviews> reviews, List<DogReviews> reviews_made, int reputation, int status_id, DogDetails details) {
+        this.name = name;
+        this.breed = breed;
+        this.gender = gender;
+        this.owner = owner;
+        this.photos = photos;
+        this.reportsagainst = reportsagainst;
+        this.reportsfiled = reportsfiled;
+        this.reviews = reviews;
+        this.reviews_made = reviews_made;
+        this.reputation = reputation;
+        this.status_id = status_id;
+        this.details = details;
     }
 
     public long getId() {
@@ -106,5 +138,53 @@ public class Dog {
 
     public void setStatus_id(int status_id) {
         this.status_id = status_id;
+    }
+
+    public List<Photos> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<Photos> photos) {
+        this.photos = photos;
+    }
+
+    public List<DogReports> getReportsagainst() {
+        return reportsagainst;
+    }
+
+    public void setReportsagainst(List<DogReports> reportsagainst) {
+        this.reportsagainst = reportsagainst;
+    }
+
+    public List<DogReports> getReportsfiled() {
+        return reportsfiled;
+    }
+
+    public void setReportsfiled(List<DogReports> reportsfiled) {
+        this.reportsfiled = reportsfiled;
+    }
+
+    public List<DogReviews> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<DogReviews> reviews) {
+        this.reviews = reviews;
+    }
+
+    public List<DogReviews> getReviews_made() {
+        return reviews_made;
+    }
+
+    public void setReviews_made(List<DogReviews> reviews_made) {
+        this.reviews_made = reviews_made;
+    }
+
+    public DogDetails getDetails() {
+        return details;
+    }
+
+    public void setDetails(DogDetails details) {
+        this.details = details;
     }
 }

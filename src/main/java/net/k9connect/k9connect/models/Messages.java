@@ -9,12 +9,12 @@ public class Messages {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne
-    @JoinColumn(name = "id")
+    @ManyToOne
+    @JoinColumn(name = "sending_id")
     private User sending_user;
 
-    @OneToOne
-    @JoinColumn(name = "id")
+    @ManyToOne
+    @JoinColumn(name = "receiving_id")
     private User receiving_user;
 
     @Column(columnDefinition = "TEXT")

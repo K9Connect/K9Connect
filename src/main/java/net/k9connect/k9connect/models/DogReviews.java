@@ -9,12 +9,12 @@ public class DogReviews {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne
-    @JoinColumn(name = "id")
+    @ManyToOne
+    @JoinColumn(name = "reviewed_id")
     private Dog dog;
 
-    @OneToOne
-    @JoinColumn(name = "id")
+    @ManyToOne
+    @JoinColumn(name = "reviewing_id")
     private User commenter;
 
     @Column(columnDefinition = "TEXT")
