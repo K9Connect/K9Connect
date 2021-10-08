@@ -22,11 +22,12 @@ public class UserProfileController {
     @GetMapping("/profile/create")
     public String createProfile(Model model) {
 
+        System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         UserInfo userInfo = new UserInfo();
         userInfo.setUser(loggedInUser);
-        model.addAttribute("user-profile", userInfo);
+        model.addAttribute("userprofile", userInfo);
 
         return "users/create-profile";
 
