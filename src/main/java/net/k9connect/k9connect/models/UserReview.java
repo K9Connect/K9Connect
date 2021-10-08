@@ -18,11 +18,11 @@ public class UserReview {
 
     @ManyToOne
     @JoinColumn(name = "reviewed_user_id")
-    @Getter @Setter private User user;
+    @Getter @Setter private User reviewed;
 
     @ManyToOne
-    @JoinColumn(name = "reviewing_user_id")
-    @Getter @Setter private User commenter;
+    @JoinColumn(name = "reviewer_user_id")
+    @Getter @Setter private User reviewer;
 
     @Column(columnDefinition = "TEXT")
     @Getter @Setter private String review;

@@ -36,16 +36,10 @@ public class Dog {
     @Getter @Setter private List<Photo> photos;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "reportedDog")
-    @Getter @Setter private List<DogReport> reportsagainst;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "reportingUser")
-    @Getter @Setter private List<DogReport> reportsfiled;
+    @Getter @Setter private List<DogReport> reports;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "dog")
     @Getter @Setter private List<DogReview> reviews;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "commenter")
-    @Getter @Setter private List<DogReview> reviews_made;
 
     @Column
     @Getter @Setter private int reputation;
