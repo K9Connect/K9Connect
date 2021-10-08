@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Create Profile</title>
+    <div th:replace="Partials :: header"></div>
+
+</head>
+<body>
+<div th:replace="Partials :: navbar"></div>
+
+<div class="container justify-content-center">
+    <form th:action="@{/profile/create}" th:method="post" th:object="${userprofile}">
+        Photo:<br>
+        <input th:field="*{pfp}" />
+        <br />
+        Phone Number:<br>
+        <input th:field="*{phone_number}" />
+        <br />
+        Zip Code:<br>
+        <input th:field="*{zipcode}" />
+        <br />
+        Bio:<br>
+        <textarea th:field="*{bio}"/>
+        <br />
+        <input type="submit" />
+    </form>
+
+</div>
+
+<div th:replace="Partials :: scripts"></div>
+
+</body>
+</html>
