@@ -28,7 +28,7 @@ public class UserProfileController {
 
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.findByUsername(loggedInUser.getUsername());
-        if (userInfoDao.findById(loggedInUser.getId()) == null) {
+        if (user.getDetails() != null) {
             return "redirect:/profile";
         }
 
@@ -56,6 +56,11 @@ public class UserProfileController {
     @GetMapping("/profile")
     public String redirectProfile(Model model) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userDao.findByUsername(loggedInUser.getUsername());
+
+        if (user.getDetails() == null) {
+            return "redirect:/profile/create";
+        }
         return "redirect:/profile/" + loggedInUser.getId();
 
     }
