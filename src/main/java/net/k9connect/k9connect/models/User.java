@@ -39,7 +39,7 @@ public class User {
 
     @OneToOne
     @JoinColumn(name = "userdetails_id")
-    @Getter @Setter private UserDetails details;
+    @Getter @Setter private UserInfo details;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "reportedUser")
     @Getter @Setter private List<UserReport> reportsagainst;
@@ -58,5 +58,12 @@ public class User {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "reviewer")
     @Getter @Setter private List<UserReview> reviews_made;
+
+    public User(User copy) {
+        id = copy.id; // This line is SUPER important! Many things won't work if it's absent
+        email = copy.email;
+        username = copy.username;
+        password = copy.password;
+    }
 
 }
