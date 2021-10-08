@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>Uh-oh - Server error</title>
+  <div th:replace="Partials :: header"></div>
+
+</head>
+<body>
+<div th:replace="Partials :: navbar"></div>
+
+<div class="container">
+
+  <div class="row justify-content-center">
+    <h1>There was an internal server error from your request!</h1>
+  </div>
+</div>
+
+<div th:replace="Partials :: scripts"></div>
+
+</body>
+</html>
