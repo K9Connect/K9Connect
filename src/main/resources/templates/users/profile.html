@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Profile</title>
+    <div th:replace="Partials :: header"></div>
+
+</head>
+<body>
+<style>
+    .table {
+        margin-top: 25px;
+    }
+    img {
+        border: solid black 3px;
+    }
+</style>
+<div th:replace="Partials :: navbar"></div>
+
+<div class="container">
+
+    <div class="justify-content-center">
+        <div class="col-4">
+            <img height="200px" width="250x" th:src="${user.getDetails().getPfp()}">
+        </div>
+        <div class="col-8">
+            <h1 th:text="${user.getUsername()}"></h1></br>
+            <h3>Zip Code: <span th:text="${info.getZipcode()}"></span></h3></br>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <table class="table">
+                <tr>
+                    <td th:text="${user.getUsername()}"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <span th:if="${user.is_admin() == true}">Administrator</span>
+                        <span th:if="${user.is_admin() != true}">Regular User</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-6">
+            <table class="table">
+                <span th:if="${info.getPhone_number() != null}">
+                <tr>
+                    <td th:text="${info.getPhone_number()}"></td>
+                </tr>
+                </span>
+                <tr>
+                    <td th:text="${info.getBio()}"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<div th:replace="Partials :: scripts"></div>
+
+</body>
+</html>

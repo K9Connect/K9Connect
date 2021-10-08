@@ -12,13 +12,13 @@
 <div class="container justify-content-center">
     <form th:action="@{/profile/create}" th:method="post" th:object="${userprofile}">
         Photo:<br>
-        <input th:field="*{pfp}" />
+        <input th:field="*{pfp}" required />
         <br />
         Phone Number:<br>
         <input th:field="*{phone_number}" />
         <br />
         Zip Code:<br>
-        <input th:field="*{zipcode}" />
+        <input th:field="*{zipcode}" required />
         <br />
         Bio:<br>
         <textarea th:field="*{bio}"/>
