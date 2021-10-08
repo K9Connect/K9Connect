@@ -53,10 +53,10 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "receiving_user")
     @Getter @Setter private List<Message> message_received;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "reviewed")
     @Getter @Setter private List<UserReview> reviews;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "commenter")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "reviewer")
     @Getter @Setter private List<UserReview> reviews_made;
 
 }
