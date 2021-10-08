@@ -41,10 +41,6 @@ public class UserController {
         }
     }
 
-    @GetMapping("/profile")
-    public String goToProfilePage() {
-        return "profile";
-    }
 
 
 }

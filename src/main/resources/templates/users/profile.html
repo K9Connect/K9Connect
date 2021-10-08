@@ -45,11 +45,10 @@
         </div>
         <div class="col-6">
             <table class="table">
-                <span th:if="${info.getPhone_number() != null}">
-                <tr>
-                    <td th:text="${info.getPhone_number()}"></td>
-                </tr>
-                </span>
+                <td>
+                    <span th:if="${info.getPhone_number() == null || info.getPhone_number().isEmpty()}">User's phone number is private.</span>
+                    <span th:if="${info.getPhone_number() != null}" th:text="${info.getPhone_number()}"></span>
+                </td>
                 <tr>
                     <td th:text="${info.getBio()}"></td>
                 </tr>

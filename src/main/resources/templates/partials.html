@@ -27,37 +27,50 @@
                 <li sec:authorize="!isAuthenticated()" class="nav-item"> <!--Hide link if user is logged in.-->
                     <a class="nav-link" href="/login">LOGIN</a>
                 </li>
-                <li sec:authorize="!isAuthenticated()" class="nav-item"> <!--Hide link if user is logged in.-->
-                    <a class="nav-link" href="/sign-up">SIGN-UP</a>
-                </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="/about">ABOUT</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/contact">CONTACT</a>
                 </li>
-<!--                <li class="nav-item dropdown">-->
-<!--                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"-->
-<!--                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-<!--                        Dropdown-->
-<!--                    </a>-->
-<!--                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">-->
-<!--                        <a class="dropdown-item" href="#">Action</a>-->
-<!--                        <a class="dropdown-item" href="#">Another action</a>-->
-<!--                        <div class="dropdown-divider"></div>-->
-<!--                        <a class="dropdown-item" href="#">Something else here</a>-->
-<!--                    </div>-->
-                <li sec:authorize="isAuthenticated()" class="nav-item active">
-                    <form th:action="@{/logout}" th:method="post">
-                        <button class="btn-link btn" style="margin-top: 8px">Logout</button>
-                    </form>
-                </li>
-                </li>
+
+
             </ul>
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
             </form>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             class="bi bi-person-fill" viewBox="0 0 16 16">
+                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                        </svg>
+                        Account
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a sec:authorize="!isAuthenticated()" class="nav-link" href="/login">
+                            <!--Hide link if user is logged in.-->
+                            LOGIN
+                        </a>
+                        <a sec:authorize="!isAuthenticated()" class="nav-link" href="/sign-up">
+                            <!--Hide link if user is logged in.-->
+                            SIGN-UP
+                        </a>
+                        <a sec:authorize="isAuthenticated()" class="nav-link" href="/profile">
+                            PROFILE
+                        </a>
+                        <a sec:authorize="isAuthenticated()" class="nav-item">
+                            <form th:action="@{/logout}" th:method="post">
+                                <button class="btn-link" style="margin-top: 8px">LOGOUT</button>
+                            </form>
+                        </a>
+                    </div>
+                </li>
+            </ul>
         </div>
     </nav>
 </div>
@@ -68,6 +81,15 @@
     <style>
         a {
             text-decoration: none;
+        }
+        .btn-link {
+            border: none;
+            color: #000000E6;
+        }
+        .btn-link:hover {
+            text-decoration: none;
+            color: #000000E6;
+            cursor: pointer;
         }
     </style>
 </div>
