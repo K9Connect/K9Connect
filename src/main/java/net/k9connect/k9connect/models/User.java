@@ -12,7 +12,7 @@ import java.util.List;
 @Table(name = "users")
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class User{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -65,5 +65,6 @@ public class User {
         username = copy.username;
         password = copy.password;
     }
+
 
 }

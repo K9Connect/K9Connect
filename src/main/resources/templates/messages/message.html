@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Messages</title>
+    <div th:replace="Partials :: header"></div>
+
+</head>
+<body>
+<div th:replace="Partials :: navbar"></div>
+
+<div class="container">
+
+    <div class="col-12 bordered">
+
+        <div class="center">
+            <h1>Message History</h1><br>
+        </div>
+
+        <h3 class="center" th:text="${otheruser.getUsername()}"></h3>
+
+        <div class="mb-4" th:each="message : ${messages}">
+
+            <div class="message-sent"
+                 th:if="${message.getSending_user() == loggedinuser && message.receiving_user == otheruser}">
+                <p th:text="${message.getContent()}"></p>
+            </div>
+            <p th:if="${message.getSending_user() == loggedinuser && message.receiving_user == otheruser}" class="no-m-top" style="justify-content: right"><small><br>Sent by You on <span th:text="${message.getReadableDate()}"></span> </small></p>
+            <div class="message-received"
+                 th:if="${message.getSending_user() == otheruser && message.receiving_user == loggedinuser}">
+                <p th:text="${message.getContent()}"></p><br>
+            </div>
+            <p class="no-m-top" th:if="${message.getSending_user() == otheruser && message.receiving_user == loggedinuser}" style="justify-content: right"><small><br>Sent by <span th:text="${otheruser.getUsername()}"></span> on <span th:text="${message.getReadableDate()}"></span> </small></p>
+
+
+        </div>
+
+
+        </div>
+        <div style="margin-top: 25px">
+            <form th:method="POST" th:action="@{'/user/message/' + ${otheruser.getId()}}" th:object="${message}">
+
+                <textarea required cols="100" rows="5" th:field="*{content}"></textarea>
+                <button type="submit" class="btn btn-dark">Send</button>
+
+            </form>
+        </div>
+
+
+    </div>
+</div>
+<div th:replace="Partials :: scripts"></div>
+
+</body>
+</html>
