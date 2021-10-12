@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @Controller
 public class UserController {
     private UserRepository userDao;
@@ -41,6 +43,11 @@ public class UserController {
         }
     }
 
+    @GetMapping("/all-users")
+    public String showAllUsers(Model model) {
+        List<User> users = userDao.findAll();
+        model.addAttribute("users", users);
 
-
+        return "users/all";
+    }
 }
