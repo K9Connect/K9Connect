@@ -43,19 +43,4 @@ public class UserController {
             return "users/login";
         }
     }
-
-    @GetMapping("/all-users")
-    public String showAllUsers(Model model) {
-        User authenticatedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User userInDb = userDao.getById(authenticatedUser.getId());
-
-        if (userInDb.is_admin()) {
-            List<User> users = userDao.findAll();
-            model.addAttribute("users", users);
-
-            return "users/all";
-        }
-
-        return "redirect:/4xx";
-    }
 }
