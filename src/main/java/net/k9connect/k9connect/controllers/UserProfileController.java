@@ -18,7 +18,7 @@ public class UserProfileController {
     private final UserInfoRepository userInfoDao;
     private UserRepository userDao;
 
-    UserProfileController(UserInfoRepository userInfoDao, UserRepository userDao) {
+    public UserProfileController(UserInfoRepository userInfoDao, UserRepository userDao) {
         this.userInfoDao = userInfoDao;
         this.userDao = userDao;
     }
@@ -78,6 +78,8 @@ public class UserProfileController {
         return "users/profile";
 
     }
+
+
 
 }
 
