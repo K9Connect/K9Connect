@@ -66,6 +66,7 @@ public class UserProfileController {
     }
 
     @GetMapping("/profile/{id}")
+
     public String viewProfile(@PathVariable long id, Model model) {
 
 
@@ -78,7 +79,30 @@ public class UserProfileController {
         return "users/profile";
 
     }
+        @GetMapping("/profile/edit/{id}")
+   public String EditProfile(@PathVariable long id, Model model)
+        {
+            User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            User user = userDao.findByUsername(loggedInUser.getUsername());
+
+
+            User displayUserEdit = userDao.getById(id);
+            UserInfo displayInfoEdit = userInfoDao.getById(id);
+
+            model.addAttribute("user",displayUserEdit);
+            model.addAttribute("userinfo",displayInfoEdit);
+
+            UserInfo userInfo = new UserInfo();
+            userInfo.setUser(user);
+
+
+            model.addAttribute("userEditProfile", userInfo);
+
+        return "users/edit-profile" ;
+    }
 
 }
+
+
 
 

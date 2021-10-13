@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>Edit Profile</title>
+  <div th:replace="Partials :: header"></div>
+
+</head>
+<body>
+<div th:replace="Partials :: navbar"></div>
+
+<div class="container justify-content-center">
+  <form th:action="@{/profile/edit/${id}}" th:method="post" th:object="${userEditProfile}">
+    Photo:<br>
+    <input th:field="${user.getDetails().getPfp()}" required />
+    <br />
+    Phone Number:<br>
+    <input th:text="${userinfo.getPhone_number()}">
+    <br />
+    Zip Code:<br>
+    <input th:field="${userinfo.getZipcode()}" required />
+    <br />
+    Bio:<br>
+    <textarea th:field="${userinfo.getBio()}"/>
+    <br />
+    <input type="submit" />
+  </form>
+
+</div>
+
+<div th:replace="Partials :: scripts"></div>
+
+</body>
+</html>
