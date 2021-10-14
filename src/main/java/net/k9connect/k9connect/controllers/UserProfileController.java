@@ -79,26 +79,27 @@ public class UserProfileController {
         return "users/profile";
 
     }
-        @GetMapping("/profile/edit/{id}")
-   public String EditProfile(@PathVariable long id, Model model)
+    @GetMapping("/profile/edit")
+   public String EditProfile( Model model)
         {
             User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             User user = userDao.findByUsername(loggedInUser.getUsername());
 
 
-            User displayUserEdit = userDao.getById(id);
-            UserInfo displayInfoEdit = userInfoDao.getById(id);
-
-            model.addAttribute("user",displayUserEdit);
-            model.addAttribute("userinfo",displayInfoEdit);
-
-            UserInfo userInfo = new UserInfo();
-            userInfo.setUser(user);
-
-
-            model.addAttribute("userEditProfile", userInfo);
+            model.addAttribute("user", user.getDetails());
 
         return "users/edit-profile" ;
+    }
+    @PostMapping("/profile/edit")
+    public String EditProfileSend(@ModelAttribute UserInfo userInfo){
+
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userDao.findByUsername(loggedInUser.getUsername());
+
+        userInfo.setId(user.getDetails().getId());
+
+        userInfoDao.save(userInfo);
+        return "redirect:/profile";
     }
 
 }

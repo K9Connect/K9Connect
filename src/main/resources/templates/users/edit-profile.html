@@ -10,20 +10,20 @@
 <div th:replace="Partials :: navbar"></div>
 
 <div class="container justify-content-center">
-  <form th:action="@{/profile/edit/${id}}" th:method="post" th:object="${userEditProfile}">
+  <form th:action="@{/profile/edit}" th:method="post" th:object="${user}">
     Photo:<br>
-    <input th:field="${user.getDetails().getPfp()}" required />
+    <input th:field="*{pfp}" required />
     <br />
     Phone Number:<br>
-    <input th:text="${userinfo.getPhone_number()}">
+    <input th:field="*{phone_number}">
     <br />
     Zip Code:<br>
-    <input th:field="${userinfo.getZipcode()}" required />
+    <input th:field="*{zipcode}" required />
     <br />
     Bio:<br>
-    <textarea th:field="${userinfo.getBio()}"/>
+    <textarea th:field="*{bio}"/>
     <br />
-    <input type="submit" />
+    <input onClick="" type="submit" />
   </form>
 
 </div>
