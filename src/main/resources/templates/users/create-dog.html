@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Create Dog</title>
+    <div th:replace="Partials :: header"></div>
+
+</head>
+<body>
+<div th:replace="Partials :: navbar"></div>
+
+<div class="container justify-content-center">
+    <form th:action="@{/dog/create}" th:method="post" th:object="${dog}">
+        Photo:<br>
+        <input th:object="${photo}" th:field="*{url}" required/>
+        <br/>
+        Name:<br>
+        <input th:field="*{name}"/>
+        <br/>
+        Breed:<br>
+        <input th:field="*{breed}" required/>
+        <br/>
+        <label for="genderSelection">Gender</label>
+        <select class="form-control" id="genderSelection" th:field="*{gender}">
+            <option value="M">M</option>
+            <option value="F">F</option>
+        </select>
+            Age:<br>
+            <input th:field="*{details.age}"   required/>
+            <br/>
+            <label for="certSelection">Has Certifications</label>
+            <select class="form-control" id="certSelection" th:field="*{details.has_certs}">
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+            </select>
+            Certification Photo:<br>
+            <input  th:field="*{details.cert_url}" />
+            <br/>
+                Bio:<br>
+                <textarea th:field="*{details.bio}"/>
+                <br />
+        <input type="submit"/>
+    </form>
+
+
+</div>
+
+<div th:replace="Partials :: scripts"></div>
+
+</body>
+</html>
