@@ -1,43 +1,43 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8" />
-  <title>Template</title>
-  <div th:replace="Partials :: header"></div>
+    <meta charset="UTF-8"/>
+    <title>Template</title>
+    <div th:replace="Partials :: header"></div>
 </head>
 <body>
 <div th:replace="Partials :: navbar"></div>
 
 <div class="container">
-  <h1>All Dogs</h1>
-  <table class="table">
-    <thead>
-    <tr>
-      <th>Name</th>
-      <th>Breed</th>
-      <th>Gender</th>
-      <th>Owner</th>
-      <th>Reports</th>
-      <th>Reviews</th>
-      <th>Reputation</th>
-      <th>Status</th>
-      <th>Details</th>
-    </tr>
-    </thead>
-    <tbody th:each="dog : ${dogs}">
-    <tr>
-      <td th:text="${dog.name}"></td>
-      <td th:text="${dog.breed}"></td>
-      <td th:text="${dog.gender}"></td>
-      <td th:text="${dog.owner.username}"></td>
-      <td th:text="${dog.reports}"></td>
-      <td th:text="${dog.reviews}"></td>
-      <td th:text="${dog.reputation}"></td>
-      <td th:text="${dog.status}"></td>
-      <td th:text="${dog.details}"></td>
-    </tr>
-    </tbody>
-  </table>
+    <h1>All Dogs</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Breed</th>
+                <th>Gender</th>
+                <th>Owner</th>
+                <th>Reports</th>
+                <th>Reviews</th>
+                <th>Reputation</th>
+                <th>Status</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody th:each="dog : ${dogs}">
+            <tr>
+                <td th:text="${dog.name}"></td>
+                <td th:text="${dog.breed}"></td>
+                <td th:text="${dog.gender}"></td>
+                <td><a th:href="@{|/profile/${dog.owner.id}|}"><span th:text="${dog.owner.username}"></span></a></td>
+                <td><a href="#">View Reports</a></td><!-- TODO: use th:href to link to dog's reports -->
+                <td><a href="#">View Reviews</a></td><!-- TODO: use th:href to link to dog's reviews -->
+                <td th:text="${dog.reputation}"></td>
+                <td>active</td><!-- TODO: get dog's status -->
+                <td><a href="#">View Details</a></td><!-- TODO: use th:href to link to dog's details -->
+            </tr>
+        </tbody>
+    </table>
 </div>
 
 <div th:replace="Partials :: scripts"></div>
