@@ -1,7 +1,6 @@
 package net.k9connect.k9connect.controllers;
 
-import net.k9connect.k9connect.models.User;
-import net.k9connect.k9connect.models.UserInfo;
+import net.k9connect.k9connect.models.*;
 import net.k9connect.k9connect.repositories.UserInfoRepository;
 import net.k9connect.k9connect.repositories.UserRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -74,6 +73,7 @@ public class UserProfileController {
 
         model.addAttribute("user", displayedUser);
         model.addAttribute("info", displayedInfo);
+//        model.addAttribute("dogs", dogDao.findAll());
 
         return "users/profile";
 

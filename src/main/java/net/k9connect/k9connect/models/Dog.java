@@ -52,4 +52,20 @@ public class Dog {
     @JoinColumn(name = "dog_details_id")
     @Getter @Setter private DogDetails details;
 
-   }
+    @Override
+    public String toString() {
+        return "Dog{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", breed='" + breed + '\'' +
+                ", gender=" + gender +
+                ", owner=" + owner +
+                ", photos=" + photos +
+                ", reports=" + reports +
+                ", reviews=" + reviews +
+                ", reputation=" + reputation +
+                ", status=" + status +
+                ", details=" + details +
+                '}';
+    }
+}

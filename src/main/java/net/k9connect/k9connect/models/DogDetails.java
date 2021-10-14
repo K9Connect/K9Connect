@@ -45,4 +45,16 @@ public class DogDetails {
     @Getter
     @Setter
     private String bio;
+
+    @Override
+    public String toString() {
+        return "DogDetails{" +
+                "id=" + id +
+                ", dog=" + dog +
+                ", age=" + age +
+                ", has_certs=" + has_certs +
+                ", cert_url='" + cert_url + '\'' +
+                ", bio='" + bio + '\'' +
+                '}';
+    }
 }

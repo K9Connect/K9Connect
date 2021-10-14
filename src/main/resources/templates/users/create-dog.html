@@ -11,29 +11,35 @@
 
 <div class="container justify-content-center">
     <form th:action="@{/dog/create}" th:method="post" th:object="${dog}">
-            Photo:<br>
-            <input th:object="${photo}" th:field="*{url}" required/>
+        Photo:<br>
+        <input th:object="${photo}" th:field="*{url}" required/>
+        <br/>
+        Name:<br>
+        <input th:field="*{name}"/>
+        <br/>
+        Breed:<br>
+        <input th:field="*{breed}" required/>
+        <br/>
+        <label for="genderSelection">Gender</label>
+        <select class="form-control" id="genderSelection" th:field="*{gender}">
+            <option value="M">M</option>
+            <option value="F">F</option>
+        </select>
+            Age:<br>
+            <input th:field="*{details.age}"   required/>
             <br/>
-            Name:<br>
-            <input th:field="*{name}"/>
-            <br/>
-            Breed:<br>
-            <input th:field="*{breed}" required/>
-            <br/>
-            <label for="genderSelection">Gender</label>
-            <select class="form-control" id="genderSelection" th:field="*{gender}">
-                <option>M</option>
-                <option>F</option>
-            </select>
-        <label for="certSelection">Has Certs</label>
-        <select th:object="${details}" class="form-control" id="certSelection"  name="has_certs">
+            <label for="certSelection">Has Certifications</label>
+            <select class="form-control" id="certSelection" th:field="*{details.has_certs}">
                 <option value="true">Yes</option>
                 <option value="false">No</option>
             </select>
-            <!--        Details:<br>-->
-            <!--        <textarea th:field="*{bio}"/>-->
-            <!--        <br />-->
-            <input type="submit"/>
+            Certification Photo:<br>
+            <input  th:field="*{details.cert_url}" />
+            <br/>
+                Bio:<br>
+                <textarea th:field="*{details.bio}"/>
+                <br />
+        <input type="submit"/>
     </form>
 
 

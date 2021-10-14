@@ -1,10 +1,8 @@
 package net.k9connect.k9connect.controllers;
 
 
-import net.k9connect.k9connect.models.Dog;
-import net.k9connect.k9connect.models.DogDetails;
-import net.k9connect.k9connect.models.Photo;
-import net.k9connect.k9connect.models.User;
+import net.k9connect.k9connect.models.*;
+import net.k9connect.k9connect.repositories.DogDetailsRepository;
 import net.k9connect.k9connect.repositories.DogRepository;
 import net.k9connect.k9connect.repositories.UserInfoRepository;
 import net.k9connect.k9connect.repositories.UserRepository;
@@ -22,17 +20,24 @@ public class DogController {
     private final UserInfoRepository userInfoDao;
     private UserRepository userDao;
     private DogRepository dogDao;
+    private DogDetailsRepository dogDetailsDao;
 
-    public DogController(UserInfoRepository userInfoDao, UserRepository userDao, DogRepository dogDao) {
+    public DogController(UserInfoRepository userInfoDao, UserRepository userDao, DogRepository dogDao, DogDetailsRepository dogDetailsDao) {
         this.userInfoDao = userInfoDao;
         this.userDao = userDao;
         this.dogDao = dogDao;
+        this.dogDetailsDao = dogDetailsDao;
     }
 
+    @GetMapping("/dogs")
+    public String dogIndex(Model model){
+        model.addAttribute("dogs", dogDao.findAll());
+        return "dogs/index";
+    }
 
     @GetMapping("/dog/create")
     public String createDogForm(Model model) {
-        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserWithRoles loggedInUser = (UserWithRoles) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.findByUsername(loggedInUser.getUsername());
 
         model.addAttribute("dog", new Dog());
@@ -42,18 +47,17 @@ public class DogController {
     }
 
     @PostMapping("/dog/create")
-    public String submitDog(@RequestParam(name = "has_certs") boolean certs,
+    public String submitDog(
             @ModelAttribute Dog dog
     ){
-        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserWithRoles loggedInUser = (UserWithRoles) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.findByUsername(loggedInUser.getUsername());
-        // if cert is "yes"
-            //cert = true
-        // other wise
-            // cert = false
 
-
+        System.out.println(dog);
+        DogDetails details = dog.getDetails();
+        details = dogDetailsDao.save(details);
         dogDao.save(dog);
-        return "redirect:/dogs";
+
+        return "redirect:/profile";
     }
 }
