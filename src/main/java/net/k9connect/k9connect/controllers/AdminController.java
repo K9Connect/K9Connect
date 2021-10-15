@@ -7,6 +7,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +37,19 @@ public class AdminController {
         }
 
         return "redirect:/4xx";
+    }
+
+    @PostMapping("/users/all")
+    public String updateUserStatus(
+            @RequestParam(name = "user-id") long userId,
+            @RequestParam(name = "user-status") Statuses status
+    ) {
+        User user = userDao.getById(userId);
+        System.out.println("User: " + user.getUsername());
+        user.setStatus(status);
+        userDao.save(user);
+
+        return "redirect:/users/all";
     }
 
     @GetMapping("/dogs/all")
