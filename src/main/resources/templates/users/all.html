@@ -16,6 +16,7 @@
                 <th>Username</th>
                 <th>Email</th>
                 <th>Status</th>
+                <th>Set Status</th>
             </tr>
         </thead>
         <tbody th:each="user : ${users}">
@@ -23,6 +24,16 @@
                 <td><a th:href="@{|/profile/${user.id}|}"><span th:text="${user.username}"></span></a></td>
                 <td th:text="${user.email}"></td>
                 <td th:text="${user.status}"></td>
+                <td>
+                    <form th:action="@{/users/all}" method="post">
+                        <input type="hidden" name="user-id" th:value="${user.id}">
+                        <select name="user-status" id="user-status">
+                            <option th:each="userStatus : ${T(net.k9connect.k9connect.models.Statuses).values()}"
+                                    th:value="${userStatus}" th:text="${userStatus}"></option>
+                        </select>
+                        <button type="submit">Set Status</button>
+                    </form>
+                </td>
             </tr>
         </tbody>
     </table>
