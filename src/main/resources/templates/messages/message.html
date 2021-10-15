@@ -38,7 +38,7 @@
 
         </div>
         <div style="margin-top: 25px">
-            <form th:method="POST" th:action="@{'/user/message/' + ${otheruser.getId()}}" th:object="${message}">
+            <form th:method="POST" th:action="@{'/message/' + ${otheruser.getId()}}" th:object="${message}">
 
                 <textarea required cols="100" rows="5" th:field="*{content}"></textarea>
                 <button type="submit" class="btn btn-dark">Send</button>
