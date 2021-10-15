@@ -41,6 +41,13 @@
                         <span th:if="${user.is_admin() != true}">Regular User</span>
                     </td>
                 </tr>
+                <tr th:if="${user.is_admin() == true}">
+                    <td>
+                        <a th:href="@{/users/all}">View All Users</a>
+                        <br>
+                        <a th:href="@{/dogs/all}">View All Dogs</a>
+                    </td>
+                </tr>
             </table>
         </div>
         <div class="col-6">
