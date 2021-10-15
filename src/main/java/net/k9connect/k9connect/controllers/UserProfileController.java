@@ -1,8 +1,7 @@
 package net.k9connect.k9connect.controllers;
 
 import net.k9connect.k9connect.models.*;
-import net.k9connect.k9connect.repositories.UserInfoRepository;
-import net.k9connect.k9connect.repositories.UserRepository;
+import net.k9connect.k9connect.repositories.*;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,10 +15,18 @@ public class UserProfileController {
 
     private final UserInfoRepository userInfoDao;
     private UserRepository userDao;
+    private DogRepository dogDao;
+    private DogDetailsRepository dogDetailsDao;
+    private PhotoRepository photoDao;
 
-    public UserProfileController(UserInfoRepository userInfoDao, UserRepository userDao) {
+
+
+    public UserProfileController(UserInfoRepository userInfoDao, UserRepository userDao, DogRepository dogDao, DogDetailsRepository dogDetailsDao, PhotoRepository photoDao) {
         this.userInfoDao = userInfoDao;
         this.userDao = userDao;
+        this.dogDao = dogDao;
+        this.dogDetailsDao = dogDetailsDao;
+        this.photoDao = photoDao;
     }
 
     @GetMapping("/profile/create")
@@ -69,11 +76,15 @@ public class UserProfileController {
 
 
         User displayedUser = userDao.getById(id);
-        UserInfo displayedInfo = userInfoDao.getById(id);
+        UserInfo displayedInfo = displayedUser.getDetails();
 
         model.addAttribute("user", displayedUser);
         model.addAttribute("info", displayedInfo);
-//        model.addAttribute("dogs", dogDao.findAll());
+
+        model.addAttribute("dogs", displayedUser.getDogs()); // should be user dogs
+        model.addAttribute("photo", displayedUser.getDetails().getPfp());
+
+
 
         return "users/profile";
 
