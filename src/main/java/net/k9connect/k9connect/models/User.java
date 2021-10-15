@@ -30,9 +30,10 @@ public class User{
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
     @Getter @Setter private List<Dog> dogs;
 
-    @OneToOne
-    @JoinColumn(name = "status_id")
-    @Getter @Setter private Status status;
+    @Enumerated(EnumType.STRING)
+    @Getter
+    @Setter
+    private Statuses status;
 
     @Column
     @Getter @Setter private boolean is_admin;

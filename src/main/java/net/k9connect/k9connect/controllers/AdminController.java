@@ -1,9 +1,6 @@
 package net.k9connect.k9connect.controllers;
 
-import net.k9connect.k9connect.models.Dog;
-import net.k9connect.k9connect.models.DogDetails;
-import net.k9connect.k9connect.models.Status;
-import net.k9connect.k9connect.models.User;
+import net.k9connect.k9connect.models.*;
 import net.k9connect.k9connect.repositories.UserRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -62,7 +59,7 @@ public class AdminController {
                     new ArrayList<>(),
                     new ArrayList<>(),
                     10,
-                    new Status(),
+                    Statuses.active,
                     new DogDetails()
                     ));
             dogs.add(new Dog(
@@ -75,7 +72,7 @@ public class AdminController {
                     new ArrayList<>(),
                     new ArrayList<>(),
                     9,
-                    new Status(),
+                    Statuses.active,
                     new DogDetails()
                     ));
             dogs.add(new Dog(
@@ -88,7 +85,7 @@ public class AdminController {
                     new ArrayList<>(),
                     new ArrayList<>(),
                     10,
-                    new Status(),
+                    Statuses.active,
                     new DogDetails()
                     ));
             dogs.add(new Dog(
@@ -101,7 +98,7 @@ public class AdminController {
                     new ArrayList<>(),
                     new ArrayList<>(),
                     8,
-                    new Status(),
+                    Statuses.active,
                     new DogDetails()
             ));
 
