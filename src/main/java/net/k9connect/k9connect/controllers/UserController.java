@@ -1,5 +1,6 @@
 package net.k9connect.k9connect.controllers;
 
+import net.k9connect.k9connect.models.Statuses;
 import net.k9connect.k9connect.models.User;
 import net.k9connect.k9connect.repositories.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -29,6 +30,7 @@ public class UserController {
     public String saveUser(@ModelAttribute User user){
         String hash = passwordEncoder.encode(user.getPassword());
         user.setPassword(hash);
+        user.setStatus(Statuses.active);
         userDao.save(user);
         return "redirect:/login";
     }
@@ -40,7 +42,4 @@ public class UserController {
             return "users/login";
         }
     }
-
-
-
 }

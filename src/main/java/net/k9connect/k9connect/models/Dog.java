@@ -44,9 +44,10 @@ public class Dog {
     @Column
     @Getter @Setter private int reputation;
 
-    @OneToOne
-    @JoinColumn(name = "status_id")
-    @Getter @Setter private Status status;
+    @Enumerated(EnumType.STRING)
+    @Getter
+    @Setter
+    private Statuses status;
 
     @OneToOne
     @JoinColumn(name = "dog_details_id")

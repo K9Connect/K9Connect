@@ -88,10 +88,39 @@
             color: #000000E6;
             cursor: pointer;
         }
+
+        .center {
+            display: flex;
+            justify-content: center;
+        }
+
+        .message-sent {
+            background-color: lightgreen;
+            display: flex;
+            justify-content: left;
+
+            border: solid black 2px;
+        }
+
+        .message-received {
+            background-color: lightblue;
+            display: flex;
+            justify-content: left;
+
+            border: solid black 2px;
+        }
+
+        .bordered {
+            border: solid black 1px;
+        }
+        .no-m-top {
+            margin-top: 1px;
+        }
     </style>
 </div>
 
 <div th:fragment="scripts">
+
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
             crossorigin="anonymous"></script>
