@@ -110,7 +110,7 @@ public class UserProfileController {
         userInfo.setId(user.getDetails().getId());
 
         userInfoDao.save(userInfo);
-        return "redirect:/profile";
+        return "redirect:/profile/";
     }
 
 
