@@ -10,10 +10,10 @@
 <div th:replace="Partials :: navbar"></div>
 
 <div class="container justify-content-center">
-  <form th:action="@{/profile/edit}" th:method="post" th:object="${user}">
+  <form th:action="@{/user/dogedit}" th:method="post" th:object="${user}">
     Photo:<br>
     <input th:field="*{pfp}" required />
-    <br />
+    <br/>
     Phone Number:<br>
     <input th:field="*{phone_number}">
     <br />
