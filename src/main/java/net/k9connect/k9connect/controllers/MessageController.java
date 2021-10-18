@@ -25,7 +25,7 @@ public class MessageController {
     @Autowired
     private UserRepository userDao;
 
-    @GetMapping("/user/message/{id}")
+    @GetMapping("/message/{id}")
     public String createMessage(Model model, @PathVariable long id) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.findByUsername(loggedInUser.getUsername());
@@ -51,7 +51,7 @@ public class MessageController {
 
     }
 
-    @PostMapping("/user/message/{id}")
+    @PostMapping("/message/{id}")
     public String sendMessage(Model model, @PathVariable long id, @ModelAttribute Message message) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.findByUsername(loggedInUser.getUsername());

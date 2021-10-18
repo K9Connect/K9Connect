@@ -24,4 +24,13 @@ public class Photo {
     @Column()
     @Getter @Setter private String url;
 
+
+    @Override
+    public String toString() {
+        return "Photo{" +
+                "id=" + id +
+                ", dog=" + dog +
+                ", url='" + url + '\'' +
+                '}';
+    }
 }

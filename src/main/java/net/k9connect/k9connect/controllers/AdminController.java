@@ -1,15 +1,15 @@
 package net.k9connect.k9connect.controllers;
 
-import net.k9connect.k9connect.models.Dog;
-import net.k9connect.k9connect.models.DogDetails;
-import net.k9connect.k9connect.models.Status;
-import net.k9connect.k9connect.models.User;
+import net.k9connect.k9connect.models.*;
 import net.k9connect.k9connect.repositories.UserRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +39,19 @@ public class AdminController {
         return "redirect:/4xx";
     }
 
+    @PostMapping("/users/all")
+    public String updateUserStatus(
+            @RequestParam(name = "user-id") long userId,
+            @RequestParam(name = "user-status") Statuses status
+    ) {
+        User user = userDao.getById(userId);
+        System.out.println("User: " + user.getUsername());
+        user.setStatus(status);
+        userDao.save(user);
+
+        return "redirect:/users/all";
+    }
+
     @GetMapping("/dogs/all")
     public String showAllDogs(Model model) {
         User authenticatedUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -62,7 +75,7 @@ public class AdminController {
                     new ArrayList<>(),
                     new ArrayList<>(),
                     10,
-                    new Status(),
+                    Statuses.active,
                     new DogDetails()
                     ));
             dogs.add(new Dog(
@@ -75,7 +88,7 @@ public class AdminController {
                     new ArrayList<>(),
                     new ArrayList<>(),
                     9,
-                    new Status(),
+                    Statuses.active,
                     new DogDetails()
                     ));
             dogs.add(new Dog(
@@ -88,7 +101,7 @@ public class AdminController {
                     new ArrayList<>(),
                     new ArrayList<>(),
                     10,
-                    new Status(),
+                    Statuses.active,
                     new DogDetails()
                     ));
             dogs.add(new Dog(
@@ -101,7 +114,7 @@ public class AdminController {
                     new ArrayList<>(),
                     new ArrayList<>(),
                     8,
-                    new Status(),
+                    Statuses.active,
                     new DogDetails()
             ));
 

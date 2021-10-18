@@ -11,6 +11,7 @@
     .table {
         margin-top: 25px;
     }
+
     img {
         border: solid black 3px;
     }
@@ -41,6 +42,13 @@
                         <span th:if="${user.is_admin() != true}">Regular User</span>
                     </td>
                 </tr>
+                <tr th:if="${user.is_admin() == true}">
+                    <td>
+                        <a th:href="@{/users/all}">View All Users</a>
+                        <br>
+                        <a th:href="@{/dogs/all}">View All Dogs</a>
+                    </td>
+                </tr>
             </table>
         </div>
         <div class="col-6">
@@ -59,30 +67,29 @@
         <a href="/dog/create">Add Dog</a>
     </div>
 
-<!--    <div class="bs-example">-->
-<!--        <div class="container">-->
-<!--            <div class="row">-->
-<!--                <div class="card-deck">-->
-<!--                        <div class="card" style="width: 350px" th:each="singleDog : ${dogs}">-->
-<!--                            <h5 class="text-center">${ad.title}</h5>-->
-<!--                            <p class="cluster text-center">ID#: <c:out value="${ad.id}"></c:out></p>-->
-<!--                            <c:if test="${ad.image != null}">-->
-<!--                                <img src="${ad.image}" class="card-img-top" alt="Card image">-->
-<!--                                <%&#45;&#45;                            <hr>&#45;&#45;%>-->
-<!--                            </c:if>-->
-<!--                            <div class="card-body ">-->
-<!--                                <h4 class="card-title">Posted by: <c:out value="${ad.username}"></c:out></h4>-->
-<!--                                <p class="card-text">Posted at: ${ad.date}</p>-->
-<!--                                <p class="card-text">${ad.categories}</p>-->
-<!--                                <p class="card-text text-center overflow-auto" style="width: auto; height: 200px;">${ad.description}</p>-->
-<!--                                <a href="/view-ad?id=${ad.id}" class="btn btn-primary">See Ad</a>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </c:forEach>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
+    <div class="bs-example">
+        <div class="container">
+            <div class="row">
+                <div class="card-deck">
+                    <div class="card" style="width: 350px" th:each="dog : ${dogs}">
+                        <h5 class="text-center"><span th:text="${dog.name}"></span></h5>
+                        <p class="cluster text-center">ID#: <span th:text="${dog.id}"></span></p>
+                            <img th:if="${dog.photos.size() != 0}" th:src="${dog.photos.get(0).getUrl()}" class="card-img-top" alt="Card image">
+                            <hr>
+                        <div class="card-body ">
+                            <h4 class="card-title">Owner:
+                                <span th:text="${dog.owner.username}"></span>
+                            </h4>
+                            <p class="card-text">Dog gender: <span th:text="${dog.gender}"></span></p>
+                            <p class="card-text" th:text="${dog.breed}"></p>
+                            <p class="card-text text-center overflow-auto" style="width: auto; height: 200px;" th:text="${dog.details.bio}"></p>
+<!--                            <a href="/view-ad?id=${ad.id}" class="btn btn-primary">See Dog</a>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 </div>
