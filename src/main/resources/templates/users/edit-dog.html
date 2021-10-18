@@ -14,6 +14,7 @@
     Photo:<br>
     <div th:each="photo:${dog.photos}">
       <input name="dog_photos[]" th:value="${photo.url}"/>
+      <input name="dog_photo_ids[]" th:value="${photo.id}"/>
       <br/>
     </div>
     Name:<br>

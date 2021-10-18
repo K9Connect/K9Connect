@@ -84,6 +84,7 @@
                             <p class="card-text" th:text="${dog.breed}"></p>
                             <p class="card-text text-center overflow-auto" style="width: auto; height: 200px;" th:text="${dog.details.bio}"></p>
 <!--                            <a href="/view-ad?id=${ad.id}" class="btn btn-primary">See Dog</a>-->
+                                <a th:href="@{|/dog/edit/${id}|}">Edit Dog</a>
                         </div>
                     </div>
                 </div>
