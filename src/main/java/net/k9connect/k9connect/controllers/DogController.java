@@ -6,12 +6,10 @@ import net.k9connect.k9connect.repositories.*;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -70,6 +68,15 @@ public class DogController {
         photoDao.save(photo);
 
 
+        return "redirect:/profile";
+    }
+
+    @PostMapping("/dog/delete/{id}")
+    public String deleteDogSend(@PathVariable long id) {
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userDao.findByUsername(loggedInUser.getUsername());
+
+        dogDao.deleteById(id);
         return "redirect:/profile";
     }
 }
