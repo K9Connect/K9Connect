@@ -2,10 +2,7 @@ package net.k9connect.k9connect.controllers;
 
 
 import net.k9connect.k9connect.models.*;
-import net.k9connect.k9connect.repositories.DogDetailsRepository;
-import net.k9connect.k9connect.repositories.DogRepository;
-import net.k9connect.k9connect.repositories.UserInfoRepository;
-import net.k9connect.k9connect.repositories.UserRepository;
+import net.k9connect.k9connect.repositories.*;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +11,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class DogController {
 
@@ -21,12 +21,15 @@ public class DogController {
     private UserRepository userDao;
     private DogRepository dogDao;
     private DogDetailsRepository dogDetailsDao;
+    private PhotoRepository photoDao;
 
-    public DogController(UserInfoRepository userInfoDao, UserRepository userDao, DogRepository dogDao, DogDetailsRepository dogDetailsDao) {
+
+    public DogController(UserInfoRepository userInfoDao, UserRepository userDao, DogRepository dogDao, DogDetailsRepository dogDetailsDao, PhotoRepository photoDao) {
         this.userInfoDao = userInfoDao;
         this.userDao = userDao;
         this.dogDao = dogDao;
         this.dogDetailsDao = dogDetailsDao;
+        this.photoDao = photoDao;
     }
 
     @GetMapping("/dogs")
@@ -37,26 +40,35 @@ public class DogController {
 
     @GetMapping("/dog/create")
     public String createDogForm(Model model) {
-        UserWithRoles loggedInUser = (UserWithRoles) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.findByUsername(loggedInUser.getUsername());
 
         model.addAttribute("dog", new Dog());
-        model.addAttribute("photo", new Photo());
         model.addAttribute("details", new DogDetails());
+        model.addAttribute("photo", new Photo());
         return "users/create-dog";
     }
 
     @PostMapping("/dog/create")
     public String submitDog(
-            @ModelAttribute Dog dog
+            @ModelAttribute Dog dog, @ModelAttribute Photo photo
     ){
-        UserWithRoles loggedInUser = (UserWithRoles) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.findByUsername(loggedInUser.getUsername());
 
-        System.out.println(dog);
         DogDetails details = dog.getDetails();
         details = dogDetailsDao.save(details);
-        dogDao.save(dog);
+
+        dog.setDetails(details);
+        dog.setOwner(user);
+        dog = dogDao.save(dog);
+
+
+        photo.setDog(dog);
+
+
+        photoDao.save(photo);
+
 
         return "redirect:/profile";
     }
