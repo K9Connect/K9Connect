@@ -88,6 +88,7 @@ public class DogController {
 
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.findByUsername(loggedInUser.getUsername());
+
         System.out.println(Arrays.toString(dogphotourls));
         System.out.println(Arrays.toString(dogPhotoIds));
         List <Photo> photos = new ArrayList<>();
