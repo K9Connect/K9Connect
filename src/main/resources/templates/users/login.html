@@ -17,6 +17,9 @@
   <div th:if="${param.logout}">
     You have been logged out.
   </div>
+  <div th:if="${param.registered}">
+    You have successfully registered.
+  </div>
 
   <form th:action="@{/login}" method="post">
     <label for="username">Username</label>
