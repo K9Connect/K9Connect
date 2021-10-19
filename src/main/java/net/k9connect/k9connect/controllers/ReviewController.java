@@ -2,6 +2,8 @@ package net.k9connect.k9connect.controllers;
 
 import net.k9connect.k9connect.models.User;
 import net.k9connect.k9connect.models.UserReview;
+import net.k9connect.k9connect.repositories.DogRepository;
+import net.k9connect.k9connect.repositories.DogReviewRepository;
 import net.k9connect.k9connect.repositories.UserRepository;
 import net.k9connect.k9connect.repositories.UserReviewRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,10 +18,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class ReviewController {
     private UserRepository userDao;
     private UserReviewRepository userReviewDao;
+    private DogRepository dogDao;
+    private DogReviewRepository dogReviewDao;
 
-    public ReviewController(UserRepository userDao, UserReviewRepository userReviewDao) {
+    public ReviewController(
+            UserRepository userDao,
+            UserReviewRepository userReviewDao,
+            DogRepository dogDao,
+            DogReviewRepository dogReviewDao
+    ) {
         this.userDao = userDao;
         this.userReviewDao = userReviewDao;
+        this.dogDao = dogDao;
+        this.dogReviewDao = dogReviewDao;
     }
 
     @GetMapping("/review/{id}")
