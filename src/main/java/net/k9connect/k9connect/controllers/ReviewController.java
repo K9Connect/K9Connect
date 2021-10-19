@@ -24,9 +24,16 @@ public class ReviewController {
 
     @GetMapping("/review/{id}")
     public String getUserReviewForm(@PathVariable long id, Model model) {
+        User reviewer = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User reviewed = userDao.getById(id);
+
+        if (reviewer.getId() == reviewed.getId()) {
+            return "redirect:/profile";
+        }
+
         UserReview userReview = new UserReview();
 
-        model.addAttribute("reviewedUser", userDao.getById(id));
+        model.addAttribute("reviewedUser", reviewed);
         model.addAttribute("userReview", userReview);
 
         return "users/review";
