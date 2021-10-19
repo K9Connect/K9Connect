@@ -1,17 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8" />
-  <title>User Review</title>
-  <div th:replace="Partials :: header"></div>
+    <meta charset="UTF-8" />
+    <title>User Review</title>
+    <div th:replace="Partials :: header"></div>
 
 </head>
 <body>
 <div th:replace="Partials :: navbar"></div>
 
 <div class="container">
-
-
+    <h1>Review of User: <span th:text="${reviewedUser.username}"></span></h1>
+    <form th:action="@{|/review/${id}|}" method="POST" th:object="${userReview}">
+        <div> <!--TODO: using radio buttons for now, but these can be styled to look like stars or dog biscuits or whatever-->
+            <input type="radio" th:field="*{stars}" value="1">
+            <input type="radio" th:field="*{stars}" value="2">
+            <input type="radio" th:field="*{stars}" value="3">
+            <input type="radio" th:field="*{stars}" value="4">
+            <input type="radio" th:field="*{stars}" value="5">
+        </div>
+        <label for="user-review">Review</label>
+        <textarea th:field="*{review}" id="user-review" cols="30" rows="10"></textarea>
+        <button type="submit">Submit Review</button>
+    </form>
 </div>
 
 <div th:replace="Partials :: scripts"></div>
