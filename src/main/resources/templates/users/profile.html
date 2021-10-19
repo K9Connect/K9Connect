@@ -25,7 +25,8 @@
             <img height="200px" width="250x" th:src="${user.getDetails().getPfp()}">
         </div>
         <div class="col-8">
-            <h1 th:text="${user.getUsername()}"></h1></br>
+            <h1 th:text="${user.getUsername()}"></h1>
+            <a th:href="@{|/review/${id}|}">Rate/Review</a>
             <h3>Zip Code: <span th:text="${info.getZipcode()}"></span></h3></br>
         </div>
 
