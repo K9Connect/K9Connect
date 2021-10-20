@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>File Report</title>
+    <div th:replace="Partials :: header"></div>
+
+</head>
+<body>
+<div th:replace="Partials :: navbar"></div>
+
+<div class="container">
+
+    <div th:if="${param.success}" style="color: lightgreen">
+        Your report has been submitted. Thank you!
+    </div>
+
+    <p>Report for: <span th:text="${reporteduser.getUsername()}"></span></p>
+
+    <form th:object="${report}" th:method="post" th:action="@{|/report/${reporteduser.getId()}|}">
+
+        <label for="text">Report Details:</label>
+        <textarea rows="10" cols="25" id="text" th:field="*{reportText}"></textarea>
+        <button type="submit" class="btn btn-dark">Report</button>
+
+    </form>
+
+</div>
+
+<div th:replace="Partials :: scripts"></div>
+
+</body>
+</html>

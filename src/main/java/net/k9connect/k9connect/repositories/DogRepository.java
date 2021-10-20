@@ -11,9 +11,13 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 
+import javax.transaction.Transactional;
+
 public interface DogRepository extends JpaRepository<Dog, Long> {
+
     Dog findByName (String name);
     List<Dog>  findDogsByIdAndBreedAndGenderAndNameAndPhotosAndReviewsOrderById(long id, String breed, String gender, String name, List<Photo> photos, List<DogReview> reviews);
+
 }
 
 
