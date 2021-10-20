@@ -7,4 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface DogDetailsRepository extends JpaRepository<DogDetails, Long> {
 
+    @Transactional
+    void deleteByDog_Id(Long dogId);
+
 }
