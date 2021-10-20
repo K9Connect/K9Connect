@@ -20,4 +20,3 @@ public interface DogRepository extends JpaRepository<Dog, Long> {
 
 }
 
-
