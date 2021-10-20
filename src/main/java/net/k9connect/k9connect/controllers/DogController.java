@@ -51,7 +51,7 @@ public class DogController {
     @PostMapping("/dog/create")
     public String submitDog(
             @ModelAttribute Dog dog, @ModelAttribute Photo photo
-    ){
+    ) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.findByUsername(loggedInUser.getUsername());
 
@@ -91,12 +91,12 @@ public class DogController {
 
         System.out.println(Arrays.toString(dogphotourls));
         System.out.println(Arrays.toString(dogPhotoIds));
-        List <Photo> photos = new ArrayList<>();
+        List<Photo> photos = new ArrayList<>();
         for (int i = 0; i < dogphotourls.length; i++) {
-            String url= dogphotourls[i];
-            long dogPhotoId=dogPhotoIds[i];
-            System.out.println(url+ " "+ dogPhotoId);
-            Photo dogPhoto=photoDao.getById(dogPhotoId);
+            String url = dogphotourls[i];
+            long dogPhotoId = dogPhotoIds[i];
+            System.out.println(url + " " + dogPhotoId);
+            Photo dogPhoto = photoDao.getById(dogPhotoId);
             dogPhoto.setUrl(url);
             photoDao.save(dogPhoto);
             photos.add(dogPhoto);
@@ -126,6 +126,5 @@ public class DogController {
 //        return "redirect:/users/"+id+"/profile/";
         return "redirect:/profile";
     }
-
 
 }
