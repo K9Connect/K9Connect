@@ -1,5 +1,7 @@
 package net.k9connect.k9connect.controllers;
 
+import net.k9connect.k9connect.models.Dog;
+import net.k9connect.k9connect.models.DogReview;
 import net.k9connect.k9connect.models.User;
 import net.k9connect.k9connect.models.UserReview;
 import net.k9connect.k9connect.repositories.DogRepository;
@@ -66,5 +68,42 @@ public class ReviewController {
         userReviewDao.save(review);
 
         return "redirect:/profile/{id}";
+    }
+
+    @GetMapping("/dogs/review/{id}")
+    public String getDogReviewForm(@PathVariable long id, Model model) {
+        User reviewer = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Dog reviewedDog = dogDao.getById(id);
+        User owner = reviewedDog.getOwner();
+
+        if (reviewer.getId() == owner.getId()) {
+            return "redirect:/profile";
+        }
+
+        DogReview dogReview = new DogReview();
+
+        model.addAttribute("reviewedDog", reviewedDog);
+        model.addAttribute("dogReview", dogReview);
+
+        return "dogs/review";
+    }
+
+    @PostMapping("/dogs/review/{id}")
+    public String submitDogReview(
+            @PathVariable long id,
+            @ModelAttribute(name = "dogReview") DogReview dogReview
+    ) {
+        User reviewer = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Dog reviewedDog = dogDao.getById(id);
+        DogReview review = new DogReview();
+
+        review.setDog(reviewedDog);
+        review.setCommenter(reviewer);
+        review.setStars(dogReview.getStars());
+        review.setReview(dogReview.getReview());
+
+        dogReviewDao.save(review);
+
+        return "redirect:/profile/" + reviewedDog.getOwner().getId();
     }
 }
