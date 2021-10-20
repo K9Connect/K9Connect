@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Arrays;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -72,6 +73,21 @@ public class DogController {
         return "redirect:/profile";
     }
 
+    @PostMapping("/dog/delete/{id}")
+    public String deleteDogSend(@PathVariable long id) {
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userDao.findByUsername(loggedInUser.getUsername());
+
+        Dog currentDog = dogDao.getById(id);
+        DogDetails detailsToDelete = currentDog.getDetails();
+
+
+        dogDao.deleteById(id);
+        dogDetailsDao.delete(detailsToDelete);
+        photoDao.deleteAllByDog_Id(id);
+        return "redirect:/profile";
+    }
+
     @GetMapping("/dog/edit/{id}")
     public String editDog(@PathVariable long id, Model model) {
         UserWithRoles loggedInUser = (UserWithRoles) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -102,12 +118,6 @@ public class DogController {
             photos.add(dogPhoto);
         }
 
-
-//        for(Photo photo1: photos){
-//            System.out.println(photo1);
-//        }
-//
-//        photos.forEach( photo1 -> photoDao.save(photo1) );
         dog.setPhotos(photos);
 
         Dog dogDB = dogDao.getById(id);
@@ -119,11 +129,6 @@ public class DogController {
         dog.setId(id);
         dogDao.save(dog);
 
-//        photo.setDog(dog);
-//        photoDao.save(photo);
-
-//        return "redirect:/dog/edit/" + id;
-//        return "redirect:/users/"+id+"/profile/";
         return "redirect:/profile";
     }
 
