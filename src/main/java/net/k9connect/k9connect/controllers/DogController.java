@@ -74,7 +74,7 @@ public class DogController {
 
     @GetMapping("/dog/edit/{id}")
     public String editDog(@PathVariable long id, Model model) {
-        UserWithRoles loggedInUser = (UserWithRoles) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.findByUsername(loggedInUser.getUsername());
 
         model.addAttribute("dog", dogDao.getById(id));
@@ -99,7 +99,7 @@ public class DogController {
             Photo dogPhoto = photoDao.getById(dogPhotoId);
             dogPhoto.setUrl(url);
             photoDao.save(dogPhoto);
-            photos.add(dogPhoto);
+                    photos.add(dogPhoto);
         }
 
 
@@ -125,6 +125,17 @@ public class DogController {
 //        return "redirect:/dog/edit/" + id;
 //        return "redirect:/users/"+id+"/profile/";
         return "redirect:/profile";
+    }
+    @PostMapping("/dog/search")
+    public String search(@RequestParam String term, Model model){
+
+        term ="%"+term+"%";
+        List<Dog> listOfDogs = dogDao.findDogsByBreedIsLike(term);
+
+
+        model.addAttribute("dogs",listOfDogs);
+        return "redirect:users/search";
+
     }
 
 }

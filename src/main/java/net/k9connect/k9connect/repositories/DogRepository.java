@@ -15,7 +15,7 @@ public interface DogRepository extends JpaRepository<Dog, Long> {
 
     Dog findByName (String name);
 
-    List<Dog>  findDogsByIdAndBreedAndGenderAndNameAndPhotosAndReviewsOrderById(long id, String breed, String gender, String name, List<Photo> photos, List<DogReview> reviews);
+    List<Dog>  findDogsByBreedIsLike(String breed);
 
 
 }
