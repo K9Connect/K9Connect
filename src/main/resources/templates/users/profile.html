@@ -99,7 +99,9 @@
                         <h5 class="text-center"><span th:text="${dog.name}"></span></h5>
                         <p class="cluster text-center">ID#: <span th:text="${dog.id}"></span></p>
                             <img th:if="${dog.photos.size() != 0}" th:src="${dog.photos.get(0).getUrl()}" class="card-img-top" alt="Card image">
-                            <hr>
+
+                        <hr>
+
                         <div class="card-body ">
                             <h4 class="card-title">Owner:
                                 <span th:text="${dog.owner.username}"></span>
