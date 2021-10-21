@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Arrays;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -38,24 +37,24 @@ public class DogController {
         return "users/dogs";
     }
 
-    @PostMapping("dogs")
-    public String displySearchedDog(@RequestParam String dogsToSearchFor) {
-//        String searchTerm = "Search Term goes here";
-//
-//
-//        List<Dog> listOfDogs = dogsDao.getbySearchTerm(searchTerm);
-//
-//        List<Detail> listofDogDetials = detailsDao.getbySearchTerm(searchTerm);
-//
-//        for (Detail dogDetail: listofDogDetials){
-//            listOfDogs.add(dogDetail.getDog());
-//        }
-//
-//        model.addAttribute("searchResults",listOfDogs);
-//
-//        return "dog/search";
-        return "users/dogs";
-    }
+//    @PostMapping("dogs")
+//    public String displySearchedDog(@RequestParam String dogsToSearchFor) {
+////        String searchTerm = "Search Term goes here";
+////
+////
+////        List<Dog> listOfDogs = dogsDao.getbySearchTerm(searchTerm);
+////
+////        List<Detail> listofDogDetials = detailsDao.getbySearchTerm(searchTerm);
+////
+////        for (Detail dogDetail: listofDogDetials){
+////            listOfDogs.add(dogDetail.getDog());
+////        }
+////
+////        model.addAttribute("searchResults",listOfDogs);
+////
+////        return "dog/search";
+//        return "users/dogs";
+//    }
 
     @GetMapping("/dog/create")
     public String createDogForm(Model model) {
@@ -71,7 +70,7 @@ public class DogController {
     @PostMapping("/dog/create")
     public String submitDog(
             @ModelAttribute Dog dog, @ModelAttribute Photo photo
-    ){
+    ) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.findByUsername(loggedInUser.getUsername());
 
@@ -92,24 +91,9 @@ public class DogController {
         return "redirect:/profile";
     }
 
-    @PostMapping("/dog/delete/{id}")
-    public String deleteDogSend(@PathVariable long id) {
-        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = userDao.findByUsername(loggedInUser.getUsername());
-
-        Dog currentDog = dogDao.getById(id);
-        DogDetails detailsToDelete = currentDog.getDetails();
-
-
-        dogDao.deleteById(id);
-        dogDetailsDao.delete(detailsToDelete);
-        photoDao.deleteAllByDog_Id(id);
-        return "redirect:/profile";
-    }
-
     @GetMapping("/dog/edit/{id}")
     public String editDog(@PathVariable long id, Model model) {
-        UserWithRoles loggedInUser = (UserWithRoles) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.findByUsername(loggedInUser.getUsername());
 
         model.addAttribute("dog", dogDao.getById(id));
@@ -126,17 +110,23 @@ public class DogController {
 
         System.out.println(Arrays.toString(dogphotourls));
         System.out.println(Arrays.toString(dogPhotoIds));
-        List <Photo> photos = new ArrayList<>();
+        List<Photo> photos = new ArrayList<>();
         for (int i = 0; i < dogphotourls.length; i++) {
-            String url= dogphotourls[i];
-            long dogPhotoId=dogPhotoIds[i];
-            System.out.println(url+ " "+ dogPhotoId);
-            Photo dogPhoto=photoDao.getById(dogPhotoId);
+            String url = dogphotourls[i];
+            long dogPhotoId = dogPhotoIds[i];
+            System.out.println(url + " " + dogPhotoId);
+            Photo dogPhoto = photoDao.getById(dogPhotoId);
             dogPhoto.setUrl(url);
             photoDao.save(dogPhoto);
-            photos.add(dogPhoto);
+                    photos.add(dogPhoto);
         }
 
+
+//        for(Photo photo1: photos){
+//            System.out.println(photo1);
+//        }
+//
+//        photos.forEach( photo1 -> photoDao.save(photo1) );
         dog.setPhotos(photos);
 
         Dog dogDB = dogDao.getById(id);
@@ -148,8 +138,23 @@ public class DogController {
         dog.setId(id);
         dogDao.save(dog);
 
+//        photo.setDog(dog);
+//        photoDao.save(photo);
+
+//        return "redirect:/dog/edit/" + id;
+//        return "redirect:/users/"+id+"/profile/";
         return "redirect:/profile";
     }
+    @PostMapping("/dog/search")
+    public String search(@RequestParam String term, Model model){
 
+        term ="%"+term+"%";
+        List<Dog> listOfDogs = dogDao.findDogsByBreedIsLike(term);
+
+
+        model.addAttribute("dogs",listOfDogs);
+        return "users/dogs";
+
+    }
 
 }
