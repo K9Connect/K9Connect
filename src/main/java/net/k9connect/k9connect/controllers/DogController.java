@@ -34,7 +34,26 @@ public class DogController {
     @GetMapping("/dogs")
     public String dogIndex(Model model) {
         model.addAttribute("dogs", dogDao.findAll());
-        return "dogs/index";
+        return "users/dogs";
+    }
+
+    @PostMapping("dogs")
+    public String displySearchedDog(@RequestParam String dogsToSearchFor) {
+//        String searchTerm = "Search Term goes here";
+//
+//
+//        List<Dog> listOfDogs = dogsDao.getbySearchTerm(searchTerm);
+//
+//        List<Detail> listofDogDetials = detailsDao.getbySearchTerm(searchTerm);
+//
+//        for (Detail dogDetail: listofDogDetials){
+//            listOfDogs.add(dogDetail.getDog());
+//        }
+//
+//        model.addAttribute("searchResults",listOfDogs);
+//
+//        return "dog/search";
+        return "users/dogs";
     }
 
     @GetMapping("/dog/create")
