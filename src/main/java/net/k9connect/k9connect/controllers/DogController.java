@@ -146,4 +146,19 @@ public class DogController {
         return "redirect:/profile";
     }
 
+    @PostMapping("/dog/delete/{id}")
+    public String deleteDogSend(@PathVariable long id) {
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userDao.findByUsername(loggedInUser.getUsername());
+
+        Dog currentDog = dogDao.getById(id);
+        DogDetails detailsToDelete = currentDog.getDetails();
+
+
+        dogDao.deleteById(id);
+        dogDetailsDao.delete(detailsToDelete);
+        photoDao.deleteAllByDog_Id(id);
+        return "redirect:/profile";
+    }
+
 }
