@@ -51,8 +51,8 @@
             <h1 th:text="${user.getUsername()}"></h1><br>
             <span th:if="${user.getId() != loggedinuser.getId()}">
                             <a th:href="@{|/message/${id}|}"><button type="button" class="btn btn-dark">Send Message</button></a>
+                            <a th:href="@{|/review/${id}|}">Rate/Review</a>
             </span>
-            <a th:href="@{|/review/${id}|}">Rate/Review</a>
             <h3>Zip Code: <span th:text="${info.getZipcode()}"></span></h3></br>
         </div>
 
