@@ -149,12 +149,37 @@ public class DogController {
     public String search(@RequestParam String term, Model model){
 
         term ="%"+term+"%";
+
         List<Dog> listOfDogs = dogDao.findDogsByBreedIsLike(term);
+//        List<Dog> listOfDogs = dogDao.findDogsByGenderAndBreed(gender, term);
+
+//        List<Dog> filteredListOfDogs = new ArrayList<>();
+//        for (Dog dog: listOfDogs) {
+//            if (gender.equals("F") && dog.getGender() == 'F' || gender.equals("") || gender.equals("M,F")) {
+//               filteredListOfDogs.add(dog);
+//        } else if (gender.equals("M") && dog.getGender() == 'M') {
+//                filteredListOfDogs.add(dog);
+//            }
+//        }
+
 
 
         model.addAttribute("dogs",listOfDogs);
         return "users/dogs";
 
     }
+//    @PostMapping("/dog/filter")
+//    public String searchByGender(@RequestParam String gender,  Model model){
+//
+////        gender ="%"+gender+"%";
+//        List<Dog> ListOfDogs = dogDao.findDogsByGender(gender);
+//
+//
+//
+//        model.addAttribute("dogs", ListOfDogs);
+//
+//        return "users/dogs";
+//
+//    }
 
 }
