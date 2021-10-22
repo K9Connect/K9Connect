@@ -34,7 +34,26 @@ public class DogController {
     @GetMapping("/dogs")
     public String dogIndex(Model model) {
         model.addAttribute("dogs", dogDao.findAll());
-        return "dogs/index";
+        return "users/dogs";
+    }
+
+    @PostMapping("dogs")
+    public String displySearchedDog(@RequestParam String dogsToSearchFor) {
+//        String searchTerm = "Search Term goes here";
+//
+//
+//        List<Dog> listOfDogs = dogsDao.getbySearchTerm(searchTerm);
+//
+//        List<Detail> listofDogDetials = detailsDao.getbySearchTerm(searchTerm);
+//
+//        for (Detail dogDetail: listofDogDetials){
+//            listOfDogs.add(dogDetail.getDog());
+//        }
+//
+//        model.addAttribute("searchResults",listOfDogs);
+//
+//        return "dog/search";
+        return "users/dogs";
     }
 
     @GetMapping("/dog/create")
@@ -132,10 +151,24 @@ public class DogController {
         term ="%"+term+"%";
         List<Dog> listOfDogs = dogDao.findDogsByBreedIsLike(term);
 
-
         model.addAttribute("dogs",listOfDogs);
         return "redirect:users/search";
 
+    }
+
+    @PostMapping("/dog/delete/{id}")
+    public String deleteDogSend(@PathVariable long id) {
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userDao.findByUsername(loggedInUser.getUsername());
+
+        Dog currentDog = dogDao.getById(id);
+        DogDetails detailsToDelete = currentDog.getDetails();
+
+
+        dogDao.deleteById(id);
+        dogDetailsDao.delete(detailsToDelete);
+        photoDao.deleteAllByDog_Id(id);
+        return "redirect:/profile";
     }
 
 }
