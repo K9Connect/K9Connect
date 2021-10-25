@@ -37,24 +37,6 @@ public class DogController {
         return "users/dogs";
     }
 
-//    @PostMapping("dogs")
-//    public String displySearchedDog(@RequestParam String dogsToSearchFor) {
-////        String searchTerm = "Search Term goes here";
-////
-////
-////        List<Dog> listOfDogs = dogsDao.getbySearchTerm(searchTerm);
-////
-////        List<Detail> listofDogDetials = detailsDao.getbySearchTerm(searchTerm);
-////
-////        for (Detail dogDetail: listofDogDetials){
-////            listOfDogs.add(dogDetail.getDog());
-////        }
-////
-////        model.addAttribute("searchResults",listOfDogs);
-////
-////        return "dog/search";
-//        return "users/dogs";
-//    }
 
     @GetMapping("/dog/create")
     public String createDogForm(Model model) {
@@ -121,12 +103,6 @@ public class DogController {
                     photos.add(dogPhoto);
         }
 
-
-//        for(Photo photo1: photos){
-//            System.out.println(photo1);
-//        }
-//
-//        photos.forEach( photo1 -> photoDao.save(photo1) );
         dog.setPhotos(photos);
 
         Dog dogDB = dogDao.getById(id);
@@ -138,21 +114,20 @@ public class DogController {
         dog.setId(id);
         dogDao.save(dog);
 
-//        photo.setDog(dog);
-//        photoDao.save(photo);
-
-//        return "redirect:/dog/edit/" + id;
-//        return "redirect:/users/"+id+"/profile/";
         return "redirect:/profile";
     }
     @PostMapping("/dog/search")
     public String search(@RequestParam String term, Model model){
-
         term ="%"+term+"%";
-
         List<Dog> listOfDogs = dogDao.findDogsByBreedIsLike(term);
-//        List<Dog> listOfDogs = dogDao.findDogsByGenderAndBreed(gender, term);
+        model.addAttribute("dogs",listOfDogs);
+        return "users/dogs";
+    }
 
+//    @PostMapping("/dog/filter")
+//    public String searchByGender(@RequestParam String gender,  Model model){
+//
+////        List<Dog> ListOfDogs = dogDao.findDogsByGender(gender);
 //        List<Dog> filteredListOfDogs = new ArrayList<>();
 //        for (Dog dog: listOfDogs) {
 //            if (gender.equals("F") && dog.getGender() == 'F' || gender.equals("") || gender.equals("M,F")) {
@@ -161,19 +136,6 @@ public class DogController {
 //                filteredListOfDogs.add(dog);
 //            }
 //        }
-
-
-
-        model.addAttribute("dogs",listOfDogs);
-        return "users/dogs";
-
-    }
-//    @PostMapping("/dog/filter")
-//    public String searchByGender(@RequestParam String gender,  Model model){
-//
-////        gender ="%"+gender+"%";
-//        List<Dog> ListOfDogs = dogDao.findDogsByGender(gender);
-//
 //
 //
 //        model.addAttribute("dogs", ListOfDogs);
