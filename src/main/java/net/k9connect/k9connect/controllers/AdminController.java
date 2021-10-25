@@ -1,6 +1,7 @@
 package net.k9connect.k9connect.controllers;
 
 import net.k9connect.k9connect.models.*;
+import net.k9connect.k9connect.repositories.DogRepository;
 import net.k9connect.k9connect.repositories.UserRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,10 +18,12 @@ import java.util.List;
 @Controller
 public class AdminController {
     private UserRepository userDao;
+    private DogRepository dogDao;
     private PasswordEncoder passwordEncoder;
 
-    public AdminController(UserRepository userDao, PasswordEncoder passwordEncoder) {
+    public AdminController(UserRepository userDao, DogRepository dogDao, PasswordEncoder passwordEncoder) {
         this.userDao = userDao;
+        this.dogDao = dogDao;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -58,65 +61,7 @@ public class AdminController {
         User userInDb = userDao.getById(authenticatedUser.getId());
 
         if (userInDb.is_admin()) {
-//            List<Dog> dogs = dogDao.findAll(); // uncomment when DogRepo available
-            User owner1 = userDao.getById(1L);
-            User owner2 = userDao.getById(2L);
-            User owner3 = userDao.getById(3L);
-            User owner4 = userDao.getById(4L);
-
-            List<Dog> dogs = new ArrayList<>();
-            dogs.add(new Dog(
-                    1L,
-                    "Winky",
-                    "Norwich Terrier",
-                    'F',
-                    owner1,
-                    new ArrayList<>(),
-                    new ArrayList<>(),
-                    new ArrayList<>(),
-                    10,
-                    Statuses.active,
-                    new DogDetails()
-                    ));
-            dogs.add(new Dog(
-                    2L,
-                    "Hubert",
-                    "Bloodhound",
-                    'M',
-                    owner2,
-                    new ArrayList<>(),
-                    new ArrayList<>(),
-                    new ArrayList<>(),
-                    9,
-                    Statuses.active,
-                    new DogDetails()
-                    ));
-            dogs.add(new Dog(
-                    3L,
-                    "Rhapsody in White",
-                    "Standard Poodle",
-                    'F',
-                    owner3,
-                    new ArrayList<>(),
-                    new ArrayList<>(),
-                    new ArrayList<>(),
-                    10,
-                    Statuses.active,
-                    new DogDetails()
-                    ));
-            dogs.add(new Dog(
-                    4L,
-                    "Miss Agnes",
-                    "Shih Tzu",
-                    'F',
-                    owner4,
-                    new ArrayList<>(),
-                    new ArrayList<>(),
-                    new ArrayList<>(),
-                    8,
-                    Statuses.active,
-                    new DogDetails()
-            ));
+            List<Dog> dogs = dogDao.findAll();
 
             model.addAttribute("dogs", dogs);
 
