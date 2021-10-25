@@ -40,8 +40,10 @@ public class ReviewController {
         User reviewer = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User reviewed = userDao.getById(id);
 
-        if (reviewer.getId() == reviewed.getId()) {
-            return "redirect:/profile";
+        UserReview existingReview = userReviewDao.findByReviewerAndReviewed(reviewer, reviewed);
+
+        if (reviewer.getId() == reviewed.getId() || existingReview != null) {
+            return "redirect:/profile/{id}";
         }
 
         UserReview userReview = new UserReview();
