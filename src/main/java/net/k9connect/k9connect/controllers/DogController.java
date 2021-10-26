@@ -118,7 +118,7 @@ public class DogController {
             Photo dogPhoto = photoDao.getById(dogPhotoId);
             dogPhoto.setUrl(url);
             photoDao.save(dogPhoto);
-                    photos.add(dogPhoto);
+            photos.add(dogPhoto);
         }
 
 
@@ -145,13 +145,14 @@ public class DogController {
 //        return "redirect:/users/"+id+"/profile/";
         return "redirect:/profile";
     }
-    @PostMapping("/dog/search")
-    public String search(@RequestParam String term, Model model){
 
-        term ="%"+term+"%";
+    @PostMapping("/dog/search")
+    public String search(@RequestParam String term, Model model) {
+
+        term = "%" + term + "%";
         List<Dog> listOfDogs = dogDao.findDogsByBreedIsLike(term);
 
-        model.addAttribute("dogs",listOfDogs);
+        model.addAttribute("dogs", listOfDogs);
         return "redirect:users/search";
 
     }
@@ -171,4 +172,38 @@ public class DogController {
         return "redirect:/profile";
     }
 
+    @PostMapping("/dog/photo/{id}")
+    public String deleteDogPhoto(@PathVariable long id,@ModelAttribute Dog dog,@ModelAttribute Photo photo) {
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userDao.findByUsername(loggedInUser.getUsername());
+
+        photoDao.deleteById(id);
+
+        return "redirect:/profile";
+    }
+
+    @GetMapping("/photo/add/{id}")
+    public String addPhotoForm(@PathVariable Long id, Model model) {
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userDao.findByUsername(loggedInUser.getUsername());
+
+        model.addAttribute("dogId", id);
+        model.addAttribute("photo", new Photo());
+
+        return "users/add-photo";
+    }
+
+    @PostMapping("/photo/add/{id}")
+    public String addPhotoForm(@PathVariable Long id, @ModelAttribute Photo photo, @RequestParam String url) {
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userDao.findByUsername(loggedInUser.getUsername());
+
+        System.out.println(url);
+        photo.setDog(dogDao.getById(id));
+        photoDao.save(photo);
+
+        return "redirect:/profile";
+    }
 }
+
+
