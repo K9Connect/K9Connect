@@ -99,7 +99,7 @@
             <div class="row">
                 <div class="card-deck">
                     <div class="card" style="width: 350px" th:each="dog : ${dogs}">
-                        <h5 class="text-center"><span th:text="${dog.name}"></span></h5>
+                        <h5 class="text-center"><a th:href="@{|/dog/${dog.id}|}"><span th:text="${dog.name}"></span></a></h5>
                         <p class="cluster text-center">ID#: <span th:text="${dog.id}"></span></p>
                             <img th:if="${dog.photos.size() != 0}" th:src="${dog.photos.get(0).getUrl()}" class="card-img-top" alt="Card image">
 

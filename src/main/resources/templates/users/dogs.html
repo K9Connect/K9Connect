@@ -60,7 +60,7 @@
             </thead>
             <tbody th:each="dog : ${dogs}">
             <tr>
-                <td th:text="${dog.name}"></td>
+                <td><a th:href="@{|/dog/${dog.id}|}" th:text="${dog.name}"></a></td>
                 <td th:text="${dog.getDetails().getAge()}"></td>
                 <td th:text="${dog.breed}"></td>
                 <td th:text="${dog.gender}"></td>
