@@ -133,4 +133,11 @@ public class DogController {
         return "redirect:/profile";
     }
 
+    @GetMapping("/dog/{id}")
+    public String showDogProfile(@PathVariable long id, Model model) {
+        Dog dogInDb = dogDao.getById(id);
+        model.addAttribute("dog", dogInDb);
+
+        return "dogs/profile";
+    }
 }
