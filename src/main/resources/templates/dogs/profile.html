@@ -58,23 +58,23 @@
                 <div class="alert alert-info">
                     <p><span th:text="${dog.name}"></span> does not have any reviews yet. Have you dealt with this dog? Help the owner out by writing a review.</p>
                 </div>
-                <div th:unless="${dog.getReviews().size() > 0}" th:each="review : ${dog.getReviews()}">
-                    <div class="d-flex">
-                        <div class="mr-2">
-                            <img
-                                    th:src="${review.commenter.details.pfp}"
-                                    class="profile-thumb"
-                                    alt="user profile picture">
-                        </div>
-                        <div>
-                            <p>
-                                <!--TODO: replace asterisk with a star icon (or something dog-themed)-->
-                                <span style="color: goldenrod"
-                                      th:each="i : ${#numbers.sequence(1, review.stars)}">*</span>
-                                <br>
-                                <span th:text="${review.review}"></span>
-                            </p>
-                        </div>
+            </div>
+            <div th:unless="${dog.getReviews().size() == 0}" th:each="review : ${dog.getReviews()}">
+                <div class="d-flex">
+                    <div class="mr-2">
+                        <img
+                                th:src="${review.commenter.details.pfp}"
+                                class="profile-thumb"
+                                alt="user profile picture">
+                    </div>
+                    <div>
+                        <p>
+                            <!--TODO: replace asterisk with a star icon (or something dog-themed)-->
+                            <span style="color: goldenrod"
+                                  th:each="i : ${#numbers.sequence(1, review.stars)}">*</span>
+                            <br>
+                            <span th:text="${review.review}"></span>
+                        </p>
                     </div>
                 </div>
             </div>
