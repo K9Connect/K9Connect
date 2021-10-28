@@ -68,7 +68,7 @@
                     <p><span th:text="${dog.name}"></span> does not have any reviews yet. Have you dealt with this dog? Help the owner out by writing a review.</p>
                 </div>
             </div>
-            <div th:unless="${dog.getReviews().size() == 0}" th:each="review : ${dog.getReviews()}">
+            <div th:unless="${dog.getReviews().size() == 0}" th:each="review : ${dog.getReviews()}" class="mb-2">
                 <div class="d-flex">
                     <div class="mr-2">
                         <img
