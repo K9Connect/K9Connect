@@ -21,14 +21,22 @@ public class DogController {
     private DogRepository dogDao;
     private DogDetailsRepository dogDetailsDao;
     private PhotoRepository photoDao;
+    private DogReviewRepository dogReviewDao;
 
-
-    public DogController(UserInfoRepository userInfoDao, UserRepository userDao, DogRepository dogDao, DogDetailsRepository dogDetailsDao, PhotoRepository photoDao) {
+    public DogController(
+            UserInfoRepository userInfoDao,
+            UserRepository userDao,
+            DogRepository dogDao,
+            DogDetailsRepository dogDetailsDao,
+            PhotoRepository photoDao,
+            DogReviewRepository dogReviewDao
+    ) {
         this.userInfoDao = userInfoDao;
         this.userDao = userDao;
         this.dogDao = dogDao;
         this.dogDetailsDao = dogDetailsDao;
         this.photoDao = photoDao;
+        this.dogReviewDao = dogReviewDao;
     }
 
     @GetMapping("/dogs")
@@ -184,8 +192,13 @@ public class DogController {
 
         Dog dogInDb = dogDao.getById(id);
 
+        DogReview currentDogReview = dogReviewDao.findByDogAndCommenter(dogInDb, currentUser);
+
+        boolean userHasNotReviewedDog = currentDogReview == null;
+
         model.addAttribute("currentUser", currentUser);
         model.addAttribute("dog", dogInDb);
+        model.addAttribute("userHasNotReviewedDog", userHasNotReviewedDog);
 
         return "dogs/profile";
     }

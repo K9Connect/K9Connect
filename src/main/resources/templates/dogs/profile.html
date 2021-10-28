@@ -88,8 +88,7 @@
                 </div>
             </div>
             <th:block th:if="${dog.owner.id != currentUser.id}">
-                <!--TODO: hide this link from users who have already reviewed this dog-->
-                <a th:href="@{|/dogs/review/${dog.id}|}">Rate/Review Dog</a>
+                <a th:if="${userHasNotReviewedDog}" th:href="@{|/dogs/review/${dog.id}|}">Rate/Review Dog</a>
             </th:block>
         </div>
     </div>
