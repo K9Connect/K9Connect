@@ -75,7 +75,7 @@ public class DogController {
 
     @GetMapping("/dog/edit/{id}")
     public String editDog(@PathVariable long id, Model model) {
-        UserWithRoles loggedInUser = (UserWithRoles) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.findByUsername(loggedInUser.getUsername());
 
         model.addAttribute("dog", dogDao.getById(id));
@@ -117,6 +117,17 @@ public class DogController {
         return "redirect:/profile";
     }
 
+    @PostMapping("/dog/search")
+    public String search(@RequestParam String term, Model model) {
+
+        term = "%" + term + "%";
+        List<Dog> listOfDogs = dogDao.findDogsByBreedIsLike(term);
+
+        model.addAttribute("dogs", listOfDogs);
+        return "redirect:users/search";
+
+    }
+
     @PostMapping("/dog/delete/{id}")
     public String deleteDogSend(@PathVariable long id) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -133,6 +144,39 @@ public class DogController {
         return "redirect:/profile";
     }
 
+    @PostMapping("/dog/photo/{id}")
+    public String deleteDogPhoto(@PathVariable long id,@ModelAttribute Dog dog,@ModelAttribute Photo photo) {
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userDao.findByUsername(loggedInUser.getUsername());
+
+        photoDao.deleteById(id);
+
+        return "redirect:/profile";
+    }
+
+    @GetMapping("/photo/add/{id}")
+    public String addPhotoForm(@PathVariable Long id, Model model) {
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userDao.findByUsername(loggedInUser.getUsername());
+
+        model.addAttribute("dogId", id);
+        model.addAttribute("photo", new Photo());
+
+        return "users/add-photo";
+    }
+
+    @PostMapping("/photo/add/{id}")
+    public String addPhotoForm(@PathVariable Long id, @ModelAttribute Photo photo, @RequestParam String url) {
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userDao.findByUsername(loggedInUser.getUsername());
+
+        System.out.println(url);
+        photo.setDog(dogDao.getById(id));
+        photoDao.save(photo);
+
+        return "redirect:/profile";
+    }
+  
     @GetMapping("/dog/{id}")
     public String showDogProfile(@PathVariable long id, Model model) {
         User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -146,3 +190,5 @@ public class DogController {
         return "dogs/profile";
     }
 }
+
+

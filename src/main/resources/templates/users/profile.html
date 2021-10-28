@@ -101,9 +101,14 @@
                     <div class="card" style="width: 350px" th:each="dog : ${dogs}">
                         <h5 class="text-center"><a th:href="@{|/dog/${dog.id}|}"><span th:text="${dog.name}"></span></a></h5>
                         <p class="cluster text-center">ID#: <span th:text="${dog.id}"></span></p>
-                            <img th:if="${dog.photos.size() != 0}" th:src="${dog.photos.get(0).getUrl()}" class="card-img-top" alt="Card image">
-
+                           <div th:if="${dog.photos.size() != 0}">
+                            <img th:each="photo: ${dog.photos}"  th:src="${photo.url}" class="card-img-top" alt="Card image">
+                           </div>
+                        <form th:if="${dog.photos.size() != 0}" th:action="@{|/dog/photo/${dog.photos.get(0).getId()}|}" th:method="POST">
+                            <button>Delete Photo</button>
+                        </form>
                         <hr>
+
 
                         <div class="card-body ">
                             <h4 class="card-title">Owner:
