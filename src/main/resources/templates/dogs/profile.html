@@ -85,6 +85,9 @@
                     </div>
                 </div>
             </div>
+            <th:block th:if="${dog.owner.id != currentUser.id}">
+                <a th:href="@{|/dogs/review/${dog.id}|}">Rate/Review Dog</a>
+            </th:block>
         </div>
     </div>
 </div>

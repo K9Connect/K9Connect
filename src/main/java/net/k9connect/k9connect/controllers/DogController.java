@@ -135,7 +135,12 @@ public class DogController {
 
     @GetMapping("/dog/{id}")
     public String showDogProfile(@PathVariable long id, Model model) {
+        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = userDao.getById(principal.getId());
+
         Dog dogInDb = dogDao.getById(id);
+
+        model.addAttribute("currentUser", currentUser);
         model.addAttribute("dog", dogInDb);
 
         return "dogs/profile";
