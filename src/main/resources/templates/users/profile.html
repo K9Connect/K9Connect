@@ -21,12 +21,38 @@
 <div class="container">
 
     <div class="justify-content-center">
-        <div class="col-4">
-            <img height="200px" width="250x" th:src="${user.getDetails().getPfp()}">
+        <div class="row">
+            <div class="col-4">
+                <img height="200px" width="250x" th:src="${user.getDetails().getPfp()}">
+            </div>
+            <div class="col-8">
+                <p>Average Rating: <span>TBD</span></p>
+                <div th:each="review : ${user.getReviews()}">
+                    <div class="d-flex">
+                        <div class="mr-2">
+                            <img
+                                    th:src="${review.reviewer.getDetails().getPfp()}"
+                                    style="height: 75px; width: 75px; border: none; border-radius: 50%"
+                                    alt="user profile picture">
+                        </div>
+                        <div>
+                            <p>
+                                <!--TODO: replace asterisk with a star icon (or something dog-themed)-->
+                                <span style="color: goldenrod" th:each="i : ${#numbers.sequence(1, review.stars)}">*</span>
+                                <br>
+                                <span th:text="${review.review}"></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-8">
-            <h1 th:text="${user.getUsername()}"></h1>
-            <a th:href="@{|/review/${id}|}">Rate/Review</a>
+            <h1 th:text="${user.getUsername()}"></h1><br>
+            <span th:if="${user.getId() != loggedinuser.getId()}">
+                            <a th:href="@{|/message/${id}|}"><button type="button" class="btn btn-dark">Send Message</button></a>
+                            <a th:href="@{|/review/${id}|}">Rate/Review</a>
+            </span>
             <h3>Zip Code: <span th:text="${info.getZipcode()}"></span></h3></br>
         </div>
 

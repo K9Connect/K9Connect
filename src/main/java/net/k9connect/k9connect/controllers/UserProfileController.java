@@ -74,7 +74,10 @@ public class UserProfileController {
     @GetMapping("/profile/{id}")
 
     public String viewProfile(@PathVariable long id, Model model) {
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userDao.findByUsername(loggedInUser.getUsername());
 
+        model.addAttribute("loggedinuser", user);
 
         User displayedUser = userDao.getById(id);
         UserInfo displayedInfo = displayedUser.getDetails();

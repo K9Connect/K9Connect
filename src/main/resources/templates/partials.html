@@ -27,6 +27,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/contact">CONTACT</a>
                 </li>
+                <li class="nav-item">
+                    <a sec:authorize="isAuthenticated()" class="nav-link" href="/dogs">
+                        DOGS
+                    </a>
+                </li>
 
 
             </ul>
@@ -41,7 +46,8 @@
 <!--                <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>-->
 <!--            </form>-->
 
-            <ul class="navbar-nav mr-auto">
+
+            <ul class="navbar-nav mr-2">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -67,7 +73,7 @@
                             DOGS
                         </a>
                         <a sec:authorize="isAuthenticated()" class="nav-link" href="/profile/edit">
-                            UPDATE PROFILE
+                            EDIT PROFILE
                         </a>
                         <div class="dropdown-divider"></div>
                         <a sec:authorize="isAuthenticated()" class="nav-item">

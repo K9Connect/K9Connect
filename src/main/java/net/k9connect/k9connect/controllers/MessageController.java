@@ -63,7 +63,7 @@ public class MessageController {
         newMessage.setContent(message.getContent());
         messageDao.save(newMessage);
 
-        return "redirect:/user/message/" + id;
+        return "redirect:/message/" + id;
 
 
     }
