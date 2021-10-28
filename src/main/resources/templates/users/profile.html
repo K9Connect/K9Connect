@@ -26,25 +26,33 @@
                 <img height="200px" width="250x" th:src="${user.getDetails().getPfp()}">
             </div>
             <div class="col-8">
-                <p>Average Rating: <span>TBD</span></p>
-                <div th:each="review : ${user.getReviews()}">
-                    <div class="d-flex">
-                        <div class="mr-2">
-                            <img
-                                    th:src="${review.reviewer.getDetails().getPfp()}"
-                                    style="height: 75px; width: 75px; border: none; border-radius: 50%"
-                                    alt="user profile picture">
-                        </div>
-                        <div>
-                            <p>
-                                <!--TODO: replace asterisk with a star icon (or something dog-themed)-->
-                                <span style="color: goldenrod" th:each="i : ${#numbers.sequence(1, review.stars)}">*</span>
-                                <br>
-                                <span th:text="${review.review}"></span>
-                            </p>
+                <th:block th:if="${user.reviews.size()} &gt; 0">
+                    <p>Average Rating:<span th:text="${#numbers.formatDecimal(averageStars, 1, 1)}"></span></p>
+                    <div th:each="review : ${user.getReviews()}">
+                        <div class="d-flex">
+                            <div class="mr-2">
+                                <img
+                                        th:src="${review.reviewer.getDetails().getPfp()}"
+                                        style="height: 75px; width: 75px; border: none; border-radius: 50%"
+                                        alt="user profile picture">
+                            </div>
+                            <div>
+                                <p>
+                                    <!--TODO: replace asterisk with a star icon (or something dog-themed)-->
+                                    <span style="color: goldenrod"
+                                          th:each="i : ${#numbers.sequence(1, review.stars)}">*</span>
+                                    <br>
+                                    <span th:text="${review.review}"></span>
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </th:block>
+                <th:block th:unless="${user.reviews.size()} &gt; 0">
+                    <div class="alert alert-info">
+                        This user has yet to recieve a review. Have experience with this user? Help us out by posting a review.
+                    </div>
+                </th:block>
             </div>
         </div>
         <div class="col-8">
