@@ -51,8 +51,8 @@
             <h1 th:text="${user.getUsername()}"></h1><br>
             <span th:if="${user.getId() != loggedinuser.getId()}">
                             <a th:href="@{|/message/${id}|}"><button type="button" class="btn btn-dark">Send Message</button></a>
+                            <a th:href="@{|/review/${id}|}">Rate/Review</a>
             </span>
-            <a th:href="@{|/review/${id}|}">Rate/Review</a>
             <h3>Zip Code: <span th:text="${info.getZipcode()}"></span></h3></br>
         </div>
 
@@ -99,7 +99,7 @@
             <div class="row">
                 <div class="card-deck">
                     <div class="card" style="width: 350px" th:each="dog : ${dogs}">
-                        <h5 class="text-center"><span th:text="${dog.name}"></span></h5>
+                        <h5 class="text-center"><a th:href="@{|/dog/${dog.id}|}"><span th:text="${dog.name}"></span></a></h5>
                         <p class="cluster text-center">ID#: <span th:text="${dog.id}"></span></p>
                            <div th:if="${dog.photos.size() != 0}">
                             <img th:each="photo: ${dog.photos}"  th:src="${photo.url}" class="card-img-top" alt="Card image">

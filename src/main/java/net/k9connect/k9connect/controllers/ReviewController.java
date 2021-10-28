@@ -11,10 +11,13 @@ import net.k9connect.k9connect.repositories.UserReviewRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.validation.Valid;
 
 @Controller
 public class ReviewController {
@@ -40,8 +43,10 @@ public class ReviewController {
         User reviewer = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User reviewed = userDao.getById(id);
 
-        if (reviewer.getId() == reviewed.getId()) {
-            return "redirect:/profile";
+        UserReview existingReview = userReviewDao.findByReviewerAndReviewed(reviewer, reviewed);
+
+        if (reviewer.getId() == reviewed.getId() || existingReview != null) {
+            return "redirect:/profile/{id}";
         }
 
         UserReview userReview = new UserReview();
@@ -55,8 +60,13 @@ public class ReviewController {
     @PostMapping("/review/{id}")
     public String submitUserReview(
             @PathVariable long id,
-            @ModelAttribute(name = "userReview") UserReview userReview
+            @Valid @ModelAttribute(name = "userReview") UserReview userReview,
+            BindingResult bindingResult
     ) {
+        if (bindingResult.hasErrors()) {
+            return "redirect:/review/{id}";
+        }
+
         User reviewer = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         UserReview review = new UserReview();
 
@@ -104,6 +114,6 @@ public class ReviewController {
 
         dogReviewDao.save(review);
 
-        return "redirect:/profile/" + reviewedDog.getOwner().getId();
+        return "redirect:/dog/{id}";
     }
 }

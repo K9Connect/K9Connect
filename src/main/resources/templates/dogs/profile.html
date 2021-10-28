@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Dog Profile</title>
+    <style>
+        .profile-thumb {
+            height: 75px;
+            width: 75px;
+            border-radius: 50%;
+        }
+
+        .dog-thumb {
+            height: 100px;
+            width: auto;
+        }
+    </style>
+    <div th:replace="Partials :: header"></div>
+
+</head>
+<body>
+<div th:replace="Partials :: navbar"></div>
+
+<div class="container">
+    <div class="row mb-2">
+        <div class="col-sm-12 col-md-4">
+            <img class="img-fluid" th:src="${dog.getPhotos()[0].url}" alt="dog profile picture">
+        </div>
+        <div class="col-sm-12 col-md-8">
+            <h1 th:text="${dog.getName()}"></h1>
+            <p>
+                <span th:text="${dog.getBreed()}"></span>,
+                <span th:if="${dog.gender} == 'F'">female, </span>
+                <span th:unless="${dog.gender} == 'F'">male, </span>
+                <span th:text="${dog.getDetails().getAge()}"></span> years<br>
+                <span>Avg Rating: TBD</span>
+            </p>
+            <div class="row">
+                <div class="col d-flex">
+                    <div class="mr-2">
+                        <img class="profile-thumb" th:src="${dog.getOwner().getDetails().getPfp()}"
+                             alt="owner profile picture">
+                    </div>
+                    <div th:text="${dog.getDetails().getBio()}"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <a th:href="@{|/profile/${dog.getOwner().getId()}|}">Owner Profile</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-4">
+            <h3>Photos</h3>
+            <div class="alert alert-info" th:if="${dog.photos.size() < 2}">
+                <p><span th:text="${dog.name}"></span> does not have any additional photos.</p>
+            </div>
+            <div th:unless="${dog.photos.size() < 2}" class="d-flex justify-content-around flex-wrap">
+                <img class="dog-thumb mb-2" th:each="photo : ${dog.photos}" th:src="${photo.url}" alt="dog photo">
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-8">
+            <h3>Reviews</h3>
+            <div th:if="${dog.getReviews().size() == 0}">
+                <div class="alert alert-info">
+                    <p><span th:text="${dog.name}"></span> does not have any reviews yet. Have you dealt with this dog? Help the owner out by writing a review.</p>
+                </div>
+            </div>
+            <div th:unless="${dog.getReviews().size() == 0}" th:each="review : ${dog.getReviews()}" class="mb-2">
+                <div class="d-flex">
+                    <div class="mr-2">
+                        <img
+                                th:src="${review.commenter.details.pfp}"
+                                class="profile-thumb"
+                                alt="user profile picture">
+                    </div>
+                    <div>
+                        <p>
+                            <!--TODO: replace asterisk with a star icon (or something dog-themed)-->
+                            <span style="color: goldenrod"
+                                  th:each="i : ${#numbers.sequence(1, review.stars)}">*</span>
+                            <br>
+                            <span th:text="${review.review}"></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <th:block th:if="${dog.owner.id != currentUser.id}">
+                <!--TODO: hide this link from users who have already reviewed this dog-->
+                <a th:href="@{|/dogs/review/${dog.id}|}">Rate/Review Dog</a>
+            </th:block>
+        </div>
+    </div>
+</div>
+
+<div th:replace="Partials :: scripts"></div>
+
+</body>
+</html>
