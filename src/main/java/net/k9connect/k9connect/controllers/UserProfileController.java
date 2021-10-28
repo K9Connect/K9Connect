@@ -2,6 +2,7 @@ package net.k9connect.k9connect.controllers;
 
 import net.k9connect.k9connect.models.*;
 import net.k9connect.k9connect.repositories.*;
+import net.k9connect.k9connect.utils.Ratings;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.Collections;
+import java.util.List;
 
 @Controller
 public class UserProfileController {
@@ -18,15 +22,22 @@ public class UserProfileController {
     private DogRepository dogDao;
     private DogDetailsRepository dogDetailsDao;
     private PhotoRepository photoDao;
+    private UserReviewRepository userReviewDao;
 
-
-
-    public UserProfileController(UserInfoRepository userInfoDao, UserRepository userDao, DogRepository dogDao, DogDetailsRepository dogDetailsDao, PhotoRepository photoDao) {
+    public UserProfileController(
+            UserInfoRepository userInfoDao,
+            UserRepository userDao,
+            DogRepository dogDao,
+            DogDetailsRepository dogDetailsDao,
+            PhotoRepository photoDao,
+            UserReviewRepository userReviewDao
+    ) {
         this.userInfoDao = userInfoDao;
         this.userDao = userDao;
         this.dogDao = dogDao;
         this.dogDetailsDao = dogDetailsDao;
         this.photoDao = photoDao;
+        this.userReviewDao = userReviewDao;
     }
 
     @GetMapping("/profile/create")
@@ -72,7 +83,6 @@ public class UserProfileController {
     }
 
     @GetMapping("/profile/{id}")
-
     public String viewProfile(@PathVariable long id, Model model) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.findByUsername(loggedInUser.getUsername());
@@ -88,24 +98,28 @@ public class UserProfileController {
         model.addAttribute("dogs", displayedUser.getDogs()); // should be user dogs
         model.addAttribute("photo", displayedUser.getDetails().getPfp());
 
+        List<UserReview> userReviews = userReviewDao.findAllByReviewed(displayedUser);
+        double averageStars = userReviews.isEmpty() ? 0 : Ratings.average(userReviews);
 
+        model.addAttribute("averageStars", averageStars);
 
         return "users/profile";
 
     }
+
     @GetMapping("/profile/edit")
-   public String EditProfile( Model model)
-        {
-            User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            User user = userDao.findByUsername(loggedInUser.getUsername());
+    public String EditProfile(Model model) {
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userDao.findByUsername(loggedInUser.getUsername());
 
 
-            model.addAttribute("user", user.getDetails());
+        model.addAttribute("user", user.getDetails());
 
-        return "users/edit-profile" ;
+        return "users/edit-profile";
     }
+
     @PostMapping("/profile/edit")
-    public String EditProfileSend(@ModelAttribute UserInfo userInfo){
+    public String EditProfileSend(@ModelAttribute UserInfo userInfo) {
 
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.findByUsername(loggedInUser.getUsername());
@@ -115,9 +129,6 @@ public class UserProfileController {
         userInfoDao.save(userInfo);
         return "redirect:/profile/";
     }
-
-
-
 }
 
 
