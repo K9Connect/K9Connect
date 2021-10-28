@@ -20,32 +20,54 @@
 
 
     <div class="container">
-        <div class="row">
-            <div class="card-deck">
-                <div class="card" style="width: 350px" th:each="dog : ${dogs}">
-                    <h5 class="text-center"><span th:text="${dog.name}"></span></h5>
-                    <p class="cluster text-center">ID#: <span th:text="${dog.id}"></span></p>
-                    <img th:if="${dog.photos.size() != 0}" th:src="${dog.photos.get(0).getUrl()}" class="card-img-top"
-                         alt="Card image">
-                    <hr>
-                    <div class="card-body ">
-                        <h4 class="card-title">Owner:
-                            <span th:text="${dog.owner.username}"></span>
-                        </h4>
-                        <p class="card-text">Dog gender: <span th:text="${dog.gender}"></span></p>
-                        <p class="card-text" th:text="${dog.breed}"></p>
-                        <p class="card-text text-center overflow-auto" style="width: auto; height: 200px;"
-                           th:text="${dog.details.bio}"></p>
-                        <a th:href="@{|/dog/edit/${dog.id}|}">Edit Dog</a>
-                        <a th:href="@{|/dogs/review/${dog.id}|}">Rate/Review Dog</a>
-                        <form th:action="@{|/dog/delete/${dog.id}|}" th:method="POST">
-                            <button>Delete</button>
-                        </form>
-                        <br>
-                    </div>
-                </div>
-            </div>
-        </div>
+<!--        <div class="row">-->
+<!--            <div class="card-deck">-->
+<!--                <div class="card" style="width: 350px" th:each="dog : ${dogs}">-->
+<!--                    <h5 class="text-center"><span th:text="${dog.name}"></span></h5>-->
+<!--                    <p class="cluster text-center">ID#: <span th:text="${dog.id}"></span></p>-->
+<!--                    <img th:if="${dog.photos.size() != 0}" th:src="${dog.photos.get(0).getUrl()}" class="card-img-top"-->
+<!--                         alt="Card image">-->
+<!--                    <hr>-->
+<!--                    <div class="card-body ">-->
+<!--                        <h4 class="card-title">Owner:-->
+<!--                            <span th:text="${dog.owner.username}"></span>-->
+<!--                        </h4>-->
+<!--                        <p class="card-text">Dog gender: <span th:text="${dog.gender}"></span></p>-->
+<!--                        <p class="card-text" th:text="${dog.breed}"></p>-->
+<!--                        <p class="card-text text-center overflow-auto" style="width: auto; height: 200px;"-->
+<!--                           th:text="${dog.details.bio}"></p>-->
+<!--                        <a th:href="@{|/dog/edit/${dog.id}|}">Edit Dog</a>-->
+<!--                        <a th:href="@{|/dogs/review/${dog.id}|}">Rate/Review Dog</a>-->
+<!--                        <form th:action="@{|/dog/delete/${dog.id}|}" th:method="POST">-->
+<!--                            <button>Delete</button>-->
+<!--                        </form>-->
+<!--                        <br>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Breed</th>
+                <th>Gender</th>
+                <th>Owner</th>
+            </tr>
+            </thead>
+            <tbody th:each="dog : ${dogs}">
+            <tr>
+                <td><a th:href="@{|/dog/${dog.id}|}" th:text="${dog.name}"></a></td>
+                <td th:text="${dog.getDetails().getAge()}"></td>
+                <td th:text="${dog.breed}"></td>
+                <td th:text="${dog.gender}"></td>
+                <td><a th:href="@{|/profile/${dog.owner.id}|}"><span th:text="${dog.owner.username}"></span></a></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 

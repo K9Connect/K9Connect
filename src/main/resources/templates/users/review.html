@@ -19,8 +19,10 @@
             <input type="radio" th:field="*{stars}" value="4">
             <input type="radio" th:field="*{stars}" value="5">
         </div>
+        <div th:if="${#fields.hasErrors('stars')}" th:errors="*{stars}">star error</div>
         <label for="user-review">Review</label>
         <textarea th:field="*{review}" id="user-review" cols="30" rows="10"></textarea>
+        <div th:if="${#fields.hasErrors('review')}" th:errors="*{review}">review error</div>
         <button type="submit">Submit Review</button>
     </form>
 </div>

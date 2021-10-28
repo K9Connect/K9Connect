@@ -37,24 +37,6 @@ public class DogController {
         return "users/dogs";
     }
 
-    @PostMapping("dogs")
-    public String displySearchedDog(@RequestParam String dogsToSearchFor) {
-//        String searchTerm = "Search Term goes here";
-//
-//
-//        List<Dog> listOfDogs = dogsDao.getbySearchTerm(searchTerm);
-//
-//        List<Detail> listofDogDetials = detailsDao.getbySearchTerm(searchTerm);
-//
-//        for (Detail dogDetail: listofDogDetials){
-//            listOfDogs.add(dogDetail.getDog());
-//        }
-//
-//        model.addAttribute("searchResults",listOfDogs);
-//
-//        return "dog/search";
-        return "users/dogs";
-    }
 
     @GetMapping("/dog/create")
     public String createDogForm(Model model) {
@@ -121,12 +103,6 @@ public class DogController {
             photos.add(dogPhoto);
         }
 
-
-//        for(Photo photo1: photos){
-//            System.out.println(photo1);
-//        }
-//
-//        photos.forEach( photo1 -> photoDao.save(photo1) );
         dog.setPhotos(photos);
 
         Dog dogDB = dogDao.getById(id);
@@ -138,11 +114,6 @@ public class DogController {
         dog.setId(id);
         dogDao.save(dog);
 
-//        photo.setDog(dog);
-//        photoDao.save(photo);
-
-//        return "redirect:/dog/edit/" + id;
-//        return "redirect:/users/"+id+"/profile/";
         return "redirect:/profile";
     }
 
@@ -169,6 +140,7 @@ public class DogController {
         dogDao.deleteById(id);
         dogDetailsDao.delete(detailsToDelete);
         photoDao.deleteAllByDog_Id(id);
+
         return "redirect:/profile";
     }
 
@@ -203,6 +175,19 @@ public class DogController {
         photoDao.save(photo);
 
         return "redirect:/profile";
+    }
+  
+    @GetMapping("/dog/{id}")
+    public String showDogProfile(@PathVariable long id, Model model) {
+        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User currentUser = userDao.getById(principal.getId());
+
+        Dog dogInDb = dogDao.getById(id);
+
+        model.addAttribute("currentUser", currentUser);
+        model.addAttribute("dog", dogInDb);
+
+        return "dogs/profile";
     }
 }
 
