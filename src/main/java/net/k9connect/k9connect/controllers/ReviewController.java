@@ -114,6 +114,6 @@ public class ReviewController {
 
         dogReviewDao.save(review);
 
-        return "redirect:/profile/" + reviewedDog.getOwner().getId();
+        return "redirect:/dog/{id}";
     }
 }
