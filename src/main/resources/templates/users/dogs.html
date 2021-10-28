@@ -24,28 +24,29 @@
         <!--        </form>-->
     </div>
 
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Breed</th>
-            <th>Gender</th>
-            <th>Owner</th>
-        </tr>
-        </thead>
-        <tbody th:each="dog : ${dogs}">
-        <tr>
-            <td th:text="${dog.name}"></td>
-            <td th:text="${dog.getDetails().getAge()}"></td>
-            <td th:text="${dog.breed}"></td>
-            <td th:text="${dog.gender}"></td>
-            <td><a th:href="@{|/profile/${dog.owner.id}|}"><span th:text="${dog.owner.username}"></span></a></td>
-        </tr>
-        </tbody>
-    </table>
 </div>
-
+    <div class="container">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Breed</th>
+                <th>Gender</th>
+                <th>Owner</th>
+            </tr>
+            </thead>
+            <tbody th:each="dog : ${dogs}">
+            <tr>
+                <td><a th:href="@{|/dog/${dog.id}|}" th:text="${dog.name}"></a></td>
+                <td th:text="${dog.getDetails().getAge()}"></td>
+                <td th:text="${dog.breed}"></td>
+                <td th:text="${dog.gender}"></td>
+                <td><a th:href="@{|/profile/${dog.owner.id}|}"><span th:text="${dog.owner.username}"></span></a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <div th:replace="Partials :: scripts"></div>
