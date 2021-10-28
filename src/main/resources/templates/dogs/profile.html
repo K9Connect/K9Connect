@@ -36,7 +36,7 @@
                 <span>Avg Rating: TBD</span>
             </p>
             <div class="row">
-                <div class="d-flex">
+                <div class="col d-flex">
                     <div class="mr-2">
                         <img class="profile-thumb" th:src="${dog.getOwner().getDetails().getPfp()}"
                              alt="owner profile picture">
@@ -45,7 +45,9 @@
                 </div>
             </div>
             <div class="row">
-                <a th:href="@{|/profile/${dog.getOwner().getId()}|}">Owner Profile</a>
+                <div class="col">
+                    <a th:href="@{|/profile/${dog.getOwner().getId()}|}">Owner Profile</a>
+                </div>
             </div>
         </div>
     </div>
