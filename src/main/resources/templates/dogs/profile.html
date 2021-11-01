@@ -33,7 +33,11 @@
                 <span th:if="${dog.gender} == 'F'">female, </span>
                 <span th:unless="${dog.gender} == 'F'">male, </span>
                 <span th:text="${dog.getDetails().getAge()}"></span> years<br>
-                <span>Avg Rating: TBD</span>
+                <span>
+                    Average Rating:
+                    <span th:if="${dogAverage} == 0">N/A</span>
+                    <span th:unless="${dogAverage} == 0" th:text="${dogAverage}"></span>
+                </span>
             </p>
             <div class="row">
                 <div class="col d-flex">

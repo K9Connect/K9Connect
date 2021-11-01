@@ -3,6 +3,7 @@ package net.k9connect.k9connect.controllers;
 
 import net.k9connect.k9connect.models.*;
 import net.k9connect.k9connect.repositories.*;
+import net.k9connect.k9connect.utils.Ratings;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -196,9 +197,13 @@ public class DogController {
 
         boolean userHasNotReviewedDog = currentDogReview == null;
 
+        List<DogReview> dogReviews = dogReviewDao.findAllByDog(dogInDb);
+        double dogAverage = dogReviews.isEmpty() ? 0 : Ratings.dogAverage(dogReviews);
+
         model.addAttribute("currentUser", currentUser);
         model.addAttribute("dog", dogInDb);
         model.addAttribute("userHasNotReviewedDog", userHasNotReviewedDog);
+        model.addAttribute("dogAverage", dogAverage);
 
         return "dogs/profile";
     }

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -99,7 +98,7 @@ public class UserProfileController {
         model.addAttribute("photo", displayedUser.getDetails().getPfp());
 
         List<UserReview> userReviews = userReviewDao.findAllByReviewed(displayedUser);
-        double averageStars = userReviews.isEmpty() ? 0 : Ratings.average(userReviews);
+        double averageStars = userReviews.isEmpty() ? 0 : Ratings.userAverage(userReviews);
 
         model.addAttribute("averageStars", averageStars);
 
