@@ -1,4 +1,5 @@
 use k9connect_db;
+# use knineconnectapp_db;
 
 insert into users_details (bio, pfp, phone_number, zipcode)
 values ('Power! Unlimited POWER!',
