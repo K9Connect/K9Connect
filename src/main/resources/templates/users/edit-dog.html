@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8"/>
   <title>Create Dog</title>
-  <div th:replace="Partials :: header"></div>
+  <div th:replace="partials :: header"></div>
 
 </head>
 <body>
-<div th:replace="Partials :: navbar"></div>
+<div th:replace="partials :: navbar"></div>
 
 <div class="container justify-content-center">
   <form th:action="@{|/dog/edit/${id}|}" th:method="post" th:object="${dog}">
@@ -48,7 +48,7 @@
 
 </div>
 
-<div th:replace="Partials :: scripts"></div>
+<div th:replace="partials :: scripts"></div>
 
 </body>
 </html>
