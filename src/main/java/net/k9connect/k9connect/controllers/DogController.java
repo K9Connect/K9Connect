@@ -117,16 +117,35 @@ public class DogController {
         return "redirect:/profile";
     }
 
-    @PostMapping("/dog/search")
-    public String search(@RequestParam String term, Model model) {
-
-        term = "%" + term + "%";
+    @GetMapping("dogs/{term}")
+        public String term  (@PathVariable String term,Model model){
+        term ="%"+term+"%";
+        if(term != null){
         List<Dog> listOfDogs = dogDao.findDogsByBreedIsLike(term);
-
-        model.addAttribute("dogs", listOfDogs);
-        return "redirect:users/search";
-
+        model.addAttribute("dogs",listOfDogs);}
+        else {
+            model.addAttribute("dogs", dogDao.findAll());
+        }
+        return "users/dogs";
     }
+
+    @GetMapping("dogs/{F}")
+    public String selectGender(@PathVariable String gender,Model model){
+
+        if(gender.equals("F")){
+            List<Dog> listOfDogs = dogDao.findDogsByGender(gender);
+            model.addAttribute("dogs",listOfDogs);}
+        else {
+            model.addAttribute("dogs", dogDao.findAll());
+        }
+        return "users/dogs";
+    }
+
+@PostMapping("/dog/search")
+public String search(@RequestParam String term, Model model){
+
+    return "redirect:/dogs/" + term;
+}
 
     @PostMapping("/dog/delete/{id}")
     public String deleteDogSend(@PathVariable long id) {
