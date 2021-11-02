@@ -117,35 +117,39 @@ public class DogController {
         return "redirect:/profile";
     }
 
-    @GetMapping("dogs/{term}")
-        public String term  (@PathVariable String term,Model model){
+//    @GetMapping("/dogs/{term}")
+//        public String term  (@RequestParam String term,Model model){
+//        term ="%"+term+"%";
+//        if(term != null){
+//        List<Dog> listOfDogs = dogDao.findDogsByBreedIsLike(term);
+//        model.addAttribute("dogs",listOfDogs);}
+//        else {
+//            model.addAttribute("dogs", dogDao.findAll());
+//        }
+//        return "users/dogs";
+//    }
+//    @GetMapping("/dogs/{gender}")
+//    public String selectGender(@PathVariable String gender,Model model){
+//
+//        if(gender.equals("F")){
+//            List<Dog> listOfDogs = dogDao.findDogsByGender(gender.charAt(0));
+//            model.addAttribute("dogs",listOfDogs);}
+//        if(gender.equals("M")){
+//            List<Dog> listOfDogs = dogDao.findDogsByGender(gender.charAt(0));
+//            model.addAttribute("dogs",listOfDogs);}
+//        else{
+//            model.addAttribute("dogs", dogDao.findAll());
+//        }
+//        return "users/dogs";
+
+
+    @PostMapping("/dog/search")
+    public String search(@RequestParam String term, Model model){
         term ="%"+term+"%";
-        if(term != null){
         List<Dog> listOfDogs = dogDao.findDogsByBreedIsLike(term);
-        model.addAttribute("dogs",listOfDogs);}
-        else {
-            model.addAttribute("dogs", dogDao.findAll());
-        }
+        model.addAttribute("dogs",listOfDogs);
         return "users/dogs";
     }
-
-    @GetMapping("dogs/{F}")
-    public String selectGender(@PathVariable String gender,Model model){
-
-        if(gender.equals("F")){
-            List<Dog> listOfDogs = dogDao.findDogsByGender(gender);
-            model.addAttribute("dogs",listOfDogs);}
-        else {
-            model.addAttribute("dogs", dogDao.findAll());
-        }
-        return "users/dogs";
-    }
-
-@PostMapping("/dog/search")
-public String search(@RequestParam String term, Model model){
-
-    return "redirect:/dogs/" + term;
-}
 
     @PostMapping("/dog/delete/{id}")
     public String deleteDogSend(@PathVariable long id) {

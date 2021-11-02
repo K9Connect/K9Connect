@@ -19,16 +19,7 @@ public interface DogRepository extends JpaRepository<Dog, Long> {
 //    Dog findByName(String name);
 
     List<Dog> findDogsByBreedIsLike(String breed);
-    List<Dog> findDogsByGender (String gender);
-//    List<Dog> findDogsByDetails_Age (int age);
-//    List<Dog> findDogsByDetails_Has_certs (boolean certs);
 
-
-//   @Query(value="select Dog.breed, Dog.gender,Dog.name from Dog , DogDetails  Where Dog.id = DogDetails.id order by gender, breed nativeQuery = true")
-//    List<Dog> findByKeyword(@Param("keyword") String keyword);
-
-
-//    @Query(value="select breed, gender, name, age from Dog ,DogDetails Where Dog.id= DogDetails.id", nativeQuery=true)
-//    List<Dog> findByKeyword(@Param("keyword") String keyword);
+    List<Dog> findDogsByBreedIsLikeAndGenderAndDetails_Has_certs(String breed, char gender, boolean hasCerts);
 }
 
