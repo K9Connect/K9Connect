@@ -13,7 +13,8 @@ import java.util.List;
 
 public interface DogRepository extends JpaRepository<Dog, Long> {
 
-    Dog findByName(String name);
+//    List<Dog> findDogsByBreedIsLikeAndDetails_Has_certs(String breed);
+
 
     List<Dog> findDogsByBreedIsLike(String breed);
 }
