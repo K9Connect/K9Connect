@@ -86,11 +86,12 @@ public class DogController {
     public String editDog(@PathVariable long id, Model model) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.findByUsername(loggedInUser.getUsername());
-
-        model.addAttribute("dog", dogDao.getById(id));
-
-//        photoDao.getById(id).getUrl();
+        Dog dog = dogDao.getById(id);
+        if (dog.getOwner().getId() == user.getId()) {
+        model.addAttribute("dog",dog);
         return "users/edit-dog";
+        }
+        return "redirect:/profile";
     }
 
     @PostMapping("/dog/edit/{id}")
@@ -127,14 +128,65 @@ public class DogController {
     }
 
     @PostMapping("/dog/search")
-    public String search(@RequestParam String term, Model model) {
-
-        term = "%" + term + "%";
-        List<Dog> listOfDogs = dogDao.findDogsByBreedIsLike(term);
-
-        model.addAttribute("dogs", listOfDogs);
-        return "redirect:users/search";
-
+    public String search(@RequestParam String term, @RequestParam String gender, @RequestParam String hasCerts, Model model) {
+        System.out.println(term);
+        System.out.println(gender);
+        System.out.println(hasCerts);
+        if (term != null) {
+            term = "%" + term + "%";
+            List<Dog> listOfDogs = dogDao.findDogsByBreedIsLike(term);
+            model.addAttribute("dogs",listOfDogs);
+        }
+        Boolean certs = false;
+        if (hasCerts.equals("true")) {
+             certs = true;
+        }
+            if (gender.charAt(0) != 'a') {
+                if (gender.charAt(0) == 'M') {
+                    List<Dog> listOfDogs = dogDao.findDogsByBreedIsLike(term);
+                    List<Dog> dogsList = new ArrayList<>();
+                    for (int i = 0; i < listOfDogs.size(); i++) {
+                        if (listOfDogs.get(i).getGender() == 'M') {
+                            dogsList.add(listOfDogs.get(i));
+                        } else if (certs) {
+                            if (listOfDogs.get(i).getDetails().isHas_certs()) {
+                                dogsList.add(listOfDogs.get(i));
+                            }
+                        }
+                    }
+                    model.addAttribute("dogs", dogsList);
+                }
+                if (gender.charAt(0) == 'F') {
+                    List<Dog> listOfDogs = dogDao.findDogsByBreedIsLike(term);
+                    List<Dog> dogsList = new ArrayList<>();
+                    for (int i = 0; i < listOfDogs.size(); i++) {
+                        if (listOfDogs.get(i).getGender() == 'F') {
+                            dogsList.add(listOfDogs.get(i));
+                        } else if (certs) {
+                            if (listOfDogs.get(i).getDetails().isHas_certs()) {
+                                dogsList.add(listOfDogs.get(i));
+                            }
+                        }
+                    }
+                    model.addAttribute("dogs", dogsList);
+                }
+            } else if (gender.charAt(0) == 'a'){
+                List<Dog> listOfDogs = dogDao.findDogsByBreedIsLike(term);
+                model.addAttribute("dogs", listOfDogs);
+            } else if (certs) {
+                List<Dog> allDogs = dogDao.findAll();
+                List<Dog> dogsWithCerts = new ArrayList<>();
+                for (int i = 0; i < allDogs.size(); i++) {
+                    if (allDogs.get(i).getDetails().isHas_certs()) {
+                       dogsWithCerts.add(allDogs.get(i));
+                    }
+                }
+                model.addAttribute("dogs", dogsWithCerts);
+            }
+         else {
+            model.addAttribute("dogs", dogDao.findAll());
+        }
+        return "users/dogs";
     }
 
     @PostMapping("/dog/delete/{id}")
@@ -154,7 +206,7 @@ public class DogController {
     }
 
     @PostMapping("/dog/photo/{id}")
-    public String deleteDogPhoto(@PathVariable long id,@ModelAttribute Dog dog,@ModelAttribute Photo photo) {
+    public String deleteDogPhoto(@PathVariable long id, @ModelAttribute Dog dog, @ModelAttribute Photo photo) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.findByUsername(loggedInUser.getUsername());
 
@@ -185,7 +237,7 @@ public class DogController {
 
         return "redirect:/profile";
     }
-  
+
     @GetMapping("/dog/{id}")
     public String showDogProfile(@PathVariable long id, Model model) {
         User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
