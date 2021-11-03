@@ -120,7 +120,7 @@
 
                         <div class="card-body ">
 
-                            <p class="card-text">Dog gender: <span th:text="${dog.gender}"></span></p>
+                            <p class="card-text">Gender: <span th:text="${dog.gender}"></span></p>
                             <p class="card-text" th:text="${dog.breed}"></p>
                             <p class="card-text text-center overflow-auto" style="width: auto; height: 200px;" th:text="${dog.details.bio}"></p>
                             <a th:if="${dog.owner.id == loggedinuser.getId()}" th:href="@{|/dog/edit/${dog.id}|}"><button class="btn btn-dark">Edit</button></a>
