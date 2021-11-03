@@ -73,6 +73,9 @@
                             EDIT PROFILE
                         </a>
                         <div class="dropdown-divider"></div>
+                        <a sec:authorize="isAuthenticated()" class="nav-link" href="/messages">
+                        MESSAGES
+                        </a>
                         <a sec:authorize="isAuthenticated()" class="nav-item">
                             <form th:action="@{/logout}" th:method="post">
                                 <button class="btn-link" style="margin-top: 8px">LOGOUT</button>
@@ -111,6 +114,7 @@
             background-color: lightgreen;
             display: flex;
             justify-content: left;
+            margin-bottom: 1px;
 
             border: solid black 2px;
         }
@@ -119,6 +123,7 @@
             background-color: lightblue;
             display: flex;
             justify-content: left;
+            margin-bottom: 1px;
 
             border: solid black 2px;
         }
