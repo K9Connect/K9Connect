@@ -31,6 +31,7 @@
                 <p th:text="${message.getContent()}"></p><br>
             </div>
             <p class="no-m-top" th:if="${message.getSending_user() == otheruser && message.receiving_user == loggedinuser}" style="justify-content: right"><small><br>Sent by <span th:text="${otheruser.getUsername()}"></span> on <span th:text="${message.getReadableDate()}"></span> </small></p>
+            <p class="no-m-top" th:if="${message.getSending_user() == otheruser && message.receiving_user == loggedinuser}" style="justify-content: right"><small><br><a th:href="@{|/report/${otheruser.getId()}|}">Report Message</a> </small></p>
 
 
         </div>

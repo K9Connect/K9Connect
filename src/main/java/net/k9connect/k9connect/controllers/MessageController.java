@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -65,6 +66,32 @@ public class MessageController {
 
         return "redirect:/message/" + id;
 
+
+    }
+
+    @GetMapping("/messages")
+    public String showMessages(Model model) {
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userDao.findByUsername(loggedInUser.getUsername());
+
+        List<Message> messageHistory = new ArrayList<>();
+        List<User> listOfUsers = new ArrayList<>();
+
+        messageHistory.addAll(user.getMessage_received());
+        messageHistory.addAll(user.getMessage_sent());
+
+
+        for (int i = 0; i < messageHistory.size(); i++) {
+            if (!listOfUsers.contains(messageHistory.get(i).receiving_user) && user.getId() != messageHistory.get(i).receiving_user.getId()) {
+                listOfUsers.add(messageHistory.get(i).receiving_user);
+            } else if (!listOfUsers.contains(messageHistory.get(i).sending_user) && user.getId() != messageHistory.get(i).receiving_user.getId()) {
+                listOfUsers.add(messageHistory.get(i).sending_user);
+            }
+        }
+
+        model.addAttribute("users", listOfUsers);
+
+        return "messages/index";
 
     }
 }

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>Messenger</title>
+  <div th:replace="partials :: header"></div>
+
+</head>
+<body>
+<div th:replace="partials :: navbar"></div>
+
+<div class="container">
+
+  <table class="table table-light">
+
+    <th>User</th>
+    <div th:each="user : ${users}">
+
+      <tr>
+        <td><a th:href="@{|/message/${user.getId()}|}" th:text="${user.getUsername()}"></a> </td>
+      </tr>
+
+    </div>
+
+  </table>
+
+
+</div>
+
+<div th:replace="partials :: scripts"></div>
+
+</body>
+</html>
