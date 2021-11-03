@@ -1,5 +1,7 @@
 package net.k9connect.k9connect.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,42 +24,53 @@ public class User{
     @Getter @Setter private String username;
 
     @Column(nullable = false)
+    @JsonIgnore
     @Getter @Setter private String password;
 
     @Column(nullable = false)
     @Getter @Setter private String email;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+    @JsonIgnore
     @Getter @Setter private List<Dog> dogs;
 
     @Enumerated(EnumType.STRING)
+    @JsonIgnore
     @Getter
     @Setter
     private Statuses status;
 
     @Column
+    @JsonIgnore
     @Getter @Setter private boolean is_admin;
 
     @OneToOne
     @JoinColumn(name = "userdetails_id")
+    @JsonManagedReference
     @Getter @Setter private UserInfo details;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "reportedUser")
+    @JsonIgnore
     @Getter @Setter private List<UserReport> reportsagainst;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "reportingUser")
+    @JsonIgnore
     @Getter @Setter private List<UserReport> reportsfiled;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "sending_user")
+    @JsonIgnore
     @Getter @Setter private List<Message> message_sent;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "receiving_user")
+    @JsonIgnore
     @Getter @Setter private List<Message> message_received;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "reviewed")
+    @JsonIgnore
     @Getter @Setter private List<UserReview> reviews;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "reviewer")
+    @JsonIgnore
     @Getter @Setter private List<UserReview> reviews_made;
 
     public User(User copy) {
