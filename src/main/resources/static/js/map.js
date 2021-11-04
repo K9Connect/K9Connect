@@ -10,9 +10,14 @@ $(document).ready(function() {
     let request = $.ajax({'url': '/users.json'});
     request.done(function(users) {
         users.forEach(user => {
-            geocode(user.details.zipcode, MAPBOX_API_KEY)
+            let zip = user.details.zipcode.toString();
+            if (zip.length < 5) {
+                zip = '0' + zip;
+            }
+
+            geocode(zip, MAPBOX_API_KEY)
                 .then(function (coordinates) {
-                    // console.log(coordinates);
+                    // console.log(zip, coordinates);
 
                     marker = new mapboxgl.Marker()
                         .setLngLat(coordinates)
