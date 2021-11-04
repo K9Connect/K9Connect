@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Profile</title>
-    <div th:replace="Partials :: header"></div>
+    <div th:replace="partials :: header"></div>
 
 </head>
 <body>
@@ -16,7 +16,7 @@
         border: solid black 3px;
     }
 </style>
-<div th:replace="Partials :: navbar"></div>
+<div th:replace="partials :: navbar"></div>
 
 <div class="container">
 
@@ -26,25 +26,33 @@
                 <img height="200px" width="250x" th:src="${user.getDetails().getPfp()}">
             </div>
             <div class="col-8">
-                <p>Average Rating: <span>TBD</span></p>
-                <div th:each="review : ${user.getReviews()}">
-                    <div class="d-flex">
-                        <div class="mr-2">
-                            <img
-                                    th:src="${review.reviewer.getDetails().getPfp()}"
-                                    style="height: 75px; width: 75px; border: none; border-radius: 50%"
-                                    alt="user profile picture">
-                        </div>
-                        <div>
-                            <p>
-                                <!--TODO: replace asterisk with a star icon (or something dog-themed)-->
-                                <span style="color: goldenrod" th:each="i : ${#numbers.sequence(1, review.stars)}">*</span>
-                                <br>
-                                <span th:text="${review.review}"></span>
-                            </p>
+                <th:block th:if="${user.reviews.size()} &gt; 0">
+                    <p>Average Rating:<span th:text="${#numbers.formatDecimal(averageStars, 1, 1)}"></span></p>
+                    <div th:each="review : ${user.getReviews()}">
+                        <div class="d-flex">
+                            <div class="mr-2">
+                                <img
+                                        th:src="${review.reviewer.getDetails().getPfp()}"
+                                        style="height: 75px; width: 75px; border: none; border-radius: 50%"
+                                        alt="user profile picture">
+                            </div>
+                            <div>
+                                <p>
+                                    <!--TODO: replace asterisk with a star icon (or something dog-themed)-->
+                                    <span style="color: goldenrod"
+                                          th:each="i : ${#numbers.sequence(1, review.stars)}">*</span>
+                                    <br>
+                                    <span th:text="${review.review}"></span>
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </th:block>
+                <th:block th:unless="${user.reviews.size()} &gt; 0">
+                    <div class="alert alert-info">
+                        This user has yet to recieve a review. Have experience with this user? Help us out by posting a review.
+                    </div>
+                </th:block>
             </div>
         </div>
         <div class="col-8">
@@ -105,22 +113,20 @@
                             <img th:each="photo: ${dog.photos}"  th:src="${photo.url}" class="card-img-top" alt="Card image">
                            </div>
                         <form th:if="${dog.photos.size() != 0}" th:action="@{|/dog/photo/${dog.photos.get(0).getId()}|}" th:method="POST">
-                            <button>Delete Photo</button>
+                            <button class="btn btn-dark">Delete Photo</button>
                         </form>
                         <hr>
 
 
                         <div class="card-body ">
-                            <h4 class="card-title">Owner:
-                                <span th:text="${dog.owner.username}"></span>
-                            </h4>
-                            <p class="card-text">Dog gender: <span th:text="${dog.gender}"></span></p>
+
+                            <p class="card-text">Gender: <span th:text="${dog.gender}"></span></p>
                             <p class="card-text" th:text="${dog.breed}"></p>
                             <p class="card-text text-center overflow-auto" style="width: auto; height: 200px;" th:text="${dog.details.bio}"></p>
-                                <a th:href="@{|/dog/edit/${dog.id}|}">Edit Dog</a>
-                                <a th:href="@{|/dogs/review/${dog.id}|}">Rate/Review Dog</a>
+                            <a th:if="${dog.owner.id == loggedinuser.getId()}" th:href="@{|/dog/edit/${dog.id}|}"><button class="btn btn-dark">Edit</button></a>
+                                <!--/* <a th:href="@{|/dogs/review/${dog.id}|}">Rate/Review Dog</a> */-->
                             <form th:action="@{|/dog/delete/${dog.id}|}" th:method="POST">
-                                <button>Delete</button>
+                                <button class="btn btn-dark">Delete</button>
                             </form>
                             <br>
                         </div>
@@ -133,7 +139,7 @@
 
 </div>
 
-<div th:replace="Partials :: scripts"></div>
+<div th:replace="partials :: scripts"></div>
 
 </body>
 </html>

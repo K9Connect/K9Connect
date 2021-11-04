@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Messages</title>
-    <div th:replace="Partials :: header"></div>
+    <div th:replace="partials :: header"></div>
 
 </head>
 <body>
-<div th:replace="Partials :: navbar"></div>
+<div th:replace="partials :: navbar"></div>
 
 <div class="container">
 
@@ -30,7 +30,8 @@
                  th:if="${message.getSending_user() == otheruser && message.receiving_user == loggedinuser}">
                 <p th:text="${message.getContent()}"></p><br>
             </div>
-            <p class="no-m-top" th:if="${message.getSending_user() == otheruser && message.receiving_user == loggedinuser}" style="justify-content: right"><small><br>Sent by <span th:text="${otheruser.getUsername()}"></span> on <span th:text="${message.getReadableDate()}"></span> </small></p>
+            <p class="no-m-top" th:if="${message.getSending_user() == otheruser && message.receiving_user == loggedinuser}" style="margin-top: 1px"><small><br>Sent by <span th:text="${otheruser.getUsername()}"></span> on <span th:text="${message.getReadableDate()}"></span> </small></p>
+            <p class="no-m-top" th:if="${message.getSending_user() == otheruser && message.receiving_user == loggedinuser}" style="margin-top: 1px"><small><br><a th:href="@{|/report/${otheruser.getId()}|}">Report Message</a> </small></p>
 
 
         </div>
@@ -49,7 +50,7 @@
 
     </div>
 </div>
-<div th:replace="Partials :: scripts"></div>
+<div th:replace="partials :: scripts"></div>
 
 </body>
 </html>

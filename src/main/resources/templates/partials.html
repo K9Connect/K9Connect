@@ -73,6 +73,9 @@
                             EDIT PROFILE
                         </a>
                         <div class="dropdown-divider"></div>
+                        <a sec:authorize="isAuthenticated()" class="nav-link" href="/messages">
+                        MESSAGES
+                        </a>
                         <a sec:authorize="isAuthenticated()" class="nav-item">
                             <form th:action="@{/logout}" th:method="post">
                                 <button class="btn-link" style="margin-top: 8px">LOGOUT</button>
@@ -88,6 +91,10 @@
 <div th:fragment="header">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />
+
     <style>
         a {
             text-decoration: none;
@@ -111,6 +118,7 @@
             background-color: lightgreen;
             display: flex;
             justify-content: left;
+            margin-bottom: 1px;
 
             border: solid black 2px;
         }
@@ -119,6 +127,7 @@
             background-color: lightblue;
             display: flex;
             justify-content: left;
+            margin-bottom: 1px;
 
             border: solid black 2px;
         }

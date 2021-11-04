@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8" />
     <title>User Review</title>
-    <div th:replace="Partials :: header"></div>
+    <div th:replace="partials :: header"></div>
 
 </head>
 <body>
-<div th:replace="Partials :: navbar"></div>
+<div th:replace="partials :: navbar"></div>
 
 <div class="container">
     <h1>Review of User: <span th:text="${reviewedUser.username}"></span></h1>
@@ -27,7 +27,7 @@
     </form>
 </div>
 
-<div th:replace="Partials :: scripts"></div>
+<div th:replace="partials :: scripts"></div>
 
 </body>
 </html>

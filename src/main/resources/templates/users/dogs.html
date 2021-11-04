@@ -3,19 +3,34 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Dogs</title>
-    <div th:replace="Partials :: header"></div>
+    <div th:replace="partials :: header"></div>
 
 </head>
 <body>
-<div th:replace="Partials :: navbar"></div>
+<div th:replace="partials :: navbar"></div>
 
 <div class="containter">
 
     <div class="input-group rounded justify-content-center">
         <form th:action="@{/dog/search}" th:method="post" class="form-inline my-2 my-lg-0" >
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="term">
+<<<<<<< HEAD
+=======
+        <select class="form-select" aria-label="Default select example" name="gender">
+            <option selected value="a">Select All</option>
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+        </select>
+            <div class="form-check">
+                <select class="form-select" aria-label="Default select example" name="hasCerts">
+                    <option value="true">Has certifications</option>
+                    <option selected value="false">All</option>
+                </select>
+            </div>
+>>>>>>> origin
             <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
-        </form>
+            <!--        <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>-->
+    </form>
     </div>
     <form th:action="@{/dog/searchbygender}" th:method="post">
         <select class="form-select" aria-label="Default select example">
@@ -78,7 +93,7 @@
     </div>
 </div>
 
-<div th:replace="Partials :: scripts"></div>
+<div th:replace="partials :: scripts"></div>
 
 </body>
 </html>
