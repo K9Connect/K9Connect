@@ -2,7 +2,11 @@ $(document).ready(function() {
     mapboxgl.accessToken = MAPBOX_API_KEY;
     const map = new mapboxgl.Map({
         container: 'map',
-        style: 'mapbox://styles/mapbox/streets-v11',
+        // style: 'mapbox://styles/mapbox/streets-v11',
+        // style: 'mapbox://styles/michaeldcoyle/ckvl9wd2x3uu514uivwg7txz2',
+        // style: 'mapbox://styles/michaeldcoyle/ckvlcexic0apm15qol8wts88y',
+        // style: 'mapbox://styles/michaeldcoyle/ckvlb73dx3o0914mwejkurn5b',
+        style: 'mapbox://styles/michaeldcoyle/ckvlcqix23pii14mwm6oq27q8',
         zoom: 3.5,
         center: [-95.7129, 37.0902]
     });
@@ -41,7 +45,7 @@ $(document).ready(function() {
                     // `)
                     //     .addTo(map);
 
-                    marker.setPopup(popup);
+                    // marker.setPopup(popup);
                     // marker.togglePopup();
                 });
         });
