@@ -9,7 +9,25 @@ $(document).ready(function() {
 
     let request = $.ajax({'url': '/users.json'});
     request.done(function(users) {
-        console.log(users);
+        users.forEach(user => {
+            geocode(user.details.zipcode, MAPBOX_API_KEY)
+                .then(function (coordinates) {
+                    // console.log(coordinates);
+
+                    marker = new mapboxgl.Marker()
+                        .setLngLat(coordinates)
+                        .addTo(map);
+
+                    popup = new mapboxgl.Popup()
+                        .setHTML(`
+                        <a href="/profile/${user.id}">${user.username}</a>
+                    `)
+                        .addTo(map);
+
+                    marker.setPopup(popup);
+                    // marker.togglePopup();
+                });
+        });
     });
 });
 
