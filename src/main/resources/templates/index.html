@@ -4,14 +4,21 @@
     <meta charset="UTF-8"/>
     <title>Index</title>
     <div th:replace="partials :: header"></div>
-
+    <style>
+        .marker {
+            display: block;
+            border: none;
+            cursor: pointer;
+            padding: 0
+        }
+    </style>
 </head>
 <body>
 <div th:replace="partials :: navbar"></div>
 
 <div class="container">
     <h1>Find dogs near you!</h1>
-    <div id="map" style="width: 100%; height: 60vh;"></div>
+    <div id="map" style="width: 100%; height: 80vh;"></div>
 </div>
 
 <div th:replace="partials :: scripts"></div>
