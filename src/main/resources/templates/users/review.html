@@ -23,7 +23,7 @@
         <label for="user-review">Review</label>
         <textarea th:field="*{review}" id="user-review" cols="30" rows="10"></textarea>
         <div th:if="${#fields.hasErrors('review')}" th:errors="*{review}">review error</div>
-        <button type="submit">Submit Review</button>
+        <button class="btn btn-dark" type="submit">Submit Review</button>
     </form>
 </div>
 

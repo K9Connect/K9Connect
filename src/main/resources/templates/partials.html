@@ -25,9 +25,6 @@
                     <a class="nav-link" href="/about">ABOUT</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/contact">CONTACT</a>
-                </li>
-                <li class="nav-item">
                     <a sec:authorize="isAuthenticated()" class="nav-link" href="/dogs">
                         DOGS
                     </a>
@@ -38,7 +35,7 @@
 
             <form th:action="@{/dog/search}" th:method="post" class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" name="term" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
+                <button class="btn btn-dark btn-outline-teal my-2 my-sm-0" type="submit">Search</button>
             </form>
 
 <!--            <form class="form-inline my-2 my-lg-0">-->
@@ -91,7 +88,13 @@
 <div th:fragment="header">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap" rel="stylesheet">
     <style>
+
+
+
         a {
             text-decoration: none;
         }
@@ -133,6 +136,46 @@
         }
         .no-m-top {
             margin-top: 1px;
+        }
+
+        body {
+            color: #0A090C;
+            background-color: #F0EDEE;
+            font-family: 'Raleway', sans-serif;
+        }
+
+        .navbar {
+            border: solid #90DDF0 1px;
+            margin-bottom: 25px;
+            background-color: #07393C;
+        }
+
+      table {
+          margin: 15px;
+      }
+
+      select {
+          margin-left: 5px;
+      }
+
+      button {
+          margin: 5px;
+      }
+
+      img {
+          border-radius: 25px;
+      }
+
+        .btn {
+
+        }
+
+        .btn-teal {
+            border: solid #90DDF0 1px;
+        }
+        .btn-teal:hover {
+
+            background-color: #90DDF0;
         }
     </style>
 </div>

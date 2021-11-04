@@ -19,7 +19,7 @@
 
     <form th:object="${report}" th:method="post" th:action="@{|/report/${reporteduser.getId()}|}">
 
-        <label for="text">Report Details:</label>
+        <label for="text">Report Details:</label><br>
         <textarea rows="10" cols="25" id="text" th:field="*{reportText}"></textarea>
         <button type="submit" class="btn btn-dark">Report</button>
 
