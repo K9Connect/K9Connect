@@ -128,6 +128,17 @@ public class UserProfileController {
         userInfoDao.save(userInfo);
         return "redirect:/profile/";
     }
+
+
+    @PostMapping("/delete-user")
+    public String deleteUser(){
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userDao.findByUsername(loggedInUser.getUsername());
+
+        userDao.delete(user);
+
+    return "redirect:/profile/";
+    }
 }
 
 
