@@ -65,16 +65,16 @@
                 <p><span th:text="${dog.name}"></span> does not have any additional photos.</p>
             </div>
             <div>
-                <a th:href="@{|/photo/add/${dog.id}|}">Add photo</a>
+                <a th:if="${dog.owner.id == currentUser.id}" th:href="@{|/photo/add/${dog.id}|}">Add photo</a>
             </div>
             <div th:unless="${dog.photos.size() < 1}" class="d-flex justify-content-around flex-wrap">
                 <div th:each="photo : ${dog.photos}">
                     <img class="dog-thumb mb-2" th:src="${photo.url}" alt="dog photo">
-                    <form th:action="@{|/dog/photo/${photo.id}|}" th:method="POST">
+                    <form th:if="${dog.owner.id == currentUser.id}" th:action="@{|/dog/photo/${photo.id}|}" th:method="POST">
                         <button aria-label='delete item' type='submit'>X</button>
                     </form>
                 </div>
-
+ //
             </div>
             <!--                        <form th:if="${dog.photos.size() != 0}" th:action="@{|/dog/photo/${dog.photos.get(0).getId()}|}" th:method="POST">-->
             <!--                            <button class="btn btn-dark">Delete Photo</button>-->
