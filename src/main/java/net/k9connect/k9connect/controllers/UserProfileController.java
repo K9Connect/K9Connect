@@ -107,10 +107,9 @@ public class UserProfileController {
     }
 
     @GetMapping("/profile/edit")
-    public String EditProfile(Model model) {
+    public String editProfile(Model model) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.findByUsername(loggedInUser.getUsername());
-
 
         model.addAttribute("user", user.getDetails());
 
@@ -118,7 +117,7 @@ public class UserProfileController {
     }
 
     @PostMapping("/profile/edit")
-    public String EditProfileSend(@ModelAttribute UserInfo userInfo) {
+    public String editProfileSend(@ModelAttribute UserInfo userInfo) {
 
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.findByUsername(loggedInUser.getUsername());
@@ -128,14 +127,21 @@ public class UserProfileController {
         userInfoDao.save(userInfo);
         return "redirect:/profile/";
     }
-    @GetMapping("/profile/deactivate")
-    public String DeactivateProfileView(){
-        return "users/profile-management";
+
+
+    @GetMapping("/profile/manage")
+    public String manageAccountInfoView(@ModelAttribute Model model){
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userDao.findByUsername(loggedInUser.getUsername());
+
+        model.addAttribute("user", user.getDetails());
+
+        return "users/manage";
     }
 
 
     @PostMapping("/profile/deactivate")
-    public String DectivateProfile(){
+    public String deactivateProfile(){
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.findByUsername(loggedInUser.getUsername());
 
@@ -144,6 +150,19 @@ public class UserProfileController {
 
         return "redirect:/login";
     }
+
+//    @PostMapping("/profile/manage")
+//    public String manageAccountInfo (@ModelAttribute User userData) {
+//        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        User user = userDao.findByUsername(loggedInUser.getUsername());
+//
+//        user.setUsername(userData.getUsername());
+//        user.setEmail(userData.getEmail());
+//        user.setPassword(userData.getPassword());
+//        userDao.save(user);
+//
+//        return "redirect:/login";
+//    }
 }
 
 
