@@ -59,7 +59,7 @@ public class UserProfileController {
     }
 
     @PostMapping("/profile/create")
-    public String createProfileSend(@ModelAttribute UserInfo userInfo){
+    public String createProfileSend(@ModelAttribute UserInfo userInfo) {
 
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.findByUsername(loggedInUser.getUsername());
@@ -128,16 +128,21 @@ public class UserProfileController {
         userInfoDao.save(userInfo);
         return "redirect:/profile/";
     }
+    @GetMapping("/profile/deactivate")
+    public String DeactivateProfileView(){
+        return "users/profile-management";
+    }
 
 
-    @PostMapping("/delete-user")
-    public String deleteUser(){
+    @PostMapping("/profile/deactivate")
+    public String DectivateProfile(){
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.findByUsername(loggedInUser.getUsername());
 
-        userDao.delete(user);
+        user.setStatus(Statuses.inactive);
+        userDao.save(user);
 
-    return "redirect:/profile/";
+        return "redirect:/login";
     }
 }
 
