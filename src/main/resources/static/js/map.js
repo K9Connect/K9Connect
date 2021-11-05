@@ -26,7 +26,7 @@ $(document).ready(function() {
                     let paw = document.createElement('div');
                     paw.style.width = '23px';
                     paw.style.height = '24px';
-                    paw.style.backgroundImage = 'url(https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Dog_Paw_Print.png/228px-Dog_Paw_Print.png)';
+                    paw.style.backgroundImage = 'url(/images/dog_paw_print.png)';
                     paw.style.backgroundSize = '100%';
                     paw.className = 'marker';
 
