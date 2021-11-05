@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLOutput;
 import java.util.Arrays;
 
 import java.util.ArrayList;
@@ -127,6 +128,7 @@ public class DogController {
         return "redirect:/profile";
     }
 
+
     @PostMapping("/dog/search")
     public String search(@RequestParam String term, @RequestParam String gender, @RequestParam String hasCerts, Model model) {
         System.out.println(term);
@@ -186,6 +188,7 @@ public class DogController {
          else {
             model.addAttribute("dogs", dogDao.findAll());
         }
+
         return "users/dogs";
     }
 
@@ -204,6 +207,8 @@ public class DogController {
 
         return "redirect:/profile";
     }
+
+
 
     @PostMapping("/dog/photo/{id}")
     public String deleteDogPhoto(@PathVariable long id, @ModelAttribute Dog dog, @ModelAttribute Photo photo) {
@@ -256,7 +261,9 @@ public class DogController {
 
 
         return "dogs/profile";
+
     }
+
 }
 
 
