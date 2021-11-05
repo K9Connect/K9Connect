@@ -11,6 +11,20 @@ $(document).ready(function() {
         center: [-95.7129, 37.0902]
     });
 
+    // Add geolocate control to the map.
+    const geolocate = new mapboxgl.GeolocateControl({
+        showUserHeading: true
+    });
+    map.addControl(geolocate);
+
+    // Set center and zoom in
+    geolocate.on('geolocate', function(event) {
+        map.flyTo({
+            center: [event.coords.longitude, event.coords.latitude],
+            zoom: 8
+        });
+    });
+
     let request = $.ajax({'url': '/users.json'});
     request.done(function(users) {
         users.forEach(user => {
