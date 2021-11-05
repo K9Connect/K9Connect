@@ -209,11 +209,7 @@ public class DogController {
     public String deleteDogPhoto(@PathVariable long id, @ModelAttribute Dog dog, @ModelAttribute Photo photo) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.findByUsername(loggedInUser.getUsername());
-        if (dog.getOwner().getId() == user.getId()) {
         photoDao.deleteById(id);
-        return "redirect:/profile";
-        }
-
         return "redirect:/profile";
     }
 
@@ -257,6 +253,7 @@ public class DogController {
         model.addAttribute("dog", dogInDb);
         model.addAttribute("userHasNotReviewedDog", userHasNotReviewedDog);
         model.addAttribute("dogAverage", dogAverage);
+
 
         return "dogs/profile";
     }
