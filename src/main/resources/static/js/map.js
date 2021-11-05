@@ -11,6 +11,9 @@ $(document).ready(function() {
         center: [-95.7129, 37.0902]
     });
 
+    // Add zoom and rotation controls to the map.
+    map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
+
     // Add geolocate control to the map.
     const geolocate = new mapboxgl.GeolocateControl({
         showUserHeading: true
