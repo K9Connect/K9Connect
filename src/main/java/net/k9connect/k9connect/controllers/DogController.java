@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLOutput;
 import java.util.Arrays;
 
 import java.util.ArrayList;
@@ -236,10 +237,14 @@ public class DogController {
         User user = userDao.findByUsername(loggedInUser.getUsername());
 
         System.out.println(url);
-        photo.setDog(dogDao.getById(id));
-        photoDao.save(photo);
+        System.out.println(photo);
+        List<Photo> currentDogPhoto = new ArrayList<>();
+        currentDogPhoto.add(photo);
+//        dogDao.save(photo);
+//        photo.setDog(dogDao.getById(id));
+//        photoDao.save(photo);
 
-        return "redirect:/profile";
+        return "redirect:/dogs/profile";
     }
 
     @GetMapping("/dog/{id}")
