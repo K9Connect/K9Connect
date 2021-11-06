@@ -11,6 +11,37 @@ $(document).ready(function() {
             markers.forEach(marker => marker.remove());
 
             users.forEach(user => {
+                let dog = {
+                    id: user.dogs[0].id,
+                    name: user.dogs[0].name,
+                    breed: user.dogs[0].breed,
+                    gender: user.dogs[0].gender == 'F' ? 'Female' : 'Male',
+                    age: user.dogs[0].details.age,
+                    photo: user.dogs[0].photos.length ? user.dogs[0].photos[0].url : '/images/dog_silhouette.png'
+                };
+
+                if (breed != null) {
+                    for (let i = 0; i < user.dogs.length; i++) {
+                        let searchTerm = breed.toLowerCase();
+                        let dogBreed = user.dogs[i].breed.toLowerCase();
+
+                        if (dogBreed.includes(searchTerm)) {
+                            let thisDog = user.dogs[i];
+
+                            dog = {
+                                id: thisDog.id,
+                                name: thisDog.name,
+                                breed: thisDog.breed,
+                                gender: thisDog.gender == 'F' ? 'Female' : 'Male',
+                                age: thisDog.details.age,
+                                photo: thisDog.photos.length ? thisDog.photos[0].url : '/images/dog_silhouette.png'
+                            };
+
+                            break;
+                        }
+                    }
+                }
+
                 let zip = user.details.zipcode.toString();
                 if (zip.length < 5) {
                     zip = '0' + zip;
@@ -27,25 +58,35 @@ $(document).ready(function() {
                         paw.style.backgroundSize = '100%';
                         paw.className = 'marker';
 
-                        let link = document.createElement('a');
-                        link.href = `/profile/${user.id}`;
+                        // let link = document.createElement('a');
+                        // link.href = `/profile/${user.id}`;
 
-                        link.append(paw);
+                        // link.append(paw);
 
-                        marker = new mapboxgl.Marker(link)
+                        marker = new mapboxgl.Marker(paw)
                             .setLngLat(coordinates)
                             .addTo(map);
 
+                        popup = new mapboxgl.Popup()
+                            .setHTML(`
+                                <img src="${dog.photo}" class="img-dog-map img-thumbnail" alt="dog profile picture">
+                                <p>
+                                    <span class="font-weight-bold">${dog.name}</span>
+                                    <br>
+                                    ${dog.breed}
+                                    <br>
+                                    ${dog.gender}, ${dog.age} years old 
+                                    <br>
+                                    <a href="/dog/${dog.id}">Dog Profile</a>
+                                    <br>
+                                    <a href="/profile/${user.id}">Owner Profile</a>
+                                </p>
+                            `).addTo(map);
+
+                        marker.setPopup(popup);
+                        marker.togglePopup();
+
                         markers.push(marker);
-
-                        // popup = new mapboxgl.Popup()
-                        //     .setHTML(`
-                        //     <a href="/profile/${user.id}">${user.username}</a>
-                        // `)
-                        //     .addTo(map);
-
-                        // marker.setPopup(popup);
-                        // marker.togglePopup();
                     });
             });
         });
