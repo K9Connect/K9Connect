@@ -1,4 +1,99 @@
 $(document).ready(function() {
+    function markUserLocations(breed) {
+        let request = $.ajax({
+            "url": "/users.json",
+            "data": {
+                "breed": breed
+            }
+        });
+
+        request.done(function(users) {
+            markers.forEach(marker => marker.remove());
+
+            users.forEach(user => {
+                let dog = {
+                    id: user.dogs[0].id,
+                    name: user.dogs[0].name,
+                    breed: user.dogs[0].breed,
+                    gender: user.dogs[0].gender == 'F' ? 'Female' : 'Male',
+                    age: user.dogs[0].details.age,
+                    photo: user.dogs[0].photos.length ? user.dogs[0].photos[0].url : '/images/dog_silhouette.png'
+                };
+
+                if (breed != null) {
+                    for (let i = 0; i < user.dogs.length; i++) {
+                        let searchTerm = breed.toLowerCase();
+                        let dogBreed = user.dogs[i].breed.toLowerCase();
+
+                        if (dogBreed.includes(searchTerm)) {
+                            let thisDog = user.dogs[i];
+
+                            dog = {
+                                id: thisDog.id,
+                                name: thisDog.name,
+                                breed: thisDog.breed,
+                                gender: thisDog.gender == 'F' ? 'Female' : 'Male',
+                                age: thisDog.details.age,
+                                photo: thisDog.photos.length ? thisDog.photos[0].url : '/images/dog_silhouette.png'
+                            };
+
+                            break;
+                        }
+                    }
+                }
+
+                let zip = user.details.zipcode.toString();
+                if (zip.length < 5) {
+                    zip = '0' + zip;
+                }
+
+                geocode(zip, MAPBOX_API_KEY)
+                    .then(function (coordinates) {
+                        // console.log(zip, coordinates);
+
+                        let paw = document.createElement('div');
+                        paw.style.width = '23px';
+                        paw.style.height = '24px';
+                        paw.style.backgroundImage = 'url(/images/dog_paw_print.png)';
+                        paw.style.backgroundSize = '100%';
+                        paw.className = 'marker';
+
+                        // let link = document.createElement('a');
+                        // link.href = `/profile/${user.id}`;
+
+                        // link.append(paw);
+
+                        marker = new mapboxgl.Marker(paw)
+                            .setLngLat(coordinates)
+                            .addTo(map);
+
+                        popup = new mapboxgl.Popup()
+                            .setHTML(`
+                                <img src="${dog.photo}" class="img-dog-map img-thumbnail" alt="dog profile picture">
+                                <p>
+                                    <span class="font-weight-bold">${dog.name}</span>
+                                    <br>
+                                    ${dog.breed}
+                                    <br>
+                                    ${dog.gender}, ${dog.age} years old 
+                                    <br>
+                                    <a href="/dog/${dog.id}">Dog Profile</a>
+                                    <br>
+                                    <a href="/profile/${user.id}">Owner Profile</a>
+                                </p>
+                            `).addTo(map);
+
+                        marker.setPopup(popup);
+                        marker.togglePopup();
+
+                        markers.push(marker);
+                    });
+            });
+        });
+    }
+
+    const markers = [];
+
     mapboxgl.accessToken = MAPBOX_API_KEY;
     const map = new mapboxgl.Map({
         container: 'map',
@@ -11,43 +106,26 @@ $(document).ready(function() {
         center: [-95.7129, 37.0902]
     });
 
-    let request = $.ajax({'url': '/users.json'});
-    request.done(function(users) {
-        users.forEach(user => {
-            let zip = user.details.zipcode.toString();
-            if (zip.length < 5) {
-                zip = '0' + zip;
-            }
+    markUserLocations(null);
 
-            geocode(zip, MAPBOX_API_KEY)
-                .then(function (coordinates) {
-                    // console.log(zip, coordinates);
+    // Add zoom and rotation controls to the map.
+    map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
 
-                    let paw = document.createElement('div');
-                    paw.style.width = '23px';
-                    paw.style.height = '24px';
-                    paw.style.backgroundImage = 'url(https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Dog_Paw_Print.png/228px-Dog_Paw_Print.png)';
-                    paw.style.backgroundSize = '100%';
-                    paw.className = 'marker';
+    // Add geolocate control to the map.
+    const geolocate = new mapboxgl.GeolocateControl({
+        showUserHeading: true
+    });
+    map.addControl(geolocate);
 
-                    let link = document.createElement('a');
-                    link.href = `/profile/${user.id}`;
-
-                    link.append(paw);
-
-                    marker = new mapboxgl.Marker(link)
-                        .setLngLat(coordinates)
-                        .addTo(map);
-
-                    // popup = new mapboxgl.Popup()
-                    //     .setHTML(`
-                    //     <a href="/profile/${user.id}">${user.username}</a>
-                    // `)
-                    //     .addTo(map);
-
-                    // marker.setPopup(popup);
-                    // marker.togglePopup();
-                });
+    // Set center and zoom in
+    geolocate.on('geolocate', function(event) {
+        map.flyTo({
+            center: [event.coords.longitude, event.coords.latitude],
+            zoom: 8
         });
+    });
+
+    $('#breed-submit').click(function() {
+        markUserLocations($('#breed').val());
     });
 });
