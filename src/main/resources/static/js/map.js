@@ -1,4 +1,58 @@
 $(document).ready(function() {
+    function markUserLocations(breed) {
+        let request = $.ajax({
+            "url": "/users.json",
+            "data": {
+                "breed": breed
+            }
+        });
+
+        request.done(function(users) {
+            markers.forEach(marker => marker.remove());
+
+            users.forEach(user => {
+                let zip = user.details.zipcode.toString();
+                if (zip.length < 5) {
+                    zip = '0' + zip;
+                }
+
+                geocode(zip, MAPBOX_API_KEY)
+                    .then(function (coordinates) {
+                        // console.log(zip, coordinates);
+
+                        let paw = document.createElement('div');
+                        paw.style.width = '23px';
+                        paw.style.height = '24px';
+                        paw.style.backgroundImage = 'url(/images/dog_paw_print.png)';
+                        paw.style.backgroundSize = '100%';
+                        paw.className = 'marker';
+
+                        let link = document.createElement('a');
+                        link.href = `/profile/${user.id}`;
+
+                        link.append(paw);
+
+                        marker = new mapboxgl.Marker(link)
+                            .setLngLat(coordinates)
+                            .addTo(map);
+
+                        markers.push(marker);
+
+                        // popup = new mapboxgl.Popup()
+                        //     .setHTML(`
+                        //     <a href="/profile/${user.id}">${user.username}</a>
+                        // `)
+                        //     .addTo(map);
+
+                        // marker.setPopup(popup);
+                        // marker.togglePopup();
+                    });
+            });
+        });
+    }
+
+    const markers = [];
+
     mapboxgl.accessToken = MAPBOX_API_KEY;
     const map = new mapboxgl.Map({
         container: 'map',
@@ -10,6 +64,8 @@ $(document).ready(function() {
         zoom: 3.5,
         center: [-95.7129, 37.0902]
     });
+
+    markUserLocations(null);
 
     // Add zoom and rotation controls to the map.
     map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
@@ -28,43 +84,7 @@ $(document).ready(function() {
         });
     });
 
-    let request = $.ajax({'url': '/users.json'});
-    request.done(function(users) {
-        users.forEach(user => {
-            let zip = user.details.zipcode.toString();
-            if (zip.length < 5) {
-                zip = '0' + zip;
-            }
-
-            geocode(zip, MAPBOX_API_KEY)
-                .then(function (coordinates) {
-                    // console.log(zip, coordinates);
-
-                    let paw = document.createElement('div');
-                    paw.style.width = '23px';
-                    paw.style.height = '24px';
-                    paw.style.backgroundImage = 'url(/images/dog_paw_print.png)';
-                    paw.style.backgroundSize = '100%';
-                    paw.className = 'marker';
-
-                    let link = document.createElement('a');
-                    link.href = `/profile/${user.id}`;
-
-                    link.append(paw);
-
-                    marker = new mapboxgl.Marker(link)
-                        .setLngLat(coordinates)
-                        .addTo(map);
-
-                    // popup = new mapboxgl.Popup()
-                    //     .setHTML(`
-                    //     <a href="/profile/${user.id}">${user.username}</a>
-                    // `)
-                    //     .addTo(map);
-
-                    // marker.setPopup(popup);
-                    // marker.togglePopup();
-                });
-        });
+    $('#breed-submit').click(function() {
+        markUserLocations($('#breed').val());
     });
 });
