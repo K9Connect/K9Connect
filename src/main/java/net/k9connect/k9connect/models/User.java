@@ -31,7 +31,7 @@ public class User{
     @Getter @Setter private String email;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
-    @JsonIgnore
+    @JsonManagedReference
     @Getter @Setter private List<Dog> dogs;
 
     @Enumerated(EnumType.STRING)
