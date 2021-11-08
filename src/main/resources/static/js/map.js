@@ -47,7 +47,7 @@ $(document).ready(function() {
                     zip = '0' + zip;
                 }
 
-                geocode(zip, MAPBOX_API_KEY)
+                geocode(zip, mapboxKey)
                     .then(function (coordinates) {
                         // console.log(zip, coordinates);
 
@@ -94,7 +94,7 @@ $(document).ready(function() {
 
     const markers = [];
 
-    mapboxgl.accessToken = MAPBOX_API_KEY;
+    mapboxgl.accessToken = mapboxKey;
     const map = new mapboxgl.Map({
         container: 'map',
         // style: 'mapbox://styles/mapbox/streets-v11',
