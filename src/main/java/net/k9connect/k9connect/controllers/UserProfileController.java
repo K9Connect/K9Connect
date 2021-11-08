@@ -4,6 +4,7 @@ import net.k9connect.k9connect.models.*;
 import net.k9connect.k9connect.repositories.*;
 import net.k9connect.k9connect.utils.Ratings;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,8 @@ public class UserProfileController {
     private DogDetailsRepository dogDetailsDao;
     private PhotoRepository photoDao;
     private UserReviewRepository userReviewDao;
+    private PasswordEncoder passwordEncoder;
+
 
     public UserProfileController(
             UserInfoRepository userInfoDao,
@@ -29,7 +32,8 @@ public class UserProfileController {
             DogRepository dogDao,
             DogDetailsRepository dogDetailsDao,
             PhotoRepository photoDao,
-            UserReviewRepository userReviewDao
+            UserReviewRepository userReviewDao,
+            PasswordEncoder passwordEncoder
     ) {
         this.userInfoDao = userInfoDao;
         this.userDao = userDao;
@@ -37,6 +41,8 @@ public class UserProfileController {
         this.dogDetailsDao = dogDetailsDao;
         this.photoDao = photoDao;
         this.userReviewDao = userReviewDao;
+        this.passwordEncoder = passwordEncoder;
+
     }
 
     @GetMapping("/profile/create")
@@ -130,11 +136,13 @@ public class UserProfileController {
 
 
     @GetMapping("/profile/manage")
-    public String manageAccountInfoView(@ModelAttribute Model model){
+    public String manageAccountInfoView(Model model){
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.findByUsername(loggedInUser.getUsername());
 
-        model.addAttribute("user", user.getDetails());
+//        System.out.println(user);
+
+        model.addAttribute("user",user);
 
         return "users/manage";
     }
@@ -151,18 +159,18 @@ public class UserProfileController {
         return "redirect:/login";
     }
 
-//    @PostMapping("/profile/manage")
-//    public String manageAccountInfo (@ModelAttribute User userData) {
-//        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        User user = userDao.findByUsername(loggedInUser.getUsername());
-//
-//        user.setUsername(userData.getUsername());
-//        user.setEmail(userData.getEmail());
-//        user.setPassword(userData.getPassword());
-//        userDao.save(user);
-//
-//        return "redirect:/login";
-//    }
+    @PostMapping("/profile/manage")
+    public String manageAccountInfo (@ModelAttribute User userData) {
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userDao.findByUsername(loggedInUser.getUsername());
+        String hash = passwordEncoder.encode(userData.getPassword());
+        user.setPassword(hash);
+        user.setUsername(userData.getUsername());
+        user.setEmail(userData.getEmail());
+        userDao.save(user);
+
+        return "redirect:/login";
+    }
 }
 
 

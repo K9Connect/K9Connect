@@ -12,13 +12,13 @@
 <div class="container justify-content-center">
     <form th:action="@{/profile/manage}" th:method="post" th:object="${user}">
         User Name:<br>
-        <input th:field="*{user.username}" required />
+        <input th:field="*{username}" required />
         <br />
         User Email:<br>
-        <input th:field="*{user.email}" required />
+        <input th:field="*{email}" required />
         <br />
         User Password:<br>
-        <input  th:field="*{user.password}" required />
+        <input  th:field="*{password}" required />
         <br />
 <!--        Confirm Password:<br>-->
 <!--        <input th:field="*{user.password}" required />-->
@@ -26,9 +26,11 @@
         <input type="submit" />
     </form>
 
+    <br>
+
     <form th:action="@{/profile/deactivate}" th:method="post" >
 <!--        <input onClick="" type="submit" />-->
-        <button type="submit" class="btn btn-dark">Deactivate</button>
+        <button type="submit" class="btn btn-dark">Deactivate Account</button>
     </form>
 
 </div>
