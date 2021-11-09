@@ -39,6 +39,8 @@ public class UserController {
     public class AuthenticationController {
         @GetMapping("/login")
         public String showLoginForm() {
+
+
             return "users/login";
         }
     }
