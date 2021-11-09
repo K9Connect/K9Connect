@@ -27,6 +27,8 @@ public class User{
     @JsonIgnore
     @Getter @Setter private String password;
 
+    @Getter @Setter private String oldPassword;
+
     @Column(nullable = false)
     @Getter @Setter private String email;
 
@@ -80,5 +82,23 @@ public class User{
         password = copy.password;
     }
 
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", dogs=" + dogs +
+                ", status=" + status +
+                ", is_admin=" + is_admin +
+                ", details=" + details +
+                ", reportsagainst=" + reportsagainst +
+                ", reportsfiled=" + reportsfiled +
+                ", message_sent=" + message_sent +
+                ", message_received=" + message_received +
+                ", reviews=" + reviews +
+                ", reviews_made=" + reviews_made +
+                '}';
+    }
 }

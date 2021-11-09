@@ -4,13 +4,14 @@ import net.k9connect.k9connect.models.*;
 import net.k9connect.k9connect.repositories.*;
 import net.k9connect.k9connect.utils.Ratings;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -22,6 +23,8 @@ public class UserProfileController {
     private DogDetailsRepository dogDetailsDao;
     private PhotoRepository photoDao;
     private UserReviewRepository userReviewDao;
+    private PasswordEncoder passwordEncoder;
+
 
     public UserProfileController(
             UserInfoRepository userInfoDao,
@@ -29,7 +32,8 @@ public class UserProfileController {
             DogRepository dogDao,
             DogDetailsRepository dogDetailsDao,
             PhotoRepository photoDao,
-            UserReviewRepository userReviewDao
+            UserReviewRepository userReviewDao,
+            PasswordEncoder passwordEncoder
     ) {
         this.userInfoDao = userInfoDao;
         this.userDao = userDao;
@@ -37,6 +41,7 @@ public class UserProfileController {
         this.dogDetailsDao = dogDetailsDao;
         this.photoDao = photoDao;
         this.userReviewDao = userReviewDao;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/profile/create")
@@ -107,10 +112,9 @@ public class UserProfileController {
     }
 
     @GetMapping("/profile/edit")
-    public String EditProfile(Model model) {
+    public String editProfile(Model model) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.findByUsername(loggedInUser.getUsername());
-
 
         model.addAttribute("user", user.getDetails());
 
@@ -118,7 +122,7 @@ public class UserProfileController {
     }
 
     @PostMapping("/profile/edit")
-    public String EditProfileSend(@ModelAttribute UserInfo userInfo) {
+    public String editProfileSend(@ModelAttribute UserInfo userInfo) {
 
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.findByUsername(loggedInUser.getUsername());
@@ -128,14 +132,23 @@ public class UserProfileController {
         userInfoDao.save(userInfo);
         return "redirect:/profile/";
     }
-    @GetMapping("/profile/deactivate")
-    public String DeactivateProfileView(){
-        return "users/profile-management";
+
+
+    @GetMapping("/profile/manage")
+    public String manageAccountInfoView(Model model){
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userDao.findByUsername(loggedInUser.getUsername());
+
+//        System.out.println(user);
+        user.setPassword("");
+        model.addAttribute("user",user);
+
+        return "users/manage";
     }
 
 
     @PostMapping("/profile/deactivate")
-    public String DectivateProfile(){
+    public String deactivateProfile(){
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.findByUsername(loggedInUser.getUsername());
 
@@ -143,6 +156,27 @@ public class UserProfileController {
         userDao.save(user);
 
         return "redirect:/login";
+    }
+
+    @PostMapping("/profile/manage")
+    public String manageAccountInfo (@ModelAttribute User userData) {
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userDao.findByUsername(loggedInUser.getUsername());
+
+//        System.out.println();
+
+        Boolean matchingPassword = BCrypt.checkpw(userData.getOldPassword(), user.getPassword());
+
+        if (matchingPassword) {
+            String hash = passwordEncoder.encode(userData.getPassword());
+            user.setPassword(hash);
+            user.setUsername(userData.getUsername());
+            user.setEmail(userData.getEmail());
+            userDao.save(user);
+            return "redirect:/login";
+        } else {
+            return "redirect:/profile/manage?error";
+        }
     }
 }
 
