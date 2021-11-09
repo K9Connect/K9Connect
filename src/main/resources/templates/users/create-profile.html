@@ -11,9 +11,10 @@
 
 <div class="container justify-content-center">
     <form th:action="@{/profile/create}" th:method="post" th:object="${userprofile}">
-        Photo:<br>
-        <input th:field="*{pfp}" required />
-        <br />
+        <!--/* Now handled by photo upload */-->
+<!--        Photo:<br>-->
+<!--        <input th:field="*{pfp}" required />-->
+<!--        <br />-->
         Phone Number:<br>
         <input th:field="*{phone_number}" />
         <br />

@@ -57,7 +57,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/profile/edit",
                         "/all-users",
                         "/messasge/{id}",
-                        "/report/{id}"
+                        "/report/{id}",
+                        "/user/photo-upload"
                 )
                 .authenticated()
         ;

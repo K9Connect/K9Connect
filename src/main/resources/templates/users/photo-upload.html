@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Template</title>
+    <div th:replace="partials :: header"></div>
+
+</head>
+<body>
+<div th:replace="partials :: navbar"></div>
+
+<div class="container">
+    <h1>Upload a Profile Picture</h1>
+    <form action="/user/photo-upload" method="POST" enctype="multipart/form-data">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+        <label for="user-photo">Upload a Photo</label>
+        <input id="user-photo" name="user-photo" type="file"/>
+        <br/>
+        <input type="submit" value="Upload Photo"/>
+    </form>
+</div>
+
+<div th:replace="partials :: scripts"></div>
+
+</body>
+</html>
