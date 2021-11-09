@@ -1,6 +1,9 @@
 package net.k9connect.k9connect.models;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,27 +33,33 @@ public class Dog {
 
     @ManyToOne
     @JoinColumn(name = "owner_id")
+    @JsonBackReference
     @Getter @Setter private User owner;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "dog")
+    @JsonManagedReference
     @Getter @Setter private List<Photo> photos;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "reportedDog")
+    @JsonIgnore
     @Getter @Setter private List<DogReport> reports;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "dog")
+    @JsonIgnore
     @Getter @Setter private List<DogReview> reviews;
 
     @Column
     @Getter @Setter private int reputation;
 
     @Enumerated(EnumType.STRING)
+    @JsonIgnore
     @Getter
     @Setter
     private Statuses status;
 
     @OneToOne
     @JoinColumn(name = "dog_details_id")
+    @JsonManagedReference
     @Getter @Setter private DogDetails details;
 
     @Override
