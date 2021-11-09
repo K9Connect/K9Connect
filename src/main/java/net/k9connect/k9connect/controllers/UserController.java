@@ -32,7 +32,7 @@ public class UserController {
         user.setPassword(hash);
         user.setStatus(Statuses.active);
         userDao.save(user);
-        return "redirect:/login";
+        return "redirect:/login?registered";
     }
 
     @Controller
