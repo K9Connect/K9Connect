@@ -23,12 +23,12 @@ public class HomeController {
     private final EmailService emailService;
 
 
-    public HomeController(UserRepository userDao, EmailService emailService) {
+
 
     @Value("${MAPBOX_API_KEY}")
     private String mapboxKey;
 
-    public HomeController(UserRepository userDao) {
+    public HomeController(UserRepository userDao, EmailService emailService) {
 
         this.userDao = userDao;
         this.emailService = emailService;
