@@ -22,9 +22,6 @@ public class HomeController {
     private final UserRepository userDao;
     private final EmailService emailService;
 
-
-
-
     @Value("${MAPBOX_API_KEY}")
     private String mapboxKey;
 
