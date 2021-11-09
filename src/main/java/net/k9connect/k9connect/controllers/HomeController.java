@@ -37,6 +37,7 @@ public class HomeController {
     @PostMapping("/contact")
     public String sendContactEmail(@RequestParam String subject,@RequestParam String name, @RequestParam String email, @RequestParam String message) {
         System.out.println("hello world");
+
         String body= "Client Name :"+ name + "\n Client Email:"+email + "\nYour Message:"+ message;
         emailService.prepareAndSend(subject,body,email);
         return "redirect:/contact?success";
