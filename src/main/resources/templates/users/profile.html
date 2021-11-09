@@ -31,10 +31,10 @@
                     <div th:each="review : ${user.getReviews()}">
                         <div class="d-flex">
                             <div class="mr-2">
-                                <img
+                                <a th:href="@{|/profile/${review.getReviewer().getId()}|}"><img
                                         th:src="${review.reviewer.getDetails().getPfp()}"
                                         style="height: 75px; width: 75px; border: none; border-radius: 50%"
-                                        alt="user profile picture">
+                                        alt="user profile picture"></a>
                             </div>
                             <div>
                                 <p>
@@ -99,7 +99,7 @@
         </div>
     </div>
     <div>
-        <a href="/dog/create">Add Dog</a>
+        <a th:if="${user.getId() == loggedinuser.getId()}" th:href="@{/dog/create}">Add Dog</a>
     </div>
 
     <div class="bs-example">

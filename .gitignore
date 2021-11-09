@@ -34,4 +34,4 @@ build/
 
 application.properties
 
-keys.js
+src/main/resources/static/uploads/*

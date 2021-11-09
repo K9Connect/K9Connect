@@ -71,7 +71,7 @@ public class UserProfileController {
         user.setDetails(userInfo);
 
         userInfoDao.save(userInfo);
-        return "redirect:/profile";
+        return "redirect:/user/photo-upload";
     }
 
     @GetMapping("/profile")

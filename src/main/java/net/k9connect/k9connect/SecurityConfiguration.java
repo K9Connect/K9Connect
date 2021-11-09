@@ -58,6 +58,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/all-users",
                         "/messasge/{id}",
                         "/report/{id}",
+                        "/user/photo-upload",
                         "/dog/{id}",
                         "/message/{id}"
                 )
