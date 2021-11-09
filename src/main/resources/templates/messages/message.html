@@ -4,51 +4,80 @@
     <meta charset="UTF-8"/>
     <title>Messages</title>
     <div th:replace="partials :: header"></div>
+    <style>
+        .profile-thumb {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
 
+        p {
+            display: block;
+        }
+    </style>
 </head>
 <body>
 <div th:replace="partials :: navbar"></div>
 
 <div class="container">
 
-    <div class="col-12 bordered">
+    <div class="col-12 bordered curved">
 
         <div class="center">
             <h1>Message History</h1><br>
         </div>
 
-        <h3 class="center" th:text="${otheruser.getUsername()}"></h3>
+        <div class="row justify-content-center" style="margin-bottom: 10px"><a
+                th:href="@{|/profile/${otheruser.getId()}|}"><img class="profile-thumb"
+                                                                  th:src="${otheruser.getDetails().getPfp()}"
+                                                                  alt="other user profile picture"></a>
+            <h3 class="center" th:text="${otheruser.getUsername()}"></h3>
+        </div>
+        <div class="mb-4 msg" th:each="message : ${messages}">
 
-        <div class="mb-4" th:each="message : ${messages}">
 
+            <div class="just-left">
             <div class="message-sent"
-                 th:if="${message.getSending_user() == loggedinuser && message.receiving_user == otheruser}">
+                 th:if="${message.getSending_user() == loggedinuser && message.receiving_user == otheruser}"><br>
+
                 <p th:text="${message.getContent()}"></p>
+                <p th:if="${message.getSending_user() == loggedinuser && message.receiving_user == otheruser}"
+                   class="no-m-top italics" style="align-content: end">Sent by You on <span
+                        th:text="${message.getReadableDate()}"></span></p>
             </div>
-            <p th:if="${message.getSending_user() == loggedinuser && message.receiving_user == otheruser}" class="no-m-top" style="justify-content: right"><small><br>Sent by You on <span th:text="${message.getReadableDate()}"></span> </small></p>
+            </div>
+
+            <div class="just-right">
             <div class="message-received"
-                 th:if="${message.getSending_user() == otheruser && message.receiving_user == loggedinuser}">
-                <p th:text="${message.getContent()}"></p><br>
+                 th:if="${message.getSending_user() == otheruser && message.receiving_user == loggedinuser}"><br>
+                <p th:text="${message.getContent()}"></p>
+                <p class="no-m-top italics"
+                   th:if="${message.getSending_user() == otheruser && message.receiving_user == loggedinuser}"
+                   style="align-content: end">Sent by <span th:text="${otheruser.getUsername()}"></span> on <span
+                        th:text="${message.getReadableDate()}"></span></p>
+                <p class="no-m-top"
+                   th:if="${message.getSending_user() == otheruser && message.receiving_user == loggedinuser}"
+                   style="align-content: end"><a th:href="@{|/report/${otheruser.getId()}|}">Report Message</a></p>
+
             </div>
-            <p class="no-m-top" th:if="${message.getSending_user() == otheruser && message.receiving_user == loggedinuser}" style="margin-top: 1px"><small><br>Sent by <span th:text="${otheruser.getUsername()}"></span> on <span th:text="${message.getReadableDate()}"></span> </small></p>
-            <p class="no-m-top" th:if="${message.getSending_user() == otheruser && message.receiving_user == loggedinuser}" style="margin-top: 1px"><small><br><a th:href="@{|/report/${otheruser.getId()}|}">Report Message</a> </small></p>
+            </div>
 
-
-        </div>
-
-
-        </div>
-        <div style="margin-top: 25px">
-            <form th:method="POST" th:action="@{'/message/' + ${otheruser.getId()}}" th:object="${message}">
-
-                <textarea required cols="100" rows="5" th:field="*{content}"></textarea>
-                <button type="submit" class="btn btn-dark">Send</button>
-
-            </form>
         </div>
 
 
     </div>
+    <div style="margin: 25px">
+        <form th:method="POST" th:action="@{'/message/' + ${otheruser.getId()}}" th:object="${message}">
+
+            <textarea required cols="100" rows="5" th:field="*{content}"></textarea>
+            <button type="submit" class="btn btn-dark">Send</button>
+
+        </form>
+    </div>
+
+
+</div>
 </div>
 <div th:replace="partials :: scripts"></div>
 

@@ -32,13 +32,15 @@ public class UserController {
         user.setPassword(hash);
         user.setStatus(Statuses.active);
         userDao.save(user);
-        return "redirect:/login";
+        return "redirect:/login?registered";
     }
 
     @Controller
     public class AuthenticationController {
         @GetMapping("/login")
         public String showLoginForm() {
+
+
             return "users/login";
         }
     }

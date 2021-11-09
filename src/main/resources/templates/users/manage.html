@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Template</title>
+    <div th:replace="partials :: header"></div>
+
+</head>
+<body>
+<div th:replace="partials :: navbar"></div>
+
+<div class="container justify-content-center">
+    <div class="alert alert-danger" role="alert" th:if="${param.error}">
+        Invalid old password.
+    </div>
+    <form th:action="@{/profile/manage}" th:method="post" th:object="${user}">
+        Username:<br>
+        <input th:field="*{username}" required />
+        <br />
+        Email:<br>
+        <input th:field="*{email}" required />
+        <br />
+        Old Password:<br>
+        <input type="password"  th:field="*{oldPassword}" required />
+        <br />
+        New Password:<br>
+        <input type="password"  th:field="*{password}" required />
+        <br />
+        <button type="submit" class="btn btn-dark">Edit</button>
+    </form>
+
+    <br>
+
+    <form th:action="@{/profile/deactivate}" th:method="post" >
+<!--        <input onClick="" type="submit" />-->
+        <button type="submit" class="btn btn-dark">Deactivate Account</button>
+    </form>
+
+</div>
+
+<div th:replace="partials :: scripts"></div>
+
+</body>
+</html>

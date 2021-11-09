@@ -72,6 +72,9 @@
                         <a sec:authorize="isAuthenticated()" class="nav-link" href="/profile/edit">
                             EDIT PROFILE
                         </a>
+                        <a sec:authorize="isAuthenticated()" class="nav-link" href="/profile/manage">
+                            EDIT ACCOUNT
+                        </a>
                         <div class="dropdown-divider"></div>
                         <a sec:authorize="isAuthenticated()" class="nav-link" href="/messages">
                         MESSAGES
@@ -114,29 +117,66 @@
             justify-content: center;
         }
 
+        .msg {
+            display: flex;
+            /*justify-content: center;*/
+            /*float: right;*/
+        }
+
+        .just-left {
+            justify-content: left;
+            width: 100%;
+        }
+        .just-right {
+            justify-content: right;
+            width: 100%;
+        }
+
         .message-sent {
             background-color: lightgreen;
-            display: flex;
-            justify-content: left;
+            display: block;
+            /*clear: left;*/
             margin-bottom: 1px;
+            /*margin-right: 5px;*/
+            padding-left: 10px;
+            padding-right: 10px;
 
             border: solid black 2px;
+            border-radius: 25px;
+            width: 45em;
+        }
+
+        .italics {
+            font-style: italic;
+        }
+
+        .curved {
+            border-radius: 25px;
         }
 
         .message-received {
             background-color: lightblue;
-            display: flex;
-            justify-content: left;
+            display: block;
+            /*clear: left;*/
             margin-bottom: 1px;
+            /*margin-right: 5px;*/
+            padding-left: 10px;
+            padding-right: 10px;
 
             border: solid black 2px;
+            border-radius: 25px;
+            width: 45em;
         }
 
         .bordered {
-            border: solid black 1px;
+            border: solid black 3px;
         }
         .no-m-top {
-            margin-top: 1px;
+            margin-top: 0px;
+            /*margin-bottom: 5px;*/
+            /*padding: 0;*/
+            /*height: 10px;*/
+            block-size: fit-content;
         }
     </style>
 </div>

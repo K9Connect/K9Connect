@@ -1,6 +1,8 @@
 package net.k9connect.k9connect.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -12,6 +14,8 @@ import java.util.Date;
 
 @Entity
 @Table(name="messages")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Message implements Comparable<Message> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
