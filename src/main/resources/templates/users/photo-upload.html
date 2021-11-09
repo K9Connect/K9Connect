@@ -12,10 +12,12 @@
 <div class="container">
     <h1>Upload a Profile Picture</h1>
     <form th:action="@{/user/photo-upload}" method="POST" enctype="multipart/form-data">
-        <label for="user-photo">Upload a Photo</label>
-        <input id="user-photo" name="user-photo" type="file"/>
-        <br/>
-        <input type="submit" value="Upload Photo"/>
+        <div class="form-group">
+            <label for="user-photo">Upload a Photo</label>
+            <input class="form-control" id="user-photo" name="user-photo" type="file"/>
+            <br/>
+            <input class="btn btn-dark" type="submit" value="Upload Photo"/>
+        </div>
     </form>
 </div>
 
