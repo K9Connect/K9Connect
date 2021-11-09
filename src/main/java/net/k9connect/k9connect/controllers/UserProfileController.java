@@ -4,11 +4,14 @@ import net.k9connect.k9connect.models.*;
 import net.k9connect.k9connect.repositories.*;
 import net.k9connect.k9connect.utils.Ratings;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -39,7 +42,6 @@ public class UserProfileController {
         this.photoDao = photoDao;
         this.userReviewDao = userReviewDao;
         this.passwordEncoder = passwordEncoder;
-
     }
 
     @GetMapping("/profile/create")
@@ -160,13 +162,21 @@ public class UserProfileController {
     public String manageAccountInfo (@ModelAttribute User userData) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.findByUsername(loggedInUser.getUsername());
-        String hash = passwordEncoder.encode(userData.getPassword());
-        user.setPassword(hash);
-        user.setUsername(userData.getUsername());
-        user.setEmail(userData.getEmail());
-        userDao.save(user);
 
-        return "redirect:/login";
+//        System.out.println();
+
+        Boolean matchingPassword = BCrypt.checkpw(userData.getOldPassword(), user.getPassword());
+
+        if (matchingPassword) {
+            String hash = passwordEncoder.encode(userData.getPassword());
+            user.setPassword(hash);
+            user.setUsername(userData.getUsername());
+            user.setEmail(userData.getEmail());
+            userDao.save(user);
+            return "redirect:/login";
+        } else {
+            return "redirect:/profile/manage?error";
+        }
     }
 }
 

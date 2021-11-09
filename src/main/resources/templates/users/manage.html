@@ -10,6 +10,9 @@
 <div th:replace="partials :: navbar"></div>
 
 <div class="container justify-content-center">
+    <div class="alert alert-danger" role="alert" th:if="${param.error}">
+        Invalid old password.
+    </div>
     <form th:action="@{/profile/manage}" th:method="post" th:object="${user}">
         User Name:<br>
         <input th:field="*{username}" required />
@@ -17,12 +20,12 @@
         User Email:<br>
         <input th:field="*{email}" required />
         <br />
-        New Password:<br>
-        <input  th:field="*{password}" required />
+        Old Password:<br>
+        <input type="password"  th:field="*{oldPassword}" required />
         <br />
-<!--        Old Password:<br>-->
-<!--        <input th:field="*{password}" required />-->
-<!--        <br />-->
+        New Password:<br>
+        <input type="password"  th:field="*{password}" required />
+        <br />
         <input type="submit" />
     </form>
 
