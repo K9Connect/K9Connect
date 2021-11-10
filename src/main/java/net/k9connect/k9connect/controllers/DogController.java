@@ -130,19 +130,16 @@ public class DogController {
 
 
     @PostMapping("/dog/search")
-    public String search(@RequestParam String term, @RequestParam String gender, @RequestParam String hasCerts, Model model) {
+    public String search(@RequestParam String term, @RequestParam String gender, Model model) {
         System.out.println(term);
         System.out.println(gender);
-        System.out.println(hasCerts);
         if (term != null) {
             term = "%" + term + "%";
             List<Dog> listOfDogs = dogDao.findDogsByBreedIsLike(term);
             model.addAttribute("dogs",listOfDogs);
         }
         Boolean certs = false;
-        if (hasCerts.equals("true")) {
-             certs = true;
-        }
+
             if (gender.charAt(0) != 'a') {
                 if (gender.charAt(0) == 'M') {
                     List<Dog> listOfDogs = dogDao.findDogsByBreedIsLike(term);
