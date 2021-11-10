@@ -2,20 +2,89 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>About</title>
   <div th:replace="partials :: header"></div>
 
 </head>
 <body>
 <div th:replace="partials :: navbar"></div>
+<br>
 
-<div class="container">
+<div class="container d-flex align-items-center justify-content-center">
 
-  <h1>About</h1>
+  <h2>K9 Connect: Inception and Conception</h2>
+  <br>
+</div>
+<br>
+<br>
+<div class="container .d-inline-flex">
+  <div class="row align-items-start">
+    <div class="col">
+      <p>
+        K9 Connect started out with 4 friends getting together at the doggy park. We all had
+        different breed of dogs and discussed how hard it was to find someone to breed with
+        our particular canine companion. Since we  were all tech-savvy we decided to do  something about this
+        and possibly help our fellow dog owners in the process.
+        <br>
+        <br>
+        This gave birth to the K9 Connect website. We no longer have to search out people in
+        person at doggy parks or scower the web to find a suitable match. We can now log into K9 Connect and do that from the comfort of our home. this
+        makes it less stressful for us and our canine companions.
+      </p>
+    </div>
+  </div>
+</div>
 
+<div class="container d-flex align-items-center justify-content-center">
+
+  <h2>About Us</h2>
+  <br>
+</div>
+<br>
+<br>
+
+<div class="container align-items-center justify-content-center ">
+  <div class="card-group d-flex" >
+    <div class="card mx-2">
+      <img src="/images/codeup8-21-0152.jpg" class="card-img-top" alt="...">
+      <div class="card-body" >
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+    <div class="card mx-2">
+      <img src="/images/codeup8-21-0152.jpg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+    <div class="card mx-2" >
+      <img src="/images/codeup8-21-0152.jpg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+      </div>
+      <div class="card mx-2">
+        <img src="/images/codeup8-21-0152.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+    </div>
+  </div>
+</div>
 </div>
 
 <div th:replace="partials :: scripts"></div>
+
 
 </body>
 </html>
