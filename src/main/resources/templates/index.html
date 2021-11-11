@@ -1,50 +1,30 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mohave&display=swap" rel="stylesheet">
+
     <meta charset="UTF-8"/>
     <th:block th:replace="partials :: head"></th:block>
-    <title>Index</title>
-    <style>
-        .marker {
-            display: block;
-            border: none;
-            cursor: pointer;
-            padding: 0
-        }
-
-        .img-dog-map {
-            width: 100%;
-            height: auto;
-        }
-
-        .mapboxgl-popup-content {
-            max-width: 15em;
-            font-size: 1.33em;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/landing.css">
+    <title>Welcome to K9Connect</title>
 </head>
 <body>
-<div th:replace="partials :: navbar"></div>
+<!--<div th:replace="partials :: navbar"></div>-->
 
-<div class="container">
-    <h1>Find dogs near you!</h1>
-    <div class="d-flex justify-content-between">
-        <form>
-            <label for="breed">Filter map results by breed</label>
-            <input id="breed" name="breed" type="text" placeholder="Enter dog breed">
-            <button id="breed-submit" class="btn btn-dark" type="button">Find Dogs</button>
-        </form>
-        <div id="geolocate-loading-msg" class="d-flex justify-content-end align-items-center" style="width: 35%">
-            <div>Click button at top right of map to find your location.</div>
+<div class="blue-overlay d-flex justify-content-center align-items-center">
+    <div class="row d-flex justify-content-center">
+        <div class="brand">K9CONNECT</div>
+        <div class="links-box">
+            <a class="landing-link" href="/map">Find Dogs Nearby</a>
+            <a class="landing-link" href="/sign-up">Create an Account</a>
+            <a class="landing-link" href="/login">Log In</a>
         </div>
     </div>
-    <div id="map" style="width: 100%; height: 80vh;"></div>
 </div>
 
 <div th:replace="partials :: scripts"></div>
-<script src="/keys.js"></script>
-<script src="/js/jquery-2.2.4.js" ></script>
-<script src="/js/mapbox-geocoder-utils.js"></script>
-<script src="/js/map.js"></script>
+
 </body>
 </html>
