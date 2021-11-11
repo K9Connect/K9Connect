@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
+    <th:block th:replace="partials :: head"></th:block>
     <title>Dog Profile</title>
     <style>
         .profile-thumb {
@@ -15,7 +16,6 @@
             width: auto;
         }
     </style>
-    <div th:replace="partials :: header"></div>
 
 </head>
 <body>
