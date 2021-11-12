@@ -9,7 +9,7 @@
 <body>
 <div th:replace="partials :: navbar"></div>
 
-<div class="container justify-content-center">
+<div class="container  centered">
   <h1>Log In</h1>
   <div th:if="${param.error}">
     Invalid Username and Password. Please Try again or contact Admin
@@ -21,14 +21,23 @@
     You have successfully registered.
   </div>
 
-
+<div class="container-custom p-5">
   <form th:action="@{/login}" method="post">
-    <label for="username">Username</label>
-    <input id="username" name="username" type="text" />
-    <label for="password">Password</label>
-    <input id="password" name="password" type="password" />
-    <button type="submit" class="btn btn-dark">Login</button>
-    </form>
+    <div class="row mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input class="form-control" id="username" name="username" required/>
+    </div>
+    <div class="row mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input class="form-control" id="password" name="password" type="password" required/>
+    </div>
+    <div class="col-12">
+      <!--      <button type="submit" class="btn btn-dark  justify-content-start">Login</button>-->
+      <button type="submit" class="btnCustom">Login</button>
+    </div>
+  </form>
+</div>
+
 <!--  <p>Don't have an account? <a th:href="/sign-up">Register now!</a> </p>-->
 
 </div>
