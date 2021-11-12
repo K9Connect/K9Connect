@@ -50,6 +50,10 @@ public class PhotoUploadController {
             @RequestParam(name = "user-photo") MultipartFile uploadedPhoto,
             Model model
     ) {
+        if (uploadedPhoto.isEmpty()) {
+            return "redirect:/user/photo-upload";
+        }
+
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.findByUsername(loggedInUser.getUsername());
 
