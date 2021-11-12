@@ -128,6 +128,7 @@ public class UserProfileController {
         User user = userDao.findByUsername(loggedInUser.getUsername());
 
         userInfo.setId(user.getDetails().getId());
+        userInfo.setPfp(user.getDetails().getPfp());
 
         userInfoDao.save(userInfo);
         return "redirect:/profile/";
