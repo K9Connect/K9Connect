@@ -11,20 +11,38 @@
 
 <div class="container justify-content-center">
     <form th:action="@{/profile/create}" th:method="post" th:object="${userprofile}">
+        <div class="row mb-3">
+            <label for="photo" class="form-label">Photo</label>
+            <input class="form-control" id="photo" th:field="*{pfp}" required/>
+        </div>
+        <div class="row mb-3">
+            <label for="phoneNumber" class="form-label">Phone Number</label>
+            <input class="form-control" id="phoneNumber" th:field="*{phone_number}" required/>
+        </div>
+        <div class="row mb-3">
+            <label for="zipCode" class="form-label">Zip Code</label>
+            <input class="form-control" id="zipCode" th:field="*{zipcode}" required/>
+        </div>
+        <div class="row mb-3">
+            <label for="bio" class="form-label">Bio</label>
+            <textarea class="form-control" id="bio" th:field="*{bio}"/>
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-dark">Create</button>
+        </div>
         <!--/* Now handled by photo upload */-->
 <!--        Photo:<br>-->
 <!--        <input th:field="*{pfp}" required />-->
 <!--        <br />-->
-        Phone Number:<br>
-        <input th:field="*{phone_number}" />
-        <br />
-        Zip Code:<br>
-        <input th:field="*{zipcode}" required />
-        <br />
-        Bio:<br>
-        <textarea th:field="*{bio}"/>
-        <br />
-        <button type="submit" class="btn btn-dark">Create</button>
+<!--        Phone Number:<br>-->
+<!--        <input th:field="*{phone_number}" />-->
+<!--        <br />-->
+<!--        Zip Code:<br>-->
+<!--        <input th:field="*{zipcode}" required />-->
+<!--        <br />-->
+<!--        Bio:<br>-->
+<!--        <textarea th:field="*{bio}"/>-->
+<!--        <br />-->
     </form>
 
 </div>
