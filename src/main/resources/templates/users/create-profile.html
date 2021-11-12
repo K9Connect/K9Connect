@@ -12,10 +12,6 @@
 <div class="container justify-content-center">
     <form th:action="@{/profile/create}" th:method="post" th:object="${userprofile}">
         <div class="row mb-3">
-            <label for="photo" class="form-label">Photo</label>
-            <input class="form-control" id="photo" th:field="*{pfp}" required/>
-        </div>
-        <div class="row mb-3">
             <label for="phoneNumber" class="form-label">Phone Number</label>
             <input class="form-control" id="phoneNumber" th:field="*{phone_number}" required/>
         </div>
