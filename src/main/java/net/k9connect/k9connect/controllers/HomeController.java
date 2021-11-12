@@ -97,4 +97,9 @@ public class HomeController {
     public String apiKey() {
         return "const mapboxKey = '" + mapboxKey + "'";
     }
+
+    @GetMapping("/map")
+    public String showMap() {
+        return "map";
+    }
 }
