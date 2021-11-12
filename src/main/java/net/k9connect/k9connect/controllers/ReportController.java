@@ -35,7 +35,7 @@ public class ReportController {
         model.addAttribute("report", new UserReport());
 
 
-        return "/users/reports/report-user";
+        return "users/reports/report-user";
 
     }
 
