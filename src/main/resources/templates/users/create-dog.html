@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
+    <th:block th:replace="partials :: head"></th:block>
     <title>Create Dog</title>
-    <div th:replace="partials :: header"></div>
 
 </head>
 <body>
@@ -12,10 +12,6 @@
 <div class="container justify-content-center">
     <form th:action="@{/dog/create}" th:method="post" th:object="${dog}">
 
-        <div class="row mb-3">
-            <label for="photo" class="form-label">Photo</label>
-            <input class="form-control" id="photo" th:object="${photo}" th:field="*{url}" required/>
-        </div>
         <div class="row mb-3">
             <label for="name" class="form-label">Name</label>
             <input class="form-control" id="name" th:field="*{name}" required/>

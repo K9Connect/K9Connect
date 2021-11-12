@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Template</title>
-  <div th:replace="partials :: header"></div>
+
+  <th:block th:replace="partials :: head"></th:block>
+
 </head>
 <body>
 <div th:replace="partials :: navbar"></div>

@@ -2,14 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Index</title>
-    <div th:replace="partials :: header"></div>
+    <th:block th:replace="partials :: head"></th:block>
+    <title>Map</title>
     <style>
         .marker {
             display: block;
             border: none;
             cursor: pointer;
-            padding: 0
+            padding: 0;
         }
 
         .img-dog-map {

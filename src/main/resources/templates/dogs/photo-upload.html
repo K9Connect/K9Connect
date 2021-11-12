@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <th:block th:replace="partials :: head"></th:block>
+    <title>Template</title>
+
+</head>
+<body>
+<div th:replace="partials :: navbar"></div>
+
+<div class="container">
+    <h1>Upload a Picture of <span th:text="${dog.name}"></span></h1>
+<!--    <th:block th:if="${message} != null">-->
+        <div class="alert alert-success" th:if="${message}" th:text="${message}"></div>
+<!--    </th:block>-->
+    <form th:action="@{|/dog/${dog.id}/photo-upload|}" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="dog-photo">Upload Photo</label>
+            <input class="form-control" id="dog-photo" name="dog-photo" type="file" required/>
+            <br/>
+            <input class="btn btn-dark" type="submit" value="Upload Photo"/>
+        </div>
+    </form>
+    <div>Add another photo? <a th:href="@{|/dog/${dog.id}/photo-upload|}">Yes</a> <a th:href="@{|/dog/${dog.id}|}">No</a></div>
+</div>
+
+<div th:replace="partials :: scripts"></div>
+
+</body>
+</html>
