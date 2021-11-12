@@ -48,7 +48,7 @@ public class MessageController {
         model.addAttribute("otheruser", otherUser);
         model.addAttribute("messages", listOfMessages);
 
-        return "/messages/message";
+        return "messages/message";
 
     }
 
