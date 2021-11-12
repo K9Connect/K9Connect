@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
+    <th:block th:replace="partials :: head"></th:block>
     <title>Dogs</title>
-    <div th:replace="partials :: header"></div>
 
 </head>
 <body>
@@ -20,12 +20,12 @@
             <option value="M">Male</option>
             <option value="F">Female</option>
         </select>
-            <div class="form-check">
-                <select class="form-select" aria-label="Default select example" name="hasCerts">
-                    <option value="true">Has certifications</option>
-                    <option selected value="false">All</option>
-                </select>
-            </div>
+<!--            <div class="form-check">-->
+<!--                <select class="form-select" aria-label="Default select example" name="hasCerts">-->
+<!--                    <option value="true">Has certifications</option>-->
+<!--                    <option selected value="false">All</option>-->
+<!--                </select>-->
+<!--            </div>-->
 
             <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
             <!--        <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>-->

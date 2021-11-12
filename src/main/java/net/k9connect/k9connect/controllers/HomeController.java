@@ -60,14 +60,22 @@ public class HomeController {
     @ResponseBody
     public List<User> userLocations(@RequestParam String breed) {
         List<User> allUsers = userDao.findAll();
+        List<User> usersWithDogs = new ArrayList<>();
+
+        for (User user : allUsers) {
+            List<Dog> dogs = user.getDogs();
+            if (dogs != null && !dogs.isEmpty()) {
+                usersWithDogs.add(user);
+            }
+        }
 
         if (breed == null || breed.isEmpty()) {
-            return allUsers;
+            return usersWithDogs;
         }
 
         List<User> filteredUsers = new ArrayList<>();
 
-        for (User user : allUsers) {
+        for (User user : usersWithDogs) {
             List<Dog> dogs = user.getDogs();
 
             for (Dog dog : dogs) {
@@ -88,5 +96,10 @@ public class HomeController {
     @ResponseBody
     public String apiKey() {
         return "const mapboxKey = '" + mapboxKey + "'";
+    }
+
+    @GetMapping("/map")
+    public String showMap() {
+        return "map";
     }
 }

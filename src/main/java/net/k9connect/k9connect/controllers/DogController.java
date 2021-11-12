@@ -55,13 +55,13 @@ public class DogController {
 
         model.addAttribute("dog", new Dog());
         model.addAttribute("details", new DogDetails());
-        model.addAttribute("photo", new Photo());
+//        model.addAttribute("photo", new Photo());
         return "users/create-dog";
     }
 
     @PostMapping("/dog/create")
     public String submitDog(
-            @ModelAttribute Dog dog, @ModelAttribute Photo photo
+            @ModelAttribute Dog dog//, @ModelAttribute Photo photo
     ) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.findByUsername(loggedInUser.getUsername());
@@ -74,13 +74,13 @@ public class DogController {
         dog = dogDao.save(dog);
 
 
-        photo.setDog(dog);
+       // photo.setDog(dog);
 
 
-        photoDao.save(photo);
+        // photoDao.save(photo);
 
 
-        return "redirect:/profile";
+        return "redirect:/dog/" + dog.getId() + "/photo-upload";
     }
 
     @GetMapping("/dog/edit/{id}")
@@ -130,19 +130,16 @@ public class DogController {
 
 
     @PostMapping("/dog/search")
-    public String search(@RequestParam String term, @RequestParam String gender, @RequestParam String hasCerts, Model model) {
+    public String search(@RequestParam String term, @RequestParam String gender, Model model) {
         System.out.println(term);
         System.out.println(gender);
-        System.out.println(hasCerts);
         if (term != null) {
             term = "%" + term + "%";
             List<Dog> listOfDogs = dogDao.findDogsByBreedIsLike(term);
             model.addAttribute("dogs",listOfDogs);
         }
         Boolean certs = false;
-        if (hasCerts.equals("true")) {
-             certs = true;
-        }
+
             if (gender.charAt(0) != 'a') {
                 if (gender.charAt(0) == 'M') {
                     List<Dog> listOfDogs = dogDao.findDogsByBreedIsLike(term);
@@ -214,6 +211,7 @@ public class DogController {
     public String deleteDogPhoto(@PathVariable long id, @ModelAttribute Dog dog, @ModelAttribute Photo photo) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.findByUsername(loggedInUser.getUsername());
+        // TODO: Only deletes url from the database, find out how to delete file from directory
         photoDao.deleteById(id);
         return "redirect:/profile";
     }

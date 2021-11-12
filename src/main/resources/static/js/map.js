@@ -93,6 +93,7 @@ $(document).ready(function() {
     }
 
     const markers = [];
+    const geoLoadingMsg = $('#geolocate-loading-msg');
 
     mapboxgl.accessToken = mapboxKey;
     const map = new mapboxgl.Map({
@@ -115,7 +116,18 @@ $(document).ready(function() {
     const geolocate = new mapboxgl.GeolocateControl({
         showUserHeading: true
     });
+
     map.addControl(geolocate);
+
+    map.on('load', () => {
+        $('#map').children()[2].children[1].children[0].children[0].addEventListener('click', () => {
+            console.log('geolocate button clicked');
+            geoLoadingMsg.html(`
+                <div class="spinner-border mr-4" role="status" aria-hidden="true"></div>
+                <div><span class="font-weight-bold">Loading...</span></div>
+            `);
+        });
+    });
 
     // Set center and zoom in
     geolocate.on('geolocate', function(event) {
@@ -123,6 +135,8 @@ $(document).ready(function() {
             center: [event.coords.longitude, event.coords.latitude],
             zoom: 8
         });
+
+        geoLoadingMsg.removeClass('d-flex').addClass('d-none');
     });
 
     $('#breed-submit').click(function() {
