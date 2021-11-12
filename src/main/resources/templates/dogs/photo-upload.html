@@ -17,7 +17,7 @@
     <form th:action="@{|/dog/${dog.id}/photo-upload|}" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <label for="dog-photo">Upload Photo</label>
-            <input class="form-control" id="dog-photo" name="dog-photo" type="file"/>
+            <input class="form-control" id="dog-photo" name="dog-photo" type="file" required/>
             <br/>
             <input class="btn btn-dark" type="submit" value="Upload Photo"/>
         </div>

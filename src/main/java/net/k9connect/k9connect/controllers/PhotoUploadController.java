@@ -92,6 +92,10 @@ public class PhotoUploadController {
 
         Dog dog = dogDao.getById(id);
 
+        if (uploadedPhoto.isEmpty()) {
+            return "redirect:/dog/{id}/photo-upload";
+        }
+
         String timestamp = LocalTime.now().toString().replaceAll("[^0-9]", "");
         String filename = "dog-" + timestamp + "-" + uploadedPhoto.getOriginalFilename();
         String filepath = Paths.get(uploadPath, filename).toString();
