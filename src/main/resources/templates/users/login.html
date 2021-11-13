@@ -1,45 +1,47 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8" />
-  <th:block th:replace="partials :: head"></th:block>
-  <title>Log-In</title>
+    <meta charset="UTF-8" />
+    <th:block th:replace="partials :: head"></th:block>
+    <title>Log-In</title>
 
 </head>
-<body>
+<body id="login-body">
 <div th:replace="partials :: navbar"></div>
 
-<div class="container  centered">
-  <h1>Log In</h1>
-  <div th:if="${param.error}">
-    Invalid Username and Password. Please Try again or contact Admin
-  </div>
-  <div th:if="${param.logout}">
-    You have been logged out.
-  </div>
-  <div th:if="${param.registered}">
-    You have successfully registered.
-  </div>
+<div class="blue-overlay">
+    <div class="container  centered">
+        <h1>Log In</h1>
+        <div th:if="${param.error}">
+            Invalid Username and Password. Please Try again or contact Admin
+        </div>
+        <div th:if="${param.logout}">
+            You have been logged out.
+        </div>
+        <div th:if="${param.registered}">
+            You have successfully registered.
+        </div>
 
-<div class="container-custom p-5">
-  <form th:action="@{/login}" method="post">
-    <div class="row mb-3">
-      <label for="username" class="form-label">Username</label>
-      <input class="form-control" id="username" name="username" required/>
-    </div>
-    <div class="row mb-3">
-      <label for="password" class="form-label">Password</label>
-      <input class="form-control" id="password" name="password" type="password" required/>
-    </div>
-    <div class="col-12">
-      <!--      <button type="submit" class="btn btn-dark  justify-content-start">Login</button>-->
-      <button type="submit" class="btnCustom">Login</button>
-    </div>
-  </form>
-</div>
+        <div class="container-custom">
+            <form th:action="@{/login}" method="post">
+                <div class="form-group">
+                    <label for="username" class="form-label">Username</label>
+                    <input class="form-control" id="username" name="username" required/>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="form-label">Password</label>
+                    <input class="form-control" id="password" name="password" type="password" required/>
+                </div>
+                <div class="form-group">
+                    <!--      <button type="submit" class="btn btn-dark  justify-content-start">Login</button>-->
+                    <button type="submit" class="btnCustom">Login</button>
+                </div>
+            </form>
+        </div>
 
-<!--  <p>Don't have an account? <a th:href="/sign-up">Register now!</a> </p>-->
+        <!--  <p>Don't have an account? <a th:href="/sign-up">Register now!</a> </p>-->
 
+    </div>
 </div>
 
 <div th:replace="partials :: scripts"></div>

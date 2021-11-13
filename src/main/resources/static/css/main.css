@@ -1,6 +1,16 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
 @import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
 
+:root {
+    --k9-light: #fff;
+    --k9-light-gray: #ccc;
+    --k9-light-blue: hsl(196, 25%, 75%);
+    --k9-gray: #808088;
+    --k9-blue: hsl(196, 70%, 25%);
+    --k9-dark: hsl(196, 70%, 15%);
+    --k9-link: hsl(196, 100%, 33%);
+}
+
 a {
     text-decoration: none;
 }
@@ -91,8 +101,8 @@ a {
 }
 
 .btnCustom {
-    background-color: #25c481;
-    color: white;
+    background-color: var(--k9-blue);
+    color: var(--k9-light);
     padding: 12px;
     margin: 10px 0;
     border: none;
@@ -151,6 +161,7 @@ body{
     background: linear-gradient(to right, #25c481, #25b7c4);
     font-family: Roboto, sans-serif;
     font-size: 1.2em;
+    color: var(--k9-dark);
 }
 section{
     margin: 50px;
@@ -158,7 +169,7 @@ section{
 
 .container-custom {
     background-color: #f2f2f2;
-    padding: 5px 20px 15px 20px;
+    padding: 1em;
     border: 1px solid lightgrey;
     border-radius: 3px;
 }
@@ -194,3 +205,35 @@ section{
     width: auto;
 }
 
+#login-body {
+
+}
+
+.blue-overlay {
+    width: 100vw;
+    height: 100vh;
+    background-color: hsla(196, 70%, 25%, 0.75);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+@media (orientation: portrait) {
+
+}
+
+@media (orientation: landscape) {
+    #login-body {
+        background-image: url("/images/login-bg-landscape-skyler-gerald-unsplash.jpg");
+        background-size: cover;
+    }
+
+    .container-custom {
+        padding: 3em;
+    }
+}
+
+nav {
+    z-index: 100;
+}
