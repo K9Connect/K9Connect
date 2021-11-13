@@ -8,6 +8,11 @@ body {
     left: 0;
 }
 
+.row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
 .landing-link {
     color: #fff;
     font-size: 1em;
@@ -15,8 +20,8 @@ body {
 }
 
 .landing-link:hover {
-    color: hsl(196, 100%, 90%);
-    font-size: 1.05em;
+    color: hsl(196, 100%, 50%);
+    /*font-size: 1.05em;*/
 }
 
 .blue-overlay {
@@ -36,6 +41,11 @@ body {
     color: #fff;
     text-align: center;
     /*padding-top: 1em;*/
+}
+
+.brand > img {
+    height: auto;
+    width: 90vw;
 }
 
 .links-box {
@@ -68,6 +78,11 @@ body {
 
     .brand {
         margin-right: 0.5em;
+    }
+
+    .brand > img {
+        height: auto;
+        width: 42vw;
     }
 
     .links-box {
