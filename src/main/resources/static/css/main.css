@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
 
 :root {
-    --k9-light: #fff;
+    --k9-light: #f2f2f2;
     --k9-light-gray: #ccc;
     --k9-light-blue: hsl(196, 25%, 75%);
     --k9-gray: #808088;
@@ -168,7 +168,7 @@ section{
 }
 
 .container-custom {
-    background-color: #f2f2f2;
+    background-color: var(--k9-light);
     padding: 1em;
     border: 1px solid lightgrey;
     border-radius: 3px;
@@ -205,10 +205,6 @@ section{
     width: auto;
 }
 
-#login-body {
-
-}
-
 .blue-overlay {
     width: 100vw;
     height: 100vh;
@@ -220,20 +216,43 @@ section{
 }
 
 @media (orientation: portrait) {
-
+    #register-outer-box {
+        justify-content: center;
+    }
 }
 
 @media (orientation: landscape) {
+    .container-custom {
+        padding: 3em;
+    }
+
     #login-body {
         background-image: url("/images/login-bg-landscape-skyler-gerald-unsplash.jpg");
         background-size: cover;
     }
 
-    .container-custom {
-        padding: 3em;
+    #register-body {
+        background-image: url("/images/register-landscape-elisa-kennemer-unsplash.jpg");
+        background-size: cover;
+    }
+
+    #register-outer-box {
+        justify-content: start;
+    }
+
+    #register-form-box {
+        width: 50%;
+        margin-left: 5em;
     }
 }
 
 nav {
     z-index: 100;
+}
+
+#register-outer-box {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
 }
