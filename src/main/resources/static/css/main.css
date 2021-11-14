@@ -15,6 +15,7 @@
 }
 
 a {
+    color: var(--k9-link);
     text-decoration: none;
 }
 .table-links {
@@ -255,7 +256,7 @@ section{
 
     #review-box {
         max-height: 320px;
-        overflow: scroll;
+        overflow-y: auto;
     }
 }
 
