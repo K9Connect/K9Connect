@@ -10,143 +10,150 @@
 <div th:replace="partials :: navbar"></div>
 <div class="container">
     <div id="user-profile-row" class="row">
-        <div id="user-profile-col" class="col-sm-12 col-md-2">
-            <img id="user-profile-pic" th:src="${user.getDetails().getPfp()}">
-        </div>
-        <div class="col-sm-12 col-md-3 d-flex flex-column">
-            <h1 id="user-profile-h1" th:text="${user.getUsername()}"></h1>
-            <div th:if="${user.is_admin() == true}">Administrator</div>
-            <th:block th:switch="${user.status}">
-                <div th:case="${T(net.k9connect.k9connect.models.Statuses).inactive}">
-                    Status: <span class="status-inactive">Inactive</span>
+        <div class="col-sm-12 col-md-4">
+            <div class="row">
+                <div id="user-profile-col" class="col">
+                    <img id="user-profile-pic" th:src="${user.getDetails().getPfp()}">
                 </div>
-                <div th:case="${T(net.k9connect.k9connect.models.Statuses).banned}">
-                    Status: <span class="status-banned">Banned</span>
-                </div>
-                <div th:case="*">
-                    Status: <span class="status-active">Active</span>
-                </div>
-            </th:block>
-            <div>
-                <i class="fas fa-phone"></i>
-                <span th:if="${info.getPhone_number() == null || info.getPhone_number().isEmpty()}">Private Number</span>
-                <span th:if="${info.getPhone_number() != null}" th:text="${info.getPhone_number()}"></span>
             </div>
-            <div>Zip Code: <span th:text="${info.getZipcode()}"></span></div>
-            <th:block th:if="${user.getId() != loggedinuser.getId()}">
-                <div>
-                    <a class="k9-link" th:href="@{|/message/${id}|}">
-                        <i class="far fa-comment-dots"></i>&nbsp;Message
-                    </a>
-                </div>
-                <div>
-                    <a class="k9-link" th:href="@{|/review/${id}|}">
-                        <i class="fas fa-bone bone-icon icon-adjust"></i>&nbsp;Rate/Review
-                    </a>
-                </div>
-            </th:block>
-            <th:block th:if="${user.id} == ${loggedinuser.id} and ${user.is_admin()} == true">
-                <div>
-                    <a th:href="@{/users/all}">View All Users</a>
-                </div>
-                <div>
-                    <a th:href="@{/dogs/all}">View All Dogs</a>
-                </div>
-            </th:block>
-        </div>
-        <div id="user-bio" class="col-sm-12 col-md-7">
-            <h4>Bio</h4>
-            <p th:text="${info.getBio()}"></p>
-        </div>
-    </div>
-    <th:block th:if="${user.reviews.size()} &gt; 0">
-        <p>
-            Average Rating:&nbsp;
-            <span th:text="${#numbers.formatDecimal(averageStars, 1, 1)}"></span>&nbsp;
-            (<span th:text="${user.reviews.size()}"></span> rating<span
-                th:if="${user.reviews.size()} &gt; 1">s</span>)
-        </p>
-        <div class="row">
-            <th:block th:each="review : ${user.getReviews()}">
-                <div class=" col-sm-12 col-md-4 user-review">
-                    <div id="reviewer-thumb-box">
-                        <a th:href="@{|/profile/${review.getReviewer().getId()}|}">
-                            <img
-                                    th:src="${review.reviewer.getDetails().getPfp()}"
-                                    class="reviewer-thumbnail"
-                                    alt="reviewer profile picture">
-                        </a>
+            <div class="row">
+                <div id="user-profile-info" class="col d-flex flex-column">
+                    <h1 id="user-profile-h1" th:text="${user.getUsername()}"></h1>
+                    <div th:if="${user.is_admin() == true}">Administrator</div>
+                    <th:block th:switch="${user.status}">
+                        <div th:case="${T(net.k9connect.k9connect.models.Statuses).inactive}">
+                            Status: <span class="status-inactive">Inactive</span>
+                        </div>
+                        <div th:case="${T(net.k9connect.k9connect.models.Statuses).banned}">
+                            Status: <span class="status-banned">Banned</span>
+                        </div>
+                        <div th:case="*">
+                            Status: <span class="status-active">Active</span>
+                        </div>
+                    </th:block>
+                    <div>
+                        <i class="fas fa-phone"></i>
+                        <span th:if="${info.getPhone_number() == null || info.getPhone_number().isEmpty()}">Private Number</span>
+                        <span th:if="${info.getPhone_number() != null}" th:text="${info.getPhone_number()}"></span>
                     </div>
-                    <div><!-- Needed for flex to make each below the direct child -->
-                        <span class="mr-2">
-                                    <th:block th:each="i : ${#numbers.sequence(1, review.stars)}">
-<!--                                        <i class="fas fa-star review-bones"></i>-->
-                                       <i class="fas fa-bone review-bones bone-icon icon-adjust"></i>
-                                    </th:block>
-                                </span>
-                        <span th:text="${review.review}"></span>
-                    </div>
+                    <div>Zip Code: <span th:text="${info.getZipcode()}"></span></div>
+                    <th:block th:if="${user.getId() != loggedinuser.getId()}">
+                        <div>
+                            <a class="k9-link" th:href="@{|/message/${id}|}">
+                                <i class="far fa-comment-dots"></i>&nbsp;Message
+                            </a>
+                        </div>
+                        <div>
+                            <a class="k9-link" th:href="@{|/review/${id}|}">
+                                <i class="fas fa-bone bone-icon icon-adjust"></i>&nbsp;Rate/Review
+                            </a>
+                        </div>
+                    </th:block>
+                    <th:block th:if="${user.id} == ${loggedinuser.id} and ${user.is_admin()} == true">
+                        <div>
+                            <a th:href="@{/users/all}">View All Users</a>
+                        </div>
+                        <div>
+                            <a th:href="@{/dogs/all}">View All Dogs</a>
+                        </div>
+                    </th:block>
                 </div>
-            </th:block>
-        </div>
-    </th:block>
-    <th:block th:unless="${user.reviews.size()} &gt; 0">
-        <div class="row">
-            <div class="col alert alert-info">
-                This user has yet to recieve a review. Have experience with this user? Help us out by posting a
-                review.
             </div>
         </div>
-    </th:block>
-    <div class="row">
-        <div class="col-12">
-            <div>
-                <a th:if="${user.getId() == loggedinuser.getId()}" th:href="@{/dog/create}">Add Dog</a>
+        <div class="col-sm-12 col-md-8">
+            <div class="row">
+                <div id="user-bio" class="col">
+                    <h4>Bio</h4>
+                    <p th:text="${info.getBio()}"></p>
+                </div>
             </div>
-            <div class="bs-example">
-                <div class="container">
-                    <div class="row">
-                        <div class="card-deck">
-                            <div class="card" style="width: 350px" th:each="dog : ${dogs}">
-                                <h5 class="text-center"><a th:href="@{|/dog/${dog.id}|}"><span
-                                        th:text="${dog.name}"></span></a>
-                                </h5>
-                                <p class="cluster text-center">ID#: <span th:text="${dog.id}"></span></p>
-                                <div th:if="${dog.getPhotos().size() == 0}">
-                                    <img class="img-fluid"
-                                         src="https://lh3.googleusercontent.com/proxy/q2LT85lAnp77l_QWzhffbFUp6kXuWM6TVO6q4fJwEFIRVvbGPqhGZxsPGJ1AB7LTsXtm7fRfKDRnM8xPO6hARk0Q"
-                                         alt="dog profile picture">
-                                </div>
-                                <div th:unless="${dog.getPhotos().size() == 0}">
-                                    <img class="img-fluid" th:src="${dog.getPhotos()[0].url}"
-                                         alt="dog profile picture">
-                                </div>
-                                <hr>
-                                <div class="card-body ">
-                                    <p class="card-text">Gender: <span th:text="${dog.gender}"></span></p>
-                                    <p class="card-text" th:text="${dog.breed}"></p>
-                                    <p class="card-text text-center overflow-auto"
-                                       style="width: auto; height: 200px;"
-                                       th:text="${dog.details.bio}"></p>
-                                    <a th:if="${dog.owner.id == loggedinuser.getId()}"
-                                       th:href="@{|/dog/edit/${dog.id}|}">
-                                        <button class="btn btn-dark">Edit</button>
+            <div class="row">
+                <div class="col" id="review-box">
+                    <th:block th:if="${user.reviews.size()} &gt; 0">
+                        <p>
+                            Average Rating:&nbsp;
+                            <span th:text="${#numbers.formatDecimal(averageStars, 1, 1)}"></span>&nbsp;
+                            (<span th:text="${user.reviews.size()}"></span> rating<span
+                                th:if="${user.reviews.size()} &gt; 1">s</span>)
+                        </p>
+                        <th:block th:each="review : ${user.getReviews()}">
+                            <div class="user-review">
+                                <div id="reviewer-thumb-box">
+                                    <a th:href="@{|/profile/${review.getReviewer().getId()}|}">
+                                        <img
+                                                th:src="${review.reviewer.getDetails().getPfp()}"
+                                                class="reviewer-thumbnail"
+                                                alt="reviewer profile picture">
                                     </a>
-                                    <!--/* <a th:href="@{|/dogs/review/${dog.id}|}">Rate/Review Dog</a> */-->
-                                    <form th:if="${dog.owner.id == loggedinuser.getId()}"
-                                          th:action="@{|/dog/delete/${dog.id}|}" th:method="POST">
-                                        <button class="btn btn-dark">Delete</button>
-                                    </form>
+                                </div>
+                                <div><!-- Needed for flex to make each below the direct child -->
+                                    <span class="mr-2">
+	                                <th:block th:each="i : ${#numbers.sequence(1, review.stars)}">
+	                                    <!-- <i class="fas fa-star review-bones"></i>-->
+	                                   <i class="fas fa-bone review-bones bone-icon icon-adjust"></i>
+	                                </th:block>
+	                            </span>
+                                    <span th:text="${review.review}"></span>
                                 </div>
                             </div>
+                        </th:block>
+                    </th:block>
+                    <th:block th:unless="${user.reviews.size()} &gt; 0">
+                        <div class="row">
+                            <div class="col alert alert-info">
+                                This user has yet to recieve a review. Have experience with this user? Help us out by
+                                posting a
+                                review.
+                            </div>
                         </div>
-                    </div>
+                    </th:block>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row mt-4">
+        <div class="col">
+            <a th:if="${user.getId() == loggedinuser.getId()}" th:href="@{/dog/create}">Add Dog</a>
+        </div>
+    </div>
+    <div id="user-profile-dog-row" class="row">
+        <div class="card-deck">
+            <div class="card" style="width: 350px" th:each="dog : ${dogs}">
+                <h5 class="text-center"><a th:href="@{|/dog/${dog.id}|}"><span
+                        th:text="${dog.name}"></span></a>
+                </h5>
+                <p class="cluster text-center">ID#: <span th:text="${dog.id}"></span></p>
+                <div th:if="${dog.getPhotos().size() == 0}">
+                    <img class="img-fluid"
+                         src="https://lh3.googleusercontent.com/proxy/q2LT85lAnp77l_QWzhffbFUp6kXuWM6TVO6q4fJwEFIRVvbGPqhGZxsPGJ1AB7LTsXtm7fRfKDRnM8xPO6hARk0Q"
+                         alt="dog profile picture">
+                </div>
+                <div th:unless="${dog.getPhotos().size() == 0}">
+                    <img class="img-fluid" th:src="${dog.getPhotos()[0].url}"
+                         alt="dog profile picture">
+                </div>
+                <hr>
+                <div class="card-body ">
+                    <p class="card-text">Gender: <span th:text="${dog.gender}"></span></p>
+                    <p class="card-text" th:text="${dog.breed}"></p>
+                    <p class="card-text text-center overflow-auto"
+                       style="width: auto; height: 200px;"
+                       th:text="${dog.details.bio}"></p>
+                    <a th:if="${dog.owner.id == loggedinuser.getId()}"
+                       th:href="@{|/dog/edit/${dog.id}|}">
+                        <button class="btn btn-dark">Edit</button>
+                    </a>
+                    <!--/* <a th:href="@{|/dogs/review/${dog.id}|}">Rate/Review Dog</a> */-->
+                    <form th:if="${dog.owner.id == loggedinuser.getId()}"
+                          th:action="@{|/dog/delete/${dog.id}|}" th:method="POST">
+                        <button class="btn btn-dark">Delete</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 <div th:replace="partials :: scripts"></div>
 </body>
 </html>

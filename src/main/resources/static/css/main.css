@@ -4,6 +4,7 @@
 :root {
     --k9-light: #f2f2f2;
     --k9-light-gray: #e3e3e3;
+    --k9-light-bluegray: hsl(196, 10%, 90%);
     --k9-light-blue: hsl(196, 25%, 75%);
     --k9-gray: #808088;
     --k9-blue: hsl(196, 70%, 25%);
@@ -251,6 +252,11 @@ section{
         width: 50%;
         margin-left: 5em;
     }
+
+    #review-box {
+        max-height: 320px;
+        overflow: scroll;
+    }
 }
 
 nav {
@@ -331,13 +337,14 @@ nav {
 }
 
 #user-bio {
-    background-color: var(--k9-light-gray);
-    display: block;
-    text-overflow: ellipsis;
-    word-wrap: break-word;
-    overflow: scroll;
-    max-height: 9em;
-    line-height: 1.5em;
+    background-color: var(--k9-light);
+    padding: 1.25em;
+    /*display: block;*/
+    /*text-overflow: ellipsis;*/
+    /*word-wrap: break-word;*/
+    /*overflow: scroll;*/
+    /*max-height: 9em;*/
+    /*line-height: 1.5em;*/
 }
 
 .status-active {
@@ -352,10 +359,24 @@ nav {
     color: #bf0000;
 }
 
-#user-profile-row {
-    height: 200px;
+#user-profile-col {
+    background-color: var(--k9-light);
+    /*max-height: 320px;*/
+    /*max-width: 320px;*/
+    padding: 0;
 }
 
-#user-profile-col {
-    width: 200px;
+#user-profile-info {
+    background-color: white;
+    padding: 1em;
 }
+
+#review-box {
+    background-color: var(--k9-light);
+    color: var(--k9-dark);
+    padding: 1.25em;
+}
+
+/*#user-profile-dog-row {*/
+/*    background-color: var(--k9-gray);*/
+/*}*/
