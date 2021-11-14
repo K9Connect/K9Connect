@@ -18,6 +18,11 @@ a {
     color: var(--k9-link);
     text-decoration: none;
 }
+
+/*hr {*/
+/*    background-color: var(--k9-light-bluegray);*/
+/*}*/
+
 .table-links {
     text-decoration: none;
     color: white;
@@ -368,8 +373,8 @@ nav {
 }
 
 #user-profile-info {
-    background-color: white;
-    padding: 1em;
+    /*background-color: white;*/
+    padding: 0 1em 1em 0;
 }
 
 #review-box {
@@ -381,3 +386,16 @@ nav {
 /*#user-profile-dog-row {*/
 /*    background-color: var(--k9-gray);*/
 /*}*/
+
+.btn-k9-blue {
+    background-color: var(--k9-blue);
+    color: var(--k9-light);
+}
+
+.k9-card-bio {
+    height: 8em;
+}
+
+#user-profile-row {
+    border-bottom: 2px solid var(--k9-blue);
+}

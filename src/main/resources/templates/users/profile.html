@@ -111,7 +111,7 @@
             </div>
         </div>
     </div>
-    <hr>
+<!--    <hr>-->
     <div class="row mt-4">
         <div class="col">
             <a th:if="${user.getId() == loggedinuser.getId()}" th:href="@{/dog/create}">Add Dog</a>
@@ -137,18 +137,18 @@
                 <div class="card-body ">
                     <p class="card-text">Gender: <span th:text="${dog.gender}"></span></p>
                     <p class="card-text" th:text="${dog.breed}"></p>
-                    <p class="card-text text-center overflow-auto"
-                       style="width: auto; height: 200px;"
-                       th:text="${dog.details.bio}"></p>
-                    <a th:if="${dog.owner.id == loggedinuser.getId()}"
-                       th:href="@{|/dog/edit/${dog.id}|}">
-                        <button class="btn btn-dark">Edit</button>
+                    <div class="card-text overflow-auto k9-card-bio" th:text="${dog.details.bio}"></div>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a th:if="${dog.owner.id == loggedinuser.getId()}"
+                          th:href="@{|/dog/edit/${dog.id}|}">
+                        <button class="btn btn-k9-blue px-4">Edit</button>
                     </a>
-                    <!--/* <a th:href="@{|/dogs/review/${dog.id}|}">Rate/Review Dog</a> */-->
-                    <form th:if="${dog.owner.id == loggedinuser.getId()}"
-                          th:action="@{|/dog/delete/${dog.id}|}" th:method="POST">
-                        <button class="btn btn-dark">Delete</button>
-                    </form>
+                        <!--/* <a th:href="@{|/dogs/review/${dog.id}|}">Rate/Review Dog</a> */-->
+                        <form th:if="${dog.owner.id == loggedinuser.getId()}"
+                              th:action="@{|/dog/delete/${dog.id}|}" th:method="POST">
+                            <button class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
