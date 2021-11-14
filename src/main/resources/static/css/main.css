@@ -3,13 +3,14 @@
 
 :root {
     --k9-light: #f2f2f2;
-    --k9-light-gray: #ccc;
+    --k9-light-gray: #e3e3e3;
     --k9-light-blue: hsl(196, 25%, 75%);
     --k9-gray: #808088;
     --k9-blue: hsl(196, 70%, 25%);
     --k9-dark: hsl(196, 70%, 15%);
     /*--k9-link: hsl(196, 100%, 33%);*/
-    --k9-link: rgb(101, 142, 55);
+    /*--k9-link: rgb(101, 142, 55);*/
+    --k9-link: hsl(204, 85%, 45%);
 }
 
 a {
@@ -274,4 +275,87 @@ nav {
 
 .about-links {
     color: var(--k9-link);
+}
+
+
+.k9-background-solid {
+    background: var(--k9-light);
+}
+
+.user-review {
+    margin-bottom: 0.5em;
+}
+
+.reviewer-thumbnail {
+    height: 100%;
+    width: 100%;
+    border: none;
+    border-radius: 50%
+}
+
+.review-bones {
+    color: goldenrod;
+    margin: -3px;
+}
+
+.bone-icon {
+    transform: rotate(-45deg);
+}
+
+.icon-adjust {
+    font-size: 0.8em;
+}
+
+#user-profile-h1 {
+    text-align: start;
+    color: var(--k9-dark);
+    margin-bottom: 5px;
+}
+
+#user-profile-pic {
+    /*float: left;*/
+    max-height: 100%;
+    max-width: 100%;
+    /*object-fit: cover;*/
+}
+
+#reviewer-thumb-box {
+    height: 75px;
+    width: 75px;
+    float: left;
+    margin-right: 0.5em;
+}
+
+.k9-link {
+    color: var(--k9-link);
+}
+
+#user-bio {
+    background-color: var(--k9-light-gray);
+    display: block;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    overflow: scroll;
+    max-height: 9em;
+    line-height: 1.5em;
+}
+
+.status-active {
+    color: var(--k9-blue);
+}
+
+.status-inactive {
+    color: var(--k9-gray);
+}
+
+.status-banned {
+    color: #bf0000;
+}
+
+#user-profile-row {
+    height: 200px;
+}
+
+#user-profile-col {
+    width: 200px;
 }
