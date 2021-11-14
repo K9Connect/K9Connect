@@ -8,7 +8,8 @@
     --k9-gray: #808088;
     --k9-blue: hsl(196, 70%, 25%);
     --k9-dark: hsl(196, 70%, 15%);
-    --k9-link: hsl(196, 100%, 33%);
+    /*--k9-link: hsl(196, 100%, 33%);*/
+    --k9-link: rgb(101, 142, 55);
 }
 
 a {
@@ -226,6 +227,11 @@ section{
         padding: 3em;
     }
 
+    .about-k9-devs {
+        margin-left: 1em;
+        margin-right: 1em;
+    }
+
     #login-body {
         background-image: url("/images/login-bg-landscape-skyler-gerald-unsplash.jpg");
         background-size: cover;
@@ -255,4 +261,17 @@ nav {
     width: 100%;
     display: flex;
     align-items: center;
+}
+
+.about-k9-devs {
+    flex-grow: 1;
+}
+
+.about-icons {
+    height: 1.5em;
+    width: 1.5em;
+}
+
+.about-links {
+    color: var(--k9-link);
 }
