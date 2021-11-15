@@ -12,6 +12,7 @@
     /*--k9-link: hsl(196, 100%, 33%);*/
     /*--k9-link: rgb(101, 142, 55);*/
     --k9-link: hsl(204, 85%, 45%);
+    --k9-transparent: rgba(242, 242, 242, 0.67);
 }
 
 a {
@@ -177,7 +178,7 @@ section{
 }
 
 .container-custom {
-    background-color: var(--k9-light);
+    background-color: var(--k9-transparent);
     padding: 1em;
     border: 1px solid lightgrey;
     border-radius: 3px;
@@ -398,4 +399,9 @@ nav {
 
 #user-profile-row {
     border-bottom: 2px solid var(--k9-blue);
+}
+
+#user-review-body {
+    background-image: url("/images/user-reviews-fabian-gieske-unsplash.jpg");
+    background-size: cover;
 }
