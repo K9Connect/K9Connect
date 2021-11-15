@@ -25,13 +25,13 @@
                 <td th:text="${user.email}"></td>
                 <td th:text="${user.status}"></td>
                 <td>
-                    <form th:action="@{/users/all}" method="post">
+                    <form th:action="@{/users/all}" method="post" class="form-inline">
                         <input type="hidden" name="user-id" th:value="${user.id}">
-                        <select name="user-status" id="user-status">
+                        <select name="user-status" id="user-status" class="form-control">
                             <option th:each="userStatus : ${T(net.k9connect.k9connect.models.Statuses).values()}"
                                     th:value="${userStatus}" th:text="${userStatus}"></option>
                         </select>
-                        <button type="submit">Set Status</button>
+                        <button class="btn btn-k9-blue" type="submit">Set Status</button>
                     </form>
                 </td>
             </tr>

@@ -264,6 +264,16 @@ section{
         max-height: 320px;
         overflow-y: auto;
     }
+
+    #user-review-body {
+        background-image: url("/images/user-reviews-fabian-gieske-unsplash.jpg");
+        background-size: cover;
+    }
+
+    #dog-review-body {
+        background-image: url("/images/dog-reviews-anna-dudkova-unsplash.jpg");
+        background-size: cover;
+    }
 }
 
 nav {
@@ -399,9 +409,4 @@ nav {
 
 #user-profile-row {
     border-bottom: 2px solid var(--k9-blue);
-}
-
-#user-review-body {
-    background-image: url("/images/user-reviews-fabian-gieske-unsplash.jpg");
-    background-size: cover;
 }
