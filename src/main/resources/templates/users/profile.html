@@ -21,13 +21,13 @@
                     <div th:if="${user.is_admin() == true}">Administrator</div>
                     <th:block th:switch="${user.status}">
                         <div th:case="${T(net.k9connect.k9connect.models.Statuses).inactive}">
-                            Status: <span class="status-inactive">Inactive</span>
+                            Status: <span class="status-inactive"><i class="fas fa-bed"></i> Inactive</span>
                         </div>
                         <div th:case="${T(net.k9connect.k9connect.models.Statuses).banned}">
-                            Status: <span class="status-banned">Banned</span>
+                            Status: <span class="status-banned"><i class="fas fa-user-times"></i> Banned</span>
                         </div>
                         <div th:case="*">
-                            Status: <span class="status-active">Active</span>
+                            Status: <span class="status-active"><i class="fas fa-user-check"></i> Active</span>
                         </div>
                     </th:block>
                     <div>
