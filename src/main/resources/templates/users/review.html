@@ -4,30 +4,37 @@
     <meta charset="UTF-8" />
     <th:block th:replace="partials :: head"></th:block>
     <title>User Review</title>
-
+    <style>
+        i.fa-bone {
+            color: var(--k9-light-gray);
+        }
+    </style>
 </head>
 <body>
 <div th:replace="partials :: navbar"></div>
-
 <div class="container">
     <h1>Review of User: <span th:text="${reviewedUser.username}"></span></h1>
     <form th:action="@{|/review/${id}|}" method="POST" th:object="${userReview}">
-        <div> <!--TODO: using radio buttons for now, but these can be styled to look like stars or dog biscuits or whatever-->
-            <input type="radio" th:field="*{stars}" value="1">
-            <input type="radio" th:field="*{stars}" value="2">
-            <input type="radio" th:field="*{stars}" value="3">
-            <input type="radio" th:field="*{stars}" value="4">
-            <input type="radio" th:field="*{stars}" value="5">
+        <div>
+            <span>Rating: </span>
+            <i id="user-review-bone-1" class="fas fa-bone bone-icon" data-bones="1"></i>
+            <i id="user-review-bone-2" class="fas fa-bone bone-icon" data-bones="2"></i>
+            <i id="user-review-bone-3" class="fas fa-bone bone-icon" data-bones="3"></i>
+            <i id="user-review-bone-4" class="fas fa-bone bone-icon" data-bones="4"></i>
+            <i id="user-review-bone-5" class="fas fa-bone bone-icon" data-bones="5"></i>
         </div>
+        <input id="buried-bone" type="hidden" name="stars">
         <div th:if="${#fields.hasErrors('stars')}" th:errors="*{stars}">star error</div>
-        <label for="user-review">Review</label>
-        <textarea th:field="*{review}" id="user-review" cols="30" rows="10"></textarea>
-        <div th:if="${#fields.hasErrors('review')}" th:errors="*{review}">review error</div>
-        <button type="submit">Submit Review</button>
+        <div class="form-group">
+<!--            <label for="user-review">Review</label>-->
+            <textarea class="form-control" th:field="*{review}" id="user-review" cols="30" rows="10" placeholder="Please leave a review..."></textarea>
+            <div th:if="${#fields.hasErrors('review')}" th:errors="*{review}">review error</div>
+        </div>
+        <button class="btn btn-k9-blue" type="submit">Submit Review</button>
     </form>
 </div>
 
 <div th:replace="partials :: scripts"></div>
-
+<script src="/js/review.js"></script>
 </body>
 </html>
