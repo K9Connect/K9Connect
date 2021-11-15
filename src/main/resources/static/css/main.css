@@ -1,5 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
 @import url("https://fonts.googleapis.com/css2?family=Righteous&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Mohave:wght@400;500&display=swap');
 
 :root {
     --k9-light: #f2f2f2;
@@ -30,12 +31,12 @@ a {
 
 .table-links {
     text-decoration: none;
-    color: white;
+    color: var(--k9-link);
 }
 .table-links:hover {
     text-decoration: underline;
-    font-size: 1.05em;
-    color: black;
+    /*font-size: 1.05em;*/
+    color: var(--k9-light-blue);
 }
 .btn-link {
     border: none;
@@ -43,8 +44,12 @@ a {
 }
 .btn-link:hover {
     text-decoration: none;
-    color: #000000E6;
+    color: var(--k9-light-blue);
     cursor: pointer;
+}
+
+.btn:hover {
+    color: var(--k9-light-blue);
 }
 
 .center {
@@ -129,7 +134,8 @@ a {
 
 h1{
     font-size: 30px;
-    color: #fff;
+    /*color: #fff;*/
+    color: var(--k9-dark);
     text-transform: uppercase;
     font-weight: 300;
     text-align: center;
@@ -152,8 +158,8 @@ th{
     padding: 20px 15px;
     text-align: left;
     font-weight: 500;
-    font-size: 12px;
-    color: #fff;
+    /*font-size: 12px;*/
+    color: var(--k9-dark);
     text-transform: uppercase;
 }
 td{
@@ -162,7 +168,7 @@ td{
     vertical-align:middle;
     font-weight: 300;
     font-size: 1.2em;
-    color: #fff;
+    color: var(--k9-dark);
     border-bottom: solid 1px rgba(255,255,255,0.1);
 }
 
@@ -174,7 +180,8 @@ body{
     /*background: -webkit-linear-gradient(left, #25c481, #25b7c4);*/
     /*background: linear-gradient(to right, #25c481, #25b7c4);*/
     background-color: var(--k9-light);
-    font-family: Roboto, sans-serif;
+    /*font-family: Roboto, sans-serif;*/
+    font-family: 'Mohave', sans-serif;
     font-size: 1.2em;
     color: var(--k9-dark);
 }
@@ -293,6 +300,27 @@ section{
     #edit-profile-body {
         background-image: url("/images/user-edit-marcus-cramer-unsplash.jpg");
         background-size: cover;
+    }
+
+    .dog-photo-background {
+        background-image: url("/images/dog-photos-sarandy-westfall-unsplash.jpg");
+        background-size: cover;
+    }
+
+    .photo-upload-form-bg {
+        padding: 3em;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .photo-upload-form-bg {
+        padding: 1em;
+    }
+}
+
+@media screen and (min-width:768px) {
+    .photo-upload-form-bg {
+        padding: 3em;
     }
 }
 
@@ -441,4 +469,12 @@ nav {
 
 #contact-box {
     padding-bottom: 1em;
+}
+
+#dogs-table {
+    background-color: var(--k9-light-bluegray);
+}
+
+.photo-upload-form-bg {
+    background-color: var(--k9-transparent);
 }

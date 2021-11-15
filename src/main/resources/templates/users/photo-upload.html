@@ -6,20 +6,27 @@
     <title>Photo Upload</title>
 
 </head>
-<body>
+<body class="dog-photo-background">
 <div th:replace="partials :: navbar"></div>
-
-<div class="container">
-    <h1>Upload a Profile Picture</h1>
-    <form th:action="@{/user/photo-upload}" method="POST" enctype="multipart/form-data">
-        <div class="form-group">
-            <label for="user-photo">Upload a Photo</label>
-            <input class="form-control" id="user-photo" name="user-photo" type="file" required/>
-            <div class="form-group">
-                <input class="btn btn-dark" type="submit" value="Upload Photo"/>
+<div class="blue-overlay">
+    <div class="container">
+        <div class="row justify-content-center pt-5">
+            <div class="col-sm-12 col-md-9">
+                <div class="photo-upload-form-bg">
+                    <h1>Upload a Profile Picture</h1>
+                    <form th:action="@{/user/photo-upload}" method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="user-photo">Upload a Photo</label>
+                            <input class="form-control" id="user-photo" name="user-photo" type="file" required/>
+                        </div>
+                        <div class="form-group">
+                            <input class="btn btnCustom" type="submit" value="Upload Photo"/>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </form>
+    </div>
 </div>
 
 <div th:replace="partials :: scripts"></div>
