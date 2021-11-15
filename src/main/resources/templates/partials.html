@@ -48,37 +48,33 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                         class="bi bi-person-fill" viewBox="0 0 16 16">
-                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                    </svg>
-                    Account
+                    <i class="fas fa-user icon-margin-rt"></i> Account
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a sec:authorize="!isAuthenticated()" class="nav-link" href="/login">
                         <!--Hide link if user is logged in.-->
-                        LOGIN
+                        <i class="fas fa-sign-in-alt icon-margin-rt"></i> LOGIN
                     </a>
                     <a sec:authorize="!isAuthenticated()" class="nav-link" href="/sign-up">
                         <!--Hide link if user is logged in.-->
-                        SIGN-UP
+                        <i class="fas fa-user-plus icon-margin-rt"></i> SIGN-UP
                     </a>
                     <a sec:authorize="isAuthenticated()" class="nav-link" href="/profile">
-                        PROFILE
+                        <i class="fas fa-user icon-margin-rt"></i> PROFILE
                     </a>
                     <a sec:authorize="isAuthenticated()" class="nav-link" href="/profile/edit">
-                        EDIT PROFILE
+                        <i class="fas fa-user-edit icon-margin-rt"></i> EDIT PROFILE
                     </a>
                     <a sec:authorize="isAuthenticated()" class="nav-link" href="/profile/manage">
-                        EDIT ACCOUNT
+                        <i class="fas fa-user-cog icon-margin-rt"></i> EDIT ACCOUNT
                     </a>
                     <div class="dropdown-divider"></div>
                     <a sec:authorize="isAuthenticated()" class="nav-link" href="/messages">
-                        MESSAGES
+                        <i class="far fa-comment-dots icon-margin-rt"></i> MESSAGES
                     </a>
                     <a sec:authorize="isAuthenticated()" class="nav-item">
                         <form th:action="@{/logout}" th:method="post">
-                            <button class="btn-link" style="margin-top: 8px">LOGOUT</button>
+                            <button class="btn-link" style="margin-top: 8px"><i class="fas fa-sign-out-alt icon-margin-rt"></i> LOGOUT</button>
                         </form>
                     </a>
                 </div>

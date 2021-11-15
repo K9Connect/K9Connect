@@ -18,7 +18,7 @@
     </style>
 
 </head>
-<body>
+<body class="k9-background-solid">
 <div th:replace="partials :: navbar"></div>
 
 <div class="container">
@@ -30,7 +30,7 @@
             <img class="img-fluid" th:src="${dog.getPhotos()[0].url}" alt="dog profile picture">
         </div>
         <div class="col-sm-12 col-md-8">
-            <h1 th:text="${dog.getName()}"></h1>
+            <h1 id="dog-profile-h1" th:text="${dog.name}"></h1>
             <p>
                 <span th:text="${dog.getBreed()}"></span>,
                 <span th:if="${dog.gender} == 'F'">female, </span>
@@ -39,7 +39,11 @@
                 <span>
                     Average Rating:
                     <span th:if="${dogAverage} == 0">N/A</span>
-                    <span th:unless="${dogAverage} == 0" th:text="${dogAverage}"></span>
+                    <span th:unless="${dogAverage} == 0">
+                        <span th:text="${dogAverage}"></span>
+                        &nbsp;(<span th:text="${dog.reviews.size()}"></span> rating<span
+                            th:if="${dog.reviews.size()} &gt; 1">s</span>)
+                    </span>
                 </span>
             </p>
             <div class="row">
