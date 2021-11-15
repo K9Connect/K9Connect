@@ -96,25 +96,33 @@ public class DogController {
     }
 
     @PostMapping("/dog/edit/{id}")
-    public String editDogSend(@ModelAttribute Dog dog, @RequestParam(name = "dog_photos[]") String[] dogphotourls, @ModelAttribute Photo photo, @ModelAttribute DogDetails dogDetails, @PathVariable Long id, @RequestParam(name = "dog_photo_ids[]") Long[] dogPhotoIds) {
+    public String editDogSend(
+            @ModelAttribute Dog dog,
+//            @RequestParam(name = "dog_photos[]") String[] dogphotourls,
+            @ModelAttribute Photo photo,
+            @ModelAttribute DogDetails dogDetails,
+            @PathVariable Long id
+//            @RequestParam(name = "dog_photo_ids[]") Long[] dogPhotoIds
+    ) {
 
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.findByUsername(loggedInUser.getUsername());
 
-        System.out.println(Arrays.toString(dogphotourls));
-        System.out.println(Arrays.toString(dogPhotoIds));
-        List<Photo> photos = new ArrayList<>();
-        for (int i = 0; i < dogphotourls.length; i++) {
-            String url = dogphotourls[i];
-            long dogPhotoId = dogPhotoIds[i];
-            System.out.println(url + " " + dogPhotoId);
-            Photo dogPhoto = photoDao.getById(dogPhotoId);
-            dogPhoto.setUrl(url);
-            photoDao.save(dogPhoto);
-            photos.add(dogPhoto);
-        }
+        // replaced by photo uploads
+//        System.out.println(Arrays.toString(dogphotourls));
+//        System.out.println(Arrays.toString(dogPhotoIds));
+//        List<Photo> photos = new ArrayList<>();
+//        for (int i = 0; i < dogphotourls.length; i++) {
+//            String url = dogphotourls[i];
+//            long dogPhotoId = dogPhotoIds[i];
+//            System.out.println(url + " " + dogPhotoId);
+//            Photo dogPhoto = photoDao.getById(dogPhotoId);
+//            dogPhoto.setUrl(url);
+//            photoDao.save(dogPhoto);
+//            photos.add(dogPhoto);
+//        }
 
-        dog.setPhotos(photos);
+//        dog.setPhotos(photos);
 
         Dog dogDB = dogDao.getById(id);
         DogDetails details = dog.getDetails();

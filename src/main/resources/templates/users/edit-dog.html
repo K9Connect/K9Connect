@@ -2,13 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8"/>
-<<<<<<< HEAD
   <title>Edit Dog</title>
-  <div th:replace="partials :: header"></div>
-=======
   <th:block th:replace="partials :: head"></th:block>
-  <title>Create Dog</title>
->>>>>>> main
 
 </head>
 <body>
@@ -16,10 +11,11 @@
 
 <div class="container justify-content-center">
   <form th:action="@{|/dog/edit/${id}|}" th:method="post" th:object="${dog}">
-    <div class="row mb-3" th:each="photo:${dog.photos}">
-      <label for="photo" class="form-label">Photo</label>
-      <input class="form-control" id="photo" name="dog_photos[]" th:value="${photo.url}" required/>
-    </div>
+    <!--/* replaced by photo upload */-->
+<!--    <div class="row mb-3" th:each="photo:${dog.photos}">-->
+<!--      <label for="photo" class="form-label">Photo</label>-->
+<!--      <input class="form-control" id="photo" name="dog_photos[]" th:value="${photo.url}" required/>-->
+<!--    </div>-->
     <div class="row mb-3">
       <label for="name" class="form-label">Name</label>
       <input class="form-control" id="name" th:field="*{name}" required/>
