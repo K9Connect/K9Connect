@@ -12,6 +12,7 @@
     /*--k9-link: hsl(196, 100%, 33%);*/
     /*--k9-link: rgb(101, 142, 55);*/
     --k9-link: hsl(204, 85%, 45%);
+    --k9-transparent: rgba(242, 242, 242, 0.67);
 }
 
 a {
@@ -177,7 +178,7 @@ section{
 }
 
 .container-custom {
-    background-color: var(--k9-light);
+    background-color: var(--k9-transparent);
     padding: 1em;
     border: 1px solid lightgrey;
     border-radius: 3px;
@@ -262,6 +263,16 @@ section{
     #review-box {
         max-height: 320px;
         overflow-y: auto;
+    }
+
+    #user-review-body {
+        background-image: url("/images/user-reviews-fabian-gieske-unsplash.jpg");
+        background-size: cover;
+    }
+
+    #dog-review-body {
+        background-image: url("/images/dog-reviews-anna-dudkova-unsplash.jpg");
+        background-size: cover;
     }
 }
 

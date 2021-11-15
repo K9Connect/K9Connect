@@ -17,7 +17,7 @@ $(document).ready(function() {
 
     function resetColor() {
         for (let i = 1; i < bones.length; i++) {
-            bones[i].css('color', '#e3e3e3');
+            bones[i].css('color', '#808088');
         }
     }
 

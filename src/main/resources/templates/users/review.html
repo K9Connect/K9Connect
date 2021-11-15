@@ -6,32 +6,45 @@
     <title>User Review</title>
     <style>
         i.fa-bone {
-            color: var(--k9-light-gray);
+            color: var(--k9-gray);
         }
     </style>
 </head>
-<body>
+<body id="user-review-body">
 <div th:replace="partials :: navbar"></div>
-<div class="container">
-    <h1>Review of User: <span th:text="${reviewedUser.username}"></span></h1>
-    <form th:action="@{|/review/${id}|}" method="POST" th:object="${userReview}">
-        <div>
-            <span>Rating: </span>
-            <i id="user-review-bone-1" class="fas fa-bone bone-icon" data-bones="1"></i>
-            <i id="user-review-bone-2" class="fas fa-bone bone-icon" data-bones="2"></i>
-            <i id="user-review-bone-3" class="fas fa-bone bone-icon" data-bones="3"></i>
-            <i id="user-review-bone-4" class="fas fa-bone bone-icon" data-bones="4"></i>
-            <i id="user-review-bone-5" class="fas fa-bone bone-icon" data-bones="5"></i>
+<div class="blue-overlay d-flex align-items-center">
+    <div class="container">
+        <div class="row justify-content-end">
+            <div class="col-sm-12 col-md-8">
+                <h1>Review of User: <span th:text="${reviewedUser.username}"></span></h1>
+            </div>
         </div>
-        <input id="buried-bone" type="hidden" name="stars">
-        <div th:if="${#fields.hasErrors('stars')}" th:errors="*{stars}">star error</div>
-        <div class="form-group">
-<!--            <label for="user-review">Review</label>-->
-            <textarea class="form-control" th:field="*{review}" id="user-review" cols="30" rows="10" placeholder="Please leave a review..."></textarea>
-            <div th:if="${#fields.hasErrors('review')}" th:errors="*{review}">review error</div>
+        <div class="row justify-content-end">
+            <div class="col-sm-12 col-md-8">
+                <div class="container-custom">
+                    <form th:action="@{|/review/${id}|}" method="POST" th:object="${userReview}">
+                        <div>
+                            <span>Rating: </span>
+                            <i id="user-review-bone-1" class="fas fa-bone bone-icon" data-bones="1"></i>
+                            <i id="user-review-bone-2" class="fas fa-bone bone-icon" data-bones="2"></i>
+                            <i id="user-review-bone-3" class="fas fa-bone bone-icon" data-bones="3"></i>
+                            <i id="user-review-bone-4" class="fas fa-bone bone-icon" data-bones="4"></i>
+                            <i id="user-review-bone-5" class="fas fa-bone bone-icon" data-bones="5"></i>
+                        </div>
+                        <input id="buried-bone" type="hidden" name="stars">
+                        <div th:if="${#fields.hasErrors('stars')}" th:errors="*{stars}">star error</div>
+                        <div class="form-group">
+                            <!--            <label for="user-review">Review</label>-->
+                            <textarea class="form-control" th:field="*{review}" id="user-review" cols="30" rows="10"
+                                      placeholder="Please leave a review..."></textarea>
+                            <div th:if="${#fields.hasErrors('review')}" th:errors="*{review}">review error</div>
+                        </div>
+                        <button class="btn btn-k9-blue" type="submit">Submit Review</button>
+                    </form>
+                </div>
+            </div>
         </div>
-        <button class="btn btn-k9-blue" type="submit">Submit Review</button>
-    </form>
+    </div>
 </div>
 
 <div th:replace="partials :: scripts"></div>
