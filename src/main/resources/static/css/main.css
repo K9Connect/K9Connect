@@ -279,6 +279,11 @@ section{
         display: flex;
         justify-content: space-around;
     }
+
+    #edit-profile-body {
+        background-image: url("/images/user-edit-marcus-cramer-unsplash.jpg");
+        background-size: cover;
+    }
 }
 
 nav {
