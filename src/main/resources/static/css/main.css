@@ -274,6 +274,11 @@ section{
         background-image: url("/images/dog-reviews-anna-dudkova-unsplash.jpg");
         background-size: cover;
     }
+
+    .contact-info-list {
+        display: flex;
+        justify-content: space-around;
+    }
 }
 
 nav {
@@ -409,4 +414,8 @@ nav {
 
 #user-profile-row {
     border-bottom: 2px solid var(--k9-blue);
+}
+
+.container {
+    padding-top: 3rem;
 }
