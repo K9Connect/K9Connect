@@ -15,6 +15,10 @@
     --k9-transparent: rgba(242, 242, 242, 0.67);
 }
 
+html {
+    height: 100%;
+}
+
 a {
     color: var(--k9-link);
     text-decoration: none;
@@ -166,9 +170,10 @@ td{
 /* demo styles */
 
 body{
-    height: 100vh;
-    background: -webkit-linear-gradient(left, #25c481, #25b7c4);
-    background: linear-gradient(to right, #25c481, #25b7c4);
+    height: 100%;
+    /*background: -webkit-linear-gradient(left, #25c481, #25b7c4);*/
+    /*background: linear-gradient(to right, #25c481, #25b7c4);*/
+    background-color: var(--k9-light);
     font-family: Roboto, sans-serif;
     font-size: 1.2em;
     color: var(--k9-dark);
@@ -216,10 +221,10 @@ section{
 }
 
 .blue-overlay {
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     background-color: hsla(196, 70%, 25%, 0.75);
-    position: absolute;
+    position: relative;
     top: 0;
     left: 0;
     z-index: 1;
@@ -245,6 +250,11 @@ section{
         background-image: url("/images/login-bg-landscape-skyler-gerald-unsplash.jpg");
         background-size: cover;
     }
+
+    #contact-body {
+            background-image: url("/images/contact-bg.jpeg");
+            background-size: cover;
+        }
 
     #register-body {
         background-image: url("/images/register-landscape-elisa-kennemer-unsplash.jpg");
@@ -423,4 +433,12 @@ nav {
 
 .container {
     padding-top: 3rem;
+}
+
+.icon-margin-rt {
+    margin-right: 5px;
+}
+
+#contact-box {
+    padding-bottom: 1em;
 }
