@@ -399,7 +399,3 @@ nav {
 #user-profile-row {
     border-bottom: 2px solid var(--k9-blue);
 }
-
-i.fa-bone {
-    color: var(--k9-light-gray);
-}

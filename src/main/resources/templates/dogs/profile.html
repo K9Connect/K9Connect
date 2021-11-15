@@ -15,6 +15,10 @@
             height: 100px;
             width: auto;
         }
+
+        i.fa-bone {
+            color: goldenrod;
+        }
     </style>
 
 </head>
@@ -97,9 +101,9 @@
                     </div>
                     <div>
                         <p>
-                            <!--TODO: replace asterisk with a star icon (or something dog-themed)-->
-                            <span style="color: goldenrod"
-                                  th:each="i : ${#numbers.sequence(1, review.stars)}">*</span>
+                            <span th:each="i : ${#numbers.sequence(1, review.stars)}">
+                                <i class="fas fa-bone bone-icon icon-adjust"></i>
+                            </span>
                             <br>
                             <span th:text="${review.review}"></span>
                         </p>
