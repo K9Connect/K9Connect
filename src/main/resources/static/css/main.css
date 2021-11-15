@@ -339,7 +339,7 @@ nav {
     font-size: 0.8em;
 }
 
-#user-profile-h1 {
+#user-profile-h1, #dog-profile-h1 {
     text-align: start;
     color: var(--k9-dark);
     margin-bottom: 5px;
