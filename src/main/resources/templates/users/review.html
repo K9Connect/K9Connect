@@ -4,21 +4,10 @@
     <meta charset="UTF-8" />
     <th:block th:replace="partials :: head"></th:block>
     <title>User Review</title>
-    <style>
-        .hidden-radio {
-            position: fixed;
-            opacity: 0;
-            /*pointer-events: none;*/
-        }
 
-        i {
-            color: var(--k9-light-gray);
-        }
-    </style>
 </head>
 <body>
 <div th:replace="partials :: navbar"></div>
-
 <div class="container">
     <h1>Review of User: <span th:text="${reviewedUser.username}"></span></h1>
     <form th:action="@{|/review/${id}|}" method="POST" th:object="${userReview}">

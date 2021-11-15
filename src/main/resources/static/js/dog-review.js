@@ -37,15 +37,15 @@ $(document).ready(function() {
         }
     }
 
-    const buriedBone = $('#buried-bone');
+    const buriedBone = $('#buried-dog-bone');
 
     const bones = [
         null,
-        $('#user-review-bone-1'),
-        $('#user-review-bone-2'),
-        $('#user-review-bone-3'),
-        $('#user-review-bone-4'),
-        $('#user-review-bone-5')
+        $('#dog-review-bone-1'),
+        $('#dog-review-bone-2'),
+        $('#dog-review-bone-3'),
+        $('#dog-review-bone-4'),
+        $('#dog-review-bone-5')
     ];
 
     setHoverListeners();
