@@ -64,52 +64,49 @@ a {
 }
 
 .just-left {
-    justify-content: left;
+    justify-content: start;
     width: 100%;
 }
 .just-right {
-    justify-content: right;
+    justify-content: end;
     width: 100%;
 }
 
 .message-sent {
-    background-color: lightgreen;
-    display: block;
-    /*clear: left;*/
-    margin-bottom: 1px;
-    /*margin-right: 5px;*/
-    padding-left: 10px;
-    padding-right: 10px;
-
-    border: solid black 2px;
-    border-radius: 25px;
-    width: 45em;
-}
-
-.italics {
-    font-family: Roboto, sans-serif;
-}
-
-.curved {
-    border-radius: 25px;
+    background-color: hsl(112, 40%, 70%);
+    border: solid hsl(112, 40%, 40%) 3px;
+    margin-right: 33%;
 }
 
 .message-received {
-    background-color: lightblue;
+    background-color: hsl(196, 40%, 70%);
+    border: solid hsl(196, 40%, 40%) 3px;
+    margin-left: 33%;
+}
+
+.message-sent,
+.message-received {
     display: block;
     /*clear: left;*/
     margin-bottom: 1px;
     /*margin-right: 5px;*/
-    padding-left: 10px;
-    padding-right: 10px;
+    /*padding-left: 10px;*/
+    /*padding-right: 10px;*/
+    padding: 1em;
+    border-radius: 1em;
+    width: 67%;
+}
 
-    border: solid black 2px;
-    border-radius: 25px;
-    width: 45em;
+.italics {
+    font-style: italic;
+}
+
+.curved {
+    border-radius: 1em;
 }
 
 .bordered {
-    border: solid black 3px;
+    border: solid var(--k9-blue) 3px;
 }
 .no-m-top {
     margin-top: 0px;
