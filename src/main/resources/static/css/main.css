@@ -9,6 +9,7 @@
     --k9-light-blue: hsl(196, 25%, 75%);
     --k9-gray: #808088;
     --k9-blue: hsl(196, 70%, 25%);
+    --k9-blue-brighter: hsl(196, 73%, 28%);
     --k9-dark: hsl(196, 70%, 15%);
     /*--k9-link: hsl(196, 100%, 33%);*/
     /*--k9-link: rgb(101, 142, 55);*/
@@ -49,7 +50,8 @@ a {
 }
 
 .btn:hover {
-    color: var(--k9-light-blue);
+    color: var(--k9-light);
+    box-shadow: 4px 4px var(--k9-gray);
 }
 
 .center {
@@ -468,6 +470,11 @@ nav {
 .btn-k9-blue {
     background-color: var(--k9-blue);
     color: var(--k9-light);
+}
+
+.btn-k9-blue:hover {
+    background-color: var(--k9-blue-brighter);
+    /*color: var(--k9-light-blue);*/
 }
 
 .k9-card-bio {
