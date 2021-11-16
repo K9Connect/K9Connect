@@ -5,6 +5,10 @@
     <th:block th:replace="partials :: head"></th:block>
     <title>User Review</title>
     <style>
+        h1 {
+            color: var(--k9-light);
+        }
+
         i.fa-bone {
             color: var(--k9-gray);
         }
@@ -12,7 +16,7 @@
 </head>
 <body id="user-review-body">
 <div th:replace="partials :: navbar"></div>
-<div class="blue-overlay d-flex align-items-center">
+<div class="blue-overlay">
     <div class="container">
         <div class="row justify-content-end">
             <div class="col-sm-12 col-md-8">
@@ -39,7 +43,7 @@
                                       placeholder="Please leave a review..."></textarea>
                             <div th:if="${#fields.hasErrors('review')}" th:errors="*{review}">review error</div>
                         </div>
-                        <button class="btn btn-k9-blue" type="submit">Submit Review</button>
+                        <button class="btn btn-k9-blue btn-lg btn-block" type="submit">Submit Review</button>
                     </form>
                 </div>
             </div>

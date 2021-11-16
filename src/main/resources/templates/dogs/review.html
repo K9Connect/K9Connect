@@ -5,6 +5,10 @@
     <th:block th:replace="partials :: head"></th:block>
     <title>Dog Review</title>
     <style>
+        h1 {
+            color: var(--k9-light);
+        }
+
         i.fa-bone {
             color: var(--k9-gray);
         }
@@ -13,7 +17,7 @@
 <body id="dog-review-body">
 <div th:replace="partials :: navbar"></div>
 <div class="blue-overlay d-flex align-items-center">
-    <div class="container">
+    <div class="container pt-0">
         <div class="row">
             <div class="col-sm-12 col-md-8">
                 <h1>Review of Dog: <span th:text="${reviewedDog.name}"></span></h1>
@@ -37,7 +41,7 @@
                           placeholder="Please enter a review..."></textarea>
                         </div>
                         <div class="form-group">
-                            <button class="btn btn-k9-blue" type="submit">Submit Review</button>
+                            <button class="btn btn-k9-blue btn-lg btn-block" type="submit">Submit Review</button>
                         </div>
                     </form>
                 </div>
