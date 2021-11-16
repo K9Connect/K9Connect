@@ -4,7 +4,14 @@
     <meta charset="UTF-8" />
     <th:block th:replace="partials :: head"></th:block>
     <title>Template</title>
-
+    <style>
+        body {
+            background-color: var(--k9-blue);
+        }
+        h1 {
+            color: var(--k9-light)
+        }
+    </style>
 </head>
 <body>
 <div th:replace="partials :: navbar"></div>
@@ -18,7 +25,7 @@
 
 <!--    <br>-->
 
-    <div class="container-custom p-5 ">
+    <div class="container-custom p-5">
         <form th:action="@{/profile/manage}" th:method="post" th:object="${user}">
             <div class="form-group">
                 <label for="username" class="form-label">Username</label>
@@ -37,14 +44,14 @@
                 <input class="form-control" id="newPassword" th:field="*{password}" required/>
             </div>
             <div class="p-0 col-12">
-                <button type="submit" class="btn btn-k9-blue btn-block">Edit</button>
+                <button type="submit" class="btn btn-k9-blue btn-block btn-lg">Edit</button>
             </div>
         </form>
     </div>
     <br>
     <form th:action="@{/profile/deactivate}" th:method="post" >
-        <div class="p-0 col-12">
-            <button type="submit" class="btn btn-danger btn-block">Deactivate Account</button>
+        <div class="p-0 col-12 text-center">
+            <button type="submit" class="btn btn-danger btn-lg"><i class="fas fa-user-minus mr-3"></i> Deactivate Account</button>
         </div>
     </form>
 
