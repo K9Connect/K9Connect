@@ -8,8 +8,8 @@
 <body class="k9-background-solid">
 <div th:replace="partials :: navbar"></div>
 <div class="container">
-    <div id="user-profile-row" class="row">
-        <div class="col-sm-12 col-md-4">
+    <div id="user-profile-row" class="row profile-top-row">
+        <div class="col-sm-12 col-md-3">
             <div class="row">
                 <div id="user-profile-col" class="col">
                     <img id="user-profile-pic" th:src="${user.getDetails().getPfp()}">
@@ -59,7 +59,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-12 col-md-8">
+        <div class="col-sm-12 col-md-9">
             <div class="row">
                 <div id="user-bio" class="col">
                     <h4>Bio</h4>

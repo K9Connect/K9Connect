@@ -388,7 +388,7 @@ nav {
 }
 
 .user-review {
-    margin-bottom: 0.5em;
+    margin-bottom: 1.5em;
 }
 
 .reviewer-thumbnail {
@@ -419,8 +419,11 @@ nav {
 
 #user-profile-pic {
     /*float: left;*/
+    height: 250px;
+    width: 250px;
     max-height: 100%;
     max-width: 100%;
+    padding-bottom: 1em;
     /*object-fit: cover;*/
 }
 
@@ -488,8 +491,12 @@ nav {
     height: 8em;
 }
 
-#user-profile-row {
+/*#user-profile-row {*/
+/*}*/
+
+.profile-top-row {
     border-bottom: 2px solid var(--k9-blue);
+    padding-bottom: 1em;
 }
 
 .container {
@@ -530,4 +537,15 @@ nav {
 
 .dropdown-menu.show {
     padding-left: 0.5em;
+}
+
+.dog-photo-delete-form {
+    position: relative;
+    bottom: 1.7em;
+}
+
+.dog-photo-delete-btn {
+    line-height: 1em;
+    border: 3px solid hsla(196, 70%, 15%, 0.2);
+    background-color: hsla(0, 0%, 75%, 0.25);
 }
