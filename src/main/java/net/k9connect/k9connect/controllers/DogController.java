@@ -221,7 +221,7 @@ public class DogController {
         User user = userDao.findByUsername(loggedInUser.getUsername());
         // TODO: Only deletes url from the database, find out how to delete file from directory
         photoDao.deleteById(id);
-        return "redirect:/profile";
+        return "redirect:/dog/{id}";
     }
 
     @GetMapping("/photo/add/{id}")
