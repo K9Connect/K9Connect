@@ -28,7 +28,12 @@
             <tr>
                 <td><a th:href="@{|/dog/${dog.id}|}"><span th:text="${dog.name}"></span></a></td>
                 <td th:text="${dog.breed}"></td>
-                <td th:text="${dog.gender}"></td>
+                <td th:if="${dog.gender} == 'F'">
+                    Female
+                </td>
+                <td th:unless="${dog.gender} == 'F'">
+                    Male
+                </td>
                 <td><a th:href="@{|/profile/${dog.owner.id}|}"><span th:text="${dog.owner.username}"></span></a></td>
 <!--                <td><a href="#">View Reports</a></td>&lt;!&ndash; TODO: use th:href to link to dog's reports &ndash;&gt;-->
                 <td><a th:href="@{|/dog/${dog.id}|}">View Reviews</a></td><!-- TODO: use th:href to link to dog's reviews -->

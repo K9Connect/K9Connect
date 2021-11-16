@@ -51,7 +51,8 @@
                     <td ><a class="table-links" th:href="@{|/dog/${dog.id}|}" th:text="${dog.name}"></a></td>
                     <td th:text="${dog.getDetails().getAge()}"></td>
                     <td th:text="${dog.breed}"></td>
-                    <td th:text="${dog.gender}"></td>
+                    <td th:if="${dog.gender} == 'F'">Female</td>
+                    <td th:unless="${dog.gender} == 'F'">Male</td>
                     <td>
                         <a class="table-links" th:href="@{|/profile/${dog.owner.id}|}">
                             <span th:text="${dog.owner.username}"></span>
