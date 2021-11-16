@@ -140,6 +140,11 @@ h1{
     text-align: center;
     margin-bottom: 15px;
 }
+
+.k9-form-h1 {
+    color: var(--k9-light);
+}
+
 table{
     width:100%;
     table-layout: fixed;
@@ -394,8 +399,11 @@ nav {
 .reviewer-thumbnail {
     height: 100%;
     width: 100%;
-    border: none;
+    border: 3px solid #c8c8c8;
     border-radius: 50%
+}
+.reviewer-thumbnail:hover {
+    border: 3px solid var(--k9-link);
 }
 
 .review-bones {
