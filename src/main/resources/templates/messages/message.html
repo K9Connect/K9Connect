@@ -25,7 +25,7 @@
     <div class="col-12 bordered curved">
 
         <div class="center">
-            <h1>Message History</h1><br>
+            <h1 class="mt-4">Message History</h1><br>
         </div>
 
         <div class="row justify-content-center" style="margin-bottom: 10px"><a
@@ -34,34 +34,37 @@
                                                                   alt="other user profile picture"></a>
             <h3 class="center" th:text="${otheruser.getUsername()}"></h3>
         </div>
-        <div class="mb-4 msg" th:each="message : ${messages}">
+        <div class="mb-4" th:each="message : ${messages}">
 
 
-            <div class="just-left">
-            <div class="message-sent"
-                 th:if="${message.getSending_user() == loggedinuser && message.receiving_user == otheruser}"><br>
+<!--            <div class="just-left">-->
+                <div class="message-sent"
+                     th:if="${message.getSending_user() == loggedinuser && message.receiving_user == otheruser}">
 
-                <p th:text="${message.getContent()}"></p>
-                <p th:if="${message.getSending_user() == loggedinuser && message.receiving_user == otheruser}"
-                   class="no-m-top italics" style="align-content: end">Sent by You on <span
-                        th:text="${message.getReadableDate()}"></span></p>
-            </div>
-            </div>
+                    <p th:text="${message.getContent()}"></p>
+                    <span th:if="${message.getSending_user() == loggedinuser && message.receiving_user == otheruser}"
+                       class="no-m-top italics" style="align-content: end">Sent by You on <span
+                            th:text="${message.getReadableDate()}"></span></span>
+                </div>
+<!--            </div>-->
 
-            <div class="just-right">
-            <div class="message-received"
-                 th:if="${message.getSending_user() == otheruser && message.receiving_user == loggedinuser}"><br>
-                <p th:text="${message.getContent()}"></p>
-                <p class="no-m-top italics"
-                   th:if="${message.getSending_user() == otheruser && message.receiving_user == loggedinuser}"
-                   style="align-content: end">Sent by <span th:text="${otheruser.getUsername()}"></span> on <span
-                        th:text="${message.getReadableDate()}"></span></p>
-                <p class="no-m-top"
-                   th:if="${message.getSending_user() == otheruser && message.receiving_user == loggedinuser}"
-                   style="align-content: end"><a th:href="@{|/report/${otheruser.getId()}|}">Report Message</a></p>
+<!--            <div class="just-right">-->
+                <div class="message-received"
+                     th:if="${message.getSending_user() == otheruser && message.receiving_user == loggedinuser}">
+                    <p th:text="${message.getContent()}"></p>
+                    <span class="no-m-top italics"
+                       th:if="${message.getSending_user() == otheruser && message.receiving_user == loggedinuser}"
+                       style="align-content: end">Sent by <span th:text="${otheruser.getUsername()}"></span> on <span
+                            th:text="${message.getReadableDate()}"></span></span>
+                    <span class="no-m-top"
+                       th:if="${message.getSending_user() == otheruser && message.receiving_user == loggedinuser}"
+                       style="align-content: end">
+                        <br>
+                        <a class="k9-link" th:href="@{|/report/${otheruser.getId()}|}">Report Message</a>
+                    </span>
 
-            </div>
-            </div>
+                </div>
+<!--            </div>-->
 
         </div>
 
@@ -69,10 +72,12 @@
     </div>
     <div style="margin: 25px">
         <form th:method="POST" th:action="@{'/message/' + ${otheruser.getId()}}" th:object="${message}">
-
-            <textarea required cols="100" rows="5" th:field="*{content}"></textarea>
-            <button type="submit" class="btn btn-dark">Send</button>
-
+            <div class="form-group">
+                <textarea class="form-control" required cols="100" rows="5" th:field="*{content}"></textarea>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-k9-blue btn-lg btn-block">Send</button>
+            </div>
         </form>
     </div>
 
