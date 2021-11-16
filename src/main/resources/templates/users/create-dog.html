@@ -6,46 +6,52 @@
     <title>Create Dog</title>
 
 </head>
-<body>
+<body id="create-dog-body">
 <div th:replace="partials :: navbar"></div>
-
-<div class="container justify-content-center">
-    <form th:action="@{/dog/create}" th:method="post" th:object="${dog}">
-
-        <div class="row mb-3">
-            <label for="name" class="form-label">Name</label>
-            <input class="form-control" id="name" th:field="*{name}" required/>
+<div class="blue-overlay">
+    <div class="container">
+        <div class="row justify-content-end">
+            <div class="col-sm-12 col-md-8">
+                <div class="container-custom">
+                    <form th:action="@{/dog/create}" th:method="post" th:object="${dog}">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Name</label>
+                            <input class="form-control" id="name" th:field="*{name}" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="breed" class="form-label">Breed</label>
+                            <input class="form-control" id="breed" th:field="*{breed}" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="genderSelection">Gender</label>
+                            <select class="form-control" id="genderSelection" th:field="*{gender}">
+                                <option value="M">M</option>
+                                <option value="F">F</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="age">Age</label>
+                            <input class="form-control" id="age" th:field="*{details.age}" required/>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="certSelection">Has certifications</label>
+                            <select class="form-control" id="certSelection" th:field="*{details.has_certs}">
+                                <option value="true">Yes</option>
+                                <option value="false">No</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="bio">Bio</label>
+                            <textarea class="form-control" id="bio" th:field="*{details.bio}"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-k9-blue btn-block btn-lg"><i class="fas fa-dog"></i> Create Dog</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="row mb-3">
-            <label for="breed" class="form-label">Breed</label>
-            <input class="form-control" id="breed" th:field="*{breed}" required/>
-        </div>
-        <div class="row mb-3">
-            <label for="genderSelection">Gender</label>
-            <select class="form-control" id="genderSelection" th:field="*{gender}">
-                <option value="M">M</option>
-                <option value="F">F</option>
-            </select>
-        </div>
-        <div class="row mb-3">
-            <label class="form-label" for="age">Age</label>
-            <input class="form-control" id="age" th:field="*{details.age}" required/>
-        </div>
-        <div class="row mb-3">
-            <label class="form-label" for="certSelection">Has certifications</label>
-            <select class="form-control" id="certSelection" th:field="*{details.has_certs}">
-                <option value="true">Yes</option>
-                <option value="false">No</option>
-            </select>
-        </div>
-        <div class="row mb-3">
-            <label class="form-label" for="bio">Bio</label>
-            <textarea class="form-control" id="bio" th:field="*{details.bio}"></textarea>
-        </div>
-        <div class="col-12">
-            <button type="submit" class="btn btn-k9-blue">Create dog</button>
-        </div>
-    </form>
+    </div>
 </div>
 
 <div th:replace="partials :: scripts"></div>

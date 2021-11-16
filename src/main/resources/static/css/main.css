@@ -312,6 +312,15 @@ section{
         padding: 3em;
     }
 
+    #create-dog-body {
+        background-image: url("/images/create-dog-fatty-corgi-unsplash.jpg");
+        background-size: cover;
+    }
+
+    #edit-dog-body {
+        background-image: url("/images/edit-dog-john-salzarulo-unsplash.jpg");
+        background-size: cover;
+    }
 }
 
 @media screen and (max-width:768px) {
