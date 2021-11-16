@@ -24,7 +24,7 @@
 <div class="container">
     <div class="row mb-2 profile-top-row">
         <div th:if="${dog.getPhotos().size() == 0}" class="col-sm-12 col-md-4">
-            <img class="img-fluid" src="https://lh3.googleusercontent.com/proxy/q2LT85lAnp77l_QWzhffbFUp6kXuWM6TVO6q4fJwEFIRVvbGPqhGZxsPGJ1AB7LTsXtm7fRfKDRnM8xPO6hARk0Q" alt="dog profile picture">
+            <img class="img-fluid" src="/images/dog_silhouette.png" alt="dog profile picture">
         </div>
         <div th:unless="${dog.getPhotos().size() == 0}" class="col-sm-12 col-md-4">
             <img class="img-fluid" th:src="${dog.getPhotos()[0].url}" alt="dog profile picture">

@@ -135,7 +135,7 @@
                 <p class="cluster text-center">ID#: <span th:text="${dog.id}"></span></p>
                 <div th:if="${dog.getPhotos().size() == 0}">
                     <img class="img-fluid"
-                         src="https://lh3.googleusercontent.com/proxy/q2LT85lAnp77l_QWzhffbFUp6kXuWM6TVO6q4fJwEFIRVvbGPqhGZxsPGJ1AB7LTsXtm7fRfKDRnM8xPO6hARk0Q"
+                         src="/images/dog_silhouette.png"
                          alt="dog profile picture">
                 </div>
                 <div th:unless="${dog.getPhotos().size() == 0}">

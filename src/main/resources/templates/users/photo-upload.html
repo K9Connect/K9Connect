@@ -15,12 +15,12 @@
                 <div class="photo-upload-form-bg">
                     <h1>Upload a Profile Picture</h1>
                     <form th:action="@{/user/photo-upload}" method="POST" enctype="multipart/form-data">
-                        <div class="form-group">
-                            <label for="user-photo">Upload a Photo</label>
+                        <div class="form-group photo-upload-form-group">
+                            <label class="custom-file-upload m-2" for="user-photo">Choose a Photo</label>
                             <input class="form-control" id="user-photo" name="user-photo" type="file" required/>
                         </div>
                         <div class="form-group">
-                            <input class="btn btn-k9-blue" type="submit" value="Upload Photo"/>
+                            <button class="btn btn-k9-blue btn-block btn-lg" type="submit"><i class="fas fa-camera"></i> Upload Photo</button>
                         </div>
                     </form>
                 </div>
