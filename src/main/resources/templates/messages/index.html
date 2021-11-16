@@ -4,16 +4,19 @@
   <meta charset="UTF-8" />
   <th:block th:replace="partials :: head"></th:block>
   <title>Messenger</title>
-
+  <style>
+    th {
+      background-color: var(--k9-light-bluegray);
+    }
+  </style>
 </head>
 <body>
 <div th:replace="partials :: navbar"></div>
-
 <div class="container">
+<h1>Messages</h1>
+  <table>
 
-  <table class="table table-light">
-
-    <th>User</th>
+    <th class="tbl-header">User</th>
     <div th:each="user : ${users}">
 
       <tr>

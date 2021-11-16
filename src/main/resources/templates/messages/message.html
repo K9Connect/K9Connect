@@ -73,7 +73,12 @@
     <div style="margin: 25px">
         <form th:method="POST" th:action="@{'/message/' + ${otheruser.getId()}}" th:object="${message}">
             <div class="form-group">
-                <textarea class="form-control" required cols="100" rows="5" th:field="*{content}"></textarea>
+                <textarea class="form-control"
+                          required
+                          cols="100" rows="5"
+                          th:field="*{content}"
+                          placeholder="Start typing a new message here...">
+                </textarea>
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-k9-blue btn-lg btn-block">Send</button>
