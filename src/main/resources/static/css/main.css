@@ -146,7 +146,7 @@ table{
     table-layout: fixed;
 }
 .tbl-header{
-    background-color: rgba(255,255,255,0.3);
+    background-color: var(--k9-light-bluegray);
 }
 .tbl-content{
     height:300px;
@@ -169,7 +169,7 @@ td{
     font-weight: 300;
     font-size: 1.2em;
     color: var(--k9-dark);
-    border-bottom: solid 1px rgba(255,255,255,0.1);
+    border-bottom: solid 1px hsl(196, 20%, 82%);;
 }
 
 
@@ -241,6 +241,10 @@ section{
     #register-outer-box {
         justify-content: center;
     }
+
+    .dropdown-menu.show {
+        padding-left: 1em;
+    }
 }
 
 @media (orientation: landscape) {
@@ -310,6 +314,7 @@ section{
     .photo-upload-form-bg {
         padding: 3em;
     }
+
 }
 
 @media screen and (max-width:768px) {
@@ -321,6 +326,14 @@ section{
 @media screen and (min-width:768px) {
     .photo-upload-form-bg {
         padding: 3em;
+    }
+
+    #user-profile-col {
+        padding: 0;
+    }
+
+    #user-profile-info {
+        padding: 0 1em 1em 0;
     }
 }
 
@@ -428,12 +441,12 @@ nav {
     background-color: var(--k9-light);
     /*max-height: 320px;*/
     /*max-width: 320px;*/
-    padding: 0;
+    padding: 1em;
 }
 
 #user-profile-info {
     /*background-color: white;*/
-    padding: 0 1em 1em 0;
+    padding: 1em;
 }
 
 #review-box {
@@ -472,9 +485,29 @@ nav {
 }
 
 #dogs-table {
-    background-color: var(--k9-light-bluegray);
+    background-color: var(--k9-light);
 }
 
 .photo-upload-form-bg {
     background-color: var(--k9-transparent);
+}
+
+.k9-navbar-bg {
+    /* replaced navbar-light bg-light */
+    background-color: var(--k9-light-gray);
+    color: var(--k9-blue);
+}
+
+.k9-navbar-bg a {
+    color: var(--k9-blue);
+}
+
+#nav-drop-logout-btn {
+    color: var(--k9-blue);
+    background-color: white;
+    height: 24px;
+}
+
+.dropdown-menu.show {
+    padding-left: 0.5em;
 }
