@@ -37,23 +37,31 @@
                     </div>
                     <div>Zip Code: <span th:text="${info.getZipcode()}"></span></div>
                     <th:block th:if="${user.getId() != loggedinuser.getId()}">
-                        <div>
-                            <a class="k9-link" th:href="@{|/message/${id}|}">
+<!--                        side by side-->
+                        <div class="mr-2">
+                            <a class="btn btn-k9-blue" th:href="@{|/message/${id}|}">
                                 <i class="far fa-comment-dots"></i>&nbsp;Message
                             </a>
-                        </div>
-                        <div>
-                            <a class="k9-link" th:href="@{|/review/${id}|}">
+                            <a class="btn btn-k9-blue" th:href="@{|/review/${id}|}">
                                 <i class="fas fa-bone bone-icon icon-adjust"></i>&nbsp;Rate/Review
                             </a>
                         </div>
+<!--                        stacked buttons-->
+<!--                        <div class="pb-2">-->
+<!--                            <a class="btn btn-k9-blue" th:href="@{|/message/${id}|}">-->
+<!--                                <i class="far fa-comment-dots"></i>&nbsp;Message-->
+<!--                            </a>-->
+<!--                        </div>-->
+<!--                        <div>-->
+<!--                            <a class="btn btn-k9-blue" th:href="@{|/review/${id}|}">-->
+<!--                                <i class="fas fa-bone bone-icon icon-adjust"></i>&nbsp;Rate/Review-->
+<!--                            </a>-->
+<!--                        </div>-->
                     </th:block>
                     <th:block th:if="${user.id} == ${loggedinuser.id} and ${user.is_admin()} == true">
-                        <div>
-                            <a th:href="@{/users/all}">View All Users</a>
-                        </div>
-                        <div>
-                            <a th:href="@{/dogs/all}">View All Dogs</a>
+                        <div class="mr-2">
+                            <a class="btn btn-k9-blue" th:href="@{/users/all}"><i class="fas fa-users"></i> Users</a>
+                            <a class="btn btn-k9-blue" th:href="@{/dogs/all}"><i class="fas fa-dog"></i> Dogs</a>
                         </div>
                     </th:block>
                 </div>
@@ -111,9 +119,9 @@
         </div>
     </div>
 <!--    <hr>-->
-    <div class="row mt-4">
+    <div class="row my-3">
         <div class="col">
-            <a th:if="${user.getId() == loggedinuser.getId()}" th:href="@{/dog/create}">
+            <a class="btn btn-k9-blue" th:if="${user.getId() == loggedinuser.getId()}" th:href="@{/dog/create}">
                 <i class="fas fa-dog"></i> Add Dog
             </a>
         </div>

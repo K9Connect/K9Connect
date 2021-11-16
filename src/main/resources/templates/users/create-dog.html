@@ -12,6 +12,11 @@
     <div class="container">
         <div class="row justify-content-end">
             <div class="col-sm-12 col-md-8">
+                <h1 class="k9-form-h1">Add Dog</h1>
+            </div>
+        </div>
+        <div class="row justify-content-end">
+            <div class="col-sm-12 col-md-8">
                 <div class="container-custom">
                     <form th:action="@{/dog/create}" th:method="post" th:object="${dog}">
                         <div class="form-group">
@@ -45,7 +50,7 @@
                             <textarea class="form-control" id="bio" th:field="*{details.bio}"></textarea>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-k9-blue btn-block btn-lg"><i class="fas fa-dog"></i> Create Dog</button>
+                            <button type="submit" class="btn btn-k9-blue btn-block btn-lg"><i class="fas fa-dog"></i> Add Dog</button>
                         </div>
                     </form>
                 </div>

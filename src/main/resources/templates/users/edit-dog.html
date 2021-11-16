@@ -12,6 +12,11 @@
     <div class="container">
         <div class="row justify-content-end">
             <div class="col-sm-12 col-md-8">
+                <h1 class="k9-form-h1">Edit Dog</h1>
+            </div>
+        </div>
+        <div class="row justify-content-end">
+            <div class="col-sm-12 col-md-8">
                 <div class="container-custom">
                     <form th:action="@{|/dog/edit/${id}|}" th:method="post" th:object="${dog}">
                         <!--/* replaced by photo upload */-->
