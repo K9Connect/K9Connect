@@ -84,7 +84,7 @@ public class MessageController {
         for (int i = 0; i < messageHistory.size(); i++) {
             if (!listOfUsers.contains(messageHistory.get(i).receiving_user) && user.getId() != messageHistory.get(i).receiving_user.getId()) {
                 listOfUsers.add(messageHistory.get(i).receiving_user);
-            } else if (!listOfUsers.contains(messageHistory.get(i).sending_user) && user.getId() != messageHistory.get(i).receiving_user.getId()) {
+            } else if (!listOfUsers.contains(messageHistory.get(i).sending_user) && user.getId() != messageHistory.get(i).sending_user.getId()) {
                 listOfUsers.add(messageHistory.get(i).sending_user);
             }
         }
