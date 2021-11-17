@@ -10,16 +10,17 @@
 
 <div class="container">
     <h1>All Users</h1>
-    <table class="table">
-        <thead class="tbl-header">
+    <div class="k9-table">
+        <table class="table table-responsive-sm">
+            <thead class="tbl-header">
             <tr>
                 <th>Username</th>
                 <th>Email</th>
                 <th>Status</th>
                 <th>Set Status</th>
             </tr>
-        </thead>
-        <tbody th:each="user : ${users}">
+            </thead>
+            <tbody th:each="user : ${users}">
             <tr>
                 <td><a th:href="@{|/profile/${user.id}|}"><span th:text="${user.username}"></span></a></td>
                 <td th:text="${user.email}"></td>
@@ -35,8 +36,9 @@
                     </form>
                 </td>
             </tr>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <div th:replace="partials :: scripts"></div>

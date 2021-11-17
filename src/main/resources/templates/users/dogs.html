@@ -11,8 +11,6 @@
 
 <div class="container">
     <h1>Dog Search</h1>
-    <br>
-
     <div class="input-group rounded justify-content-center">
         <form th:action="@{/dog/search}" th:method="post" class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="term">
@@ -28,43 +26,36 @@
             </div>
         </form>
     </div>
-    <div class="pt-2">
-        <div class="tbl-header">
-            <table cellpadding="0" cellspacing="0" border="0">
-                <!--        <table class="table table-bordered border-primary">-->
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Age</th>
-                    <th>Breed</th>
-                    <th>Gender</th>
-                    <th>Owner</th>
-                </tr>
-                </thead>
-            </table>
-        </div>
-        <div class="tbl-content">
-            <table id="dogs-table" cellpadding="0" cellspacing="0" border="0">
-                <tbody th:each="dog : ${dogs}">
-                <tr>
-                    <td ><a class="table-links" th:href="@{|/dog/${dog.id}|}" th:text="${dog.name}"></a></td>
-                    <td th:text="${dog.getDetails().getAge()}"></td>
-                    <td th:text="${dog.breed}"></td>
-                    <td th:if="${dog.gender} == 'F'">Female</td>
-                    <td th:unless="${dog.gender} == 'F'">Male</td>
-                    <td>
-                        <a class="table-links" th:href="@{|/profile/${dog.owner.id}|}">
-                            <span th:text="${dog.owner.username}"></span>
-                        </a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+    <div class="k9-table pt-2">
+        <table class="table-responsive-sm table-responsive-lg" cellpadding="0" cellspacing="0" border="0">
+            <!--        <table class="table table-bordered border-primary">-->
+            <thead class="tbl-header">
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Breed</th>
+                <th>Gender</th>
+                <th>Owner</th>
+            </tr>
+            </thead>
+            <tbody id="dogs-table-body" class="tbl-content">
+            <tr th:each="dog : ${dogs}">
+                <td><a class="table-links" th:href="@{|/dog/${dog.id}|}" th:text="${dog.name}"></a></td>
+                <td th:text="${dog.getDetails().getAge()}"></td>
+                <td th:text="${dog.breed}"></td>
+                <td th:if="${dog.gender} == 'F'">Female</td>
+                <td th:unless="${dog.gender} == 'F'">Male</td>
+                <td>
+                    <a class="table-links" th:href="@{|/profile/${dog.owner.id}|}">
+                        <span th:text="${dog.owner.username}"></span>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
-
-
+</div>
 <div th:replace="partials :: scripts"></div>
 
 </body>

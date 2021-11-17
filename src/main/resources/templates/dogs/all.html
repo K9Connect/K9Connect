@@ -10,21 +10,22 @@
 
 <div class="container">
     <h1>All Dogs</h1>
-    <table>
-        <thead class="tbl-header">
+    <div class="k9-table">
+        <table class="table-responsive-sm">
+            <thead class="tbl-header">
             <tr>
                 <th>Name</th>
                 <th>Breed</th>
                 <th>Gender</th>
                 <th>Owner</th>
-<!--                <th>Reports</th>-->
+                <!--                <th>Reports</th>-->
                 <th>Reviews</th>
-<!--                <th>Reputation</th>-->
+                <!--                <th>Reputation</th>-->
                 <th>Status</th>
-<!--                <th>Details</th>-->
+                <!--                <th>Details</th>-->
             </tr>
-        </thead>
-        <tbody th:each="dog : ${dogs}">
+            </thead>
+            <tbody th:each="dog : ${dogs}">
             <tr>
                 <td><a th:href="@{|/dog/${dog.id}|}"><span th:text="${dog.name}"></span></a></td>
                 <td th:text="${dog.breed}"></td>
@@ -35,14 +36,16 @@
                     Male
                 </td>
                 <td><a th:href="@{|/profile/${dog.owner.id}|}"><span th:text="${dog.owner.username}"></span></a></td>
-<!--                <td><a href="#">View Reports</a></td>&lt;!&ndash; TODO: use th:href to link to dog's reports &ndash;&gt;-->
-                <td><a th:href="@{|/dog/${dog.id}|}">View Reviews</a></td><!-- TODO: use th:href to link to dog's reviews -->
-<!--                <td th:text="${dog.reputation}"></td>-->
+                <!--                <td><a href="#">View Reports</a></td>&lt;!&ndash; TODO: use th:href to link to dog's reports &ndash;&gt;-->
+                <td><a th:href="@{|/dog/${dog.id}|}">View Reviews</a></td>
+                <!-- TODO: use th:href to link to dog's reviews -->
+                <!--                <td th:text="${dog.reputation}"></td>-->
                 <td>active</td><!-- TODO: get dog's status and add forms to update status-->
                 <!-- <td><a href="#">View Details</a></td> --><!-- TODO: use th:href to link to dog's details -->
             </tr>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <div th:replace="partials :: scripts"></div>
