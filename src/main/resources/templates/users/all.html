@@ -24,7 +24,11 @@
             <tr>
                 <td><a th:href="@{|/profile/${user.id}|}"><span th:text="${user.username}"></span></a></td>
                 <td th:text="${user.email}"></td>
-                <td th:text="${user.status}"></td>
+                <td th:if="${user.status} == ${T(net.k9connect.k9connect.models.Statuses).banned}">
+                    <span class="status-banned" th:text="${user.status}"></span>
+                </td>
+                <td th:unless="${user.status} == ${T(net.k9connect.k9connect.models.Statuses).banned}" th:text="${user.status}">
+                </td>
                 <td>
                     <form th:action="@{/users/all}" method="post" class="form-inline">
                         <input type="hidden" name="user-id" th:value="${user.id}">
