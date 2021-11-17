@@ -18,24 +18,24 @@
             <div class="row">
                 <div id="user-profile-info" class="col d-flex flex-column">
                     <h1 id="user-profile-h1" th:text="${user.getUsername()}"></h1>
-                    <div th:if="${user.is_admin() == true}">Administrator</div>
+                    <div class="pb-1" th:if="${user.is_admin() == true}">Administrator</div>
                     <th:block th:switch="${user.status}">
-                        <div th:case="${T(net.k9connect.k9connect.models.Statuses).inactive}">
+                        <div class="pb-1" th:case="${T(net.k9connect.k9connect.models.Statuses).inactive}">
                             Status: <span class="status-inactive"><i class="fas fa-bed"></i> Inactive</span>
                         </div>
-                        <div th:case="${T(net.k9connect.k9connect.models.Statuses).banned}">
+                        <div class="pb-1" th:case="${T(net.k9connect.k9connect.models.Statuses).banned}">
                             Status: <span class="status-banned"><i class="fas fa-user-times"></i> Banned</span>
                         </div>
-                        <div th:case="*">
+                        <div class="pb-1" th:case="*">
                             Status: <span class="status-active"><i class="fas fa-user-check"></i> Active</span>
                         </div>
                     </th:block>
-                    <div>
+                    <div class="pb-1">
                         <i class="fas fa-phone"></i>
                         <span th:if="${info.getPhone_number() == null || info.getPhone_number().isEmpty()}">Private Number</span>
                         <span th:if="${info.getPhone_number() != null}" th:text="${info.getPhone_number()}"></span>
                     </div>
-                    <div>Zip Code: <span th:text="${info.getZipcode()}"></span></div>
+                    <div class="pb-1">Zip Code: <span th:text="${info.getZipcode()}"></span></div>
                     <th:block th:if="${user.getId() != loggedinuser.getId()}">
 <!--                        side by side-->
                         <div class="mr-2">
