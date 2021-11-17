@@ -215,13 +215,14 @@ public class DogController {
 
 
 
-    @PostMapping("/dog/photo/{id}")
-    public String deleteDogPhoto(@PathVariable long id, @ModelAttribute Dog dog, @ModelAttribute Photo photo) {
+    @PostMapping("/dog/photo/{photoId}/{dogId}")
+    public String deleteDogPhoto(@PathVariable long photoId, @PathVariable long dogId) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.findByUsername(loggedInUser.getUsername());
         // TODO: Only deletes url from the database, find out how to delete file from directory
-        photoDao.deleteById(id);
-        return "redirect:/dog/{id}";
+
+        photoDao.deleteById(photoId);
+        return "redirect:/dog/" + dogId;
     }
 
     @GetMapping("/photo/add/{id}")

@@ -79,7 +79,7 @@
             <div th:unless="${dog.photos.size() == 0}" class="d-flex justify-content-around flex-wrap pt-2">
                 <div th:each="photo : ${dog.photos}">
                     <img class="dog-thumb mb-2" th:src="${photo.url}" alt="dog photo">
-                    <form class="dog-photo-delete-form" th:if="${dog.owner.id == currentUser.id}" th:action="@{|/dog/photo/${photo.id}|}" th:method="POST">
+                    <form class="dog-photo-delete-form" th:if="${dog.owner.id == currentUser.id}" th:action="@{|/dog/photo/${photo.id}/${dog.id}|}" th:method="POST">
                         <button class="dog-photo-delete-btn" aria-label='delete item' type='submit' title="Delete Photo">&times;</button>
                     </form>
                 </div>
