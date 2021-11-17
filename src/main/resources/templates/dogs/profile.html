@@ -101,7 +101,7 @@
                     <div class="mr-2">
                         <img
                                 th:src="${review.commenter.details.pfp}"
-                                class="profile-thumb"
+                                class="profile-thumb reviewer-thumbnail"
                                 alt="user profile picture">
                     </div>
                     <div>
@@ -116,7 +116,11 @@
                 </div>
             </div>
             <th:block th:if="${dog.owner.id != currentUser.id}">
-                <a th:if="${userHasNotReviewedDog}" th:href="@{|/dogs/review/${dog.id}|}">Rate/Review Dog</a>
+                <a class="btn btn-k9-blue"
+                   th:if="${userHasNotReviewedDog}"
+                   th:href="@{|/dogs/review/${dog.id}|}">
+                    <i class="fas fa-bone"></i> Rate/Review Dog
+                </a>
             </th:block>
         </div>
     </div>
