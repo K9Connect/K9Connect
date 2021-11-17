@@ -5,10 +5,6 @@
     <th:block th:replace="partials :: head"></th:block>
     <title>Dog Review</title>
     <style>
-        h1 {
-            color: var(--k9-light);
-        }
-
         i.fa-bone {
             color: var(--k9-gray);
         }
@@ -20,7 +16,7 @@
     <div class="container pt-0">
         <div class="row">
             <div class="col-sm-12 col-md-8">
-                <h1>Review of Dog: <span th:text="${reviewedDog.name}"></span></h1>
+                <h1 class="k9-form-h1">Review of Dog: <span th:text="${reviewedDog.name}"></span></h1>
             </div>
         </div>
         <div class="row">
