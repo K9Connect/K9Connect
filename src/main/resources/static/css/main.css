@@ -596,3 +596,14 @@ button.carousel-control-next {
     background-color: transparent;
     border: none;
 }
+
+.profile-thumb {
+    height: 75px;
+    width: 75px;
+    border-radius: 50%;
+}
+
+.dog-thumb {
+    max-height: 100%;
+    max-width: 100%;
+}
