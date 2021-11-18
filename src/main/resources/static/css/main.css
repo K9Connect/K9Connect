@@ -585,7 +585,14 @@ nav {
     color: var(--k9-dark);
     border: 1px solid var(--k9-dark);
 }
+
 .k9-table {
     height: calc(100vh * 0.6);
     overflow: auto;
+}
+
+button.carousel-control-prev,
+button.carousel-control-next {
+    background-color: transparent;
+    border: none;
 }

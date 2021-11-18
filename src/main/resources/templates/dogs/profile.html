@@ -12,8 +12,8 @@
         }
 
         .dog-thumb {
-            height: 100px;
-            width: auto;
+            max-height: 100%;
+            max-width: 100%;
         }
     </style>
 
@@ -73,16 +73,30 @@
                 </a>
                 </span>
             </h3>
-            <div class="alert alert-info" th:if="${dog.photos.size() == 0}">
+            <div th:if="${dog.photos.size() == 0}" class="alert alert-info">
                 <p><span th:text="${dog.name}"></span> does not have any additional photos.</p>
             </div>
-            <div th:unless="${dog.photos.size() == 0}" class="d-flex justify-content-around flex-wrap pt-2">
-                <div th:each="photo : ${dog.photos}">
-                    <img class="dog-thumb mb-2" th:src="${photo.url}" alt="dog photo">
-                    <form class="dog-photo-delete-form" th:if="${dog.owner.id == currentUser.id}" th:action="@{|/dog/photo/${photo.id}/${dog.id}|}" th:method="POST">
-                        <button class="dog-photo-delete-btn" aria-label='delete item' type='submit' title="Delete Photo">&times;</button>
-                    </form>
+            <div th:unless="${dog.photos.size() == 0}" class="pt-2"><!--  d-flex justify-content-around flex-wrap  -->
+<!--                begin carousel-->
+                <div id="dog-photo-carousel" class="carousel slide" data-ride="carousel" data-interval="false">
+                    <div class="carousel-inner">
+                        <div th:each="photo : ${dog.photos}" class="carousel-item" style="width: 345px; height: 345px;">
+                            <img class="d-block w-100 dog-thumb mb-2" th:src="${photo.url}" alt="dog photo">
+                            <form class="dog-photo-delete-form" th:if="${dog.owner.id == currentUser.id}" th:action="@{|/dog/photo/${photo.id}/${dog.id}|}" th:method="POST">
+                                <button class="dog-photo-delete-btn" aria-label='delete item' type='submit' title="Delete Photo">&times;</button>
+                            </form>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-target="#dog-photo-carousel" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-target="#dog-photo-carousel" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </button>
                 </div>
+<!--                end carousel-->
             </div>
             <!--                        <form th:if="${dog.photos.size() != 0}" th:action="@{|/dog/photo/${dog.photos.get(0).getId()}|}" th:method="POST">-->
             <!--                            <button class="btn btn-dark">Delete Photo</button>-->
@@ -127,6 +141,10 @@
 </div>
 
 <div th:replace="partials :: scripts"></div>
-
+<script>
+    $(document).ready(function () {
+        $('.carousel-item:first-child').addClass('active');
+    });
+</script>
 </body>
 </html>
