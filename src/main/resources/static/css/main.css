@@ -625,3 +625,7 @@ button.carousel-control-next {
     padding: 0.375rem 0.75rem;
     border: none
 }
+
+#dog-photo-trigger-delete:hover {
+    background-color: hsl(5, 90%, 36%);
+}
