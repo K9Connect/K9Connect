@@ -547,16 +547,19 @@ nav {
     padding-left: 0.5em;
 }
 
-.dog-photo-delete-form {
-    position: relative;
-    bottom: 1.7em;
-}
+/*.dog-photo-delete-form {*/
+/*    position: relative;*/
+/*    bottom: 2em;*/
+/*    left: 0.4em;*/
+/*}*/
 
-.dog-photo-delete-btn {
-    line-height: 1em;
-    border: 3px solid hsla(196, 70%, 15%, 0.2);
-    background-color: hsla(0, 0%, 75%, 0.25);
-}
+/*.dog-photo-delete-btn {*/
+/*    line-height: 1em;*/
+/*    border: none;*/
+/*    border-radius: 50%;*/
+/*    background-color: hsla(0, 0%, 0%, 0.5);*/
+/*    color: #ffffff;*/
+/*}*/
 
 /*input[type="file"] {*/
 /*    !*display: none;*!*/
@@ -603,7 +606,22 @@ button.carousel-control-next {
     border-radius: 50%;
 }
 
-.dog-thumb {
+.dog-image {
     max-height: 100%;
     max-width: 100%;
+    margin: auto;
+}
+
+#dog-photo-carousel .carousel-item {
+    height: 345px;
+    width: 345px;
+    background-color: var(--k9-light-gray);
+}
+
+#dog-photo-trigger-delete {
+    border-radius: 0 0 0.5rem 0.5rem;
+    background-color: hsla(0, 0%, 0%, 0.5);
+    color: var(--k9-light);
+    padding: 0.375rem 0.75rem;
+    border: none
 }

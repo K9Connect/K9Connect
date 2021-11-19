@@ -67,10 +67,15 @@
 <!--                begin carousel-->
                 <div id="dog-photo-carousel" class="carousel slide" data-ride="carousel" data-interval="false">
                     <div class="carousel-inner">
-                        <div th:each="photo : ${dog.photos}" class="carousel-item" style="width: 345px; height: 345px;">
-                            <img class="d-block w-100 dog-thumb mb-2" th:src="${photo.url}" alt="dog photo">
+                        <div th:each="photo : ${dog.photos}" class="carousel-item">
+                            <div class="h-100 w-100 d-flex justify-content-center align-items-center">
+                                <img class="d-block dog-image"
+                                    th:src="${photo.url}"
+                                    alt="dog photo"
+                                >
+                            </div>
                             <form class="dog-photo-delete-form" th:if="${dog.owner.id == currentUser.id}" th:action="@{|/dog/photo/${photo.id}/${dog.id}|}" th:method="POST">
-                                <button class="dog-photo-delete-btn" aria-label='delete item' type='submit' title="Delete Photo">&times;</button>
+                                <button aria-label='delete item' type='submit' title="Delete Photo"></button>
                             </form>
                         </div>
                     </div>
@@ -84,6 +89,36 @@
                     </button>
                 </div>
 <!--                end carousel-->
+                <!-- modal trigger -->
+                <button
+                        th:if="${dog.owner.id == currentUser.id}"
+                        id="dog-photo-trigger-delete"
+                        type="button"
+                        data-toggle="modal"
+                        data-target="#dog-photo-confirm-delete">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+
+                <!-- modal -->
+                <div class="modal fade" id="dog-photo-confirm-delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Confirm Delete</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Are you certain you want to delete this photo?<br>This action cannot be undone.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button id="confirm-dog-photo-delete" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Confirm Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!--                        <form th:if="${dog.photos.size() != 0}" th:action="@{|/dog/photo/${dog.photos.get(0).getId()}|}" th:method="POST">-->
             <!--                            <button class="btn btn-dark">Delete Photo</button>-->
@@ -131,6 +166,16 @@
 <script>
     $(document).ready(function () {
         $('.carousel-item:first-child').addClass('active');
+
+        $('#dog-photo-trigger-delete').click(function () {
+            $('.dog-photo-delete-form').each(function (index, form) {
+                if (form.parentElement.classList.contains('active')) {
+                    $('#confirm-dog-photo-delete').click(function() {
+                        form.submit();
+                    });
+                }
+            });
+        });
     });
 </script>
 </body>
