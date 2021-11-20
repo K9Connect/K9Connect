@@ -219,9 +219,15 @@ public class DogController {
     public String deleteDogPhoto(@PathVariable long photoId, @PathVariable long dogId) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userDao.findByUsername(loggedInUser.getUsername());
-        // TODO: Only deletes url from the database, find out how to delete file from directory
 
-        photoDao.deleteById(photoId);
+        Dog currentDog = dogDao.getById(dogId);
+        Photo currentPhoto = photoDao.getById(photoId);
+        // to prevent user from editing path variable in form and deleting some other dog's photo
+        if (user.getId() == currentPhoto.getDog().getOwner().getId()) {
+            // TODO: Only deletes url from the database, find out how to delete file from directory
+            photoDao.delete(currentPhoto);
+        }
+
         return "redirect:/dog/" + dogId;
     }
 
