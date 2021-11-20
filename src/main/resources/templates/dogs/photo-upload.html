@@ -19,7 +19,7 @@
                     <!--    </th:block>-->
                     <form th:action="@{|/dog/${dog.id}/photo-upload|}" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
-                            <label class="m-2" for="dog-photo">Photo Upload</label>
+                            <label class="m-2" for="dog-photo">Photo Upload (maximum file size is 5MB)</label>
                             <input class="form-control" id="dog-photo" name="dog-photo" type="file" required/>
                         </div>
                         <div class="form-group">
