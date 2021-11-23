@@ -14,13 +14,13 @@
         <div class="row justify-content-center">
             <div class="col-sm-12 col-md-8">
                 <h1 class="k9-form-h1">Log In</h1>
-                <div th:if="${param.error}">
-                    Invalid Username and Password. Please Try again or contact Admin
+                <div th:if="${param.error}" class="k9-text-light">
+                    Invalid Username and Password. Please try again or contact an admin.
                 </div>
-                <div th:if="${param.logout}">
+                <div th:if="${param.logout}" class="k9-text-light">
                     You have been logged out.
                 </div>
-                <div th:if="${param.registered}">
+                <div th:if="${param.registered}" class="k9-text-light">
                     You have successfully registered.
                 </div>
 

@@ -629,3 +629,7 @@ button.carousel-control-next {
 #dog-photo-trigger-delete:hover {
     background-color: hsl(5, 90%, 36%);
 }
+
+.k9-text-light {
+    color: var(--k9-light);
+}
