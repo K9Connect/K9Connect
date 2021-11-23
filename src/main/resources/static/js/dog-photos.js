@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $('.carousel-item:first-child').addClass('active');
+    $('.carousel-inner').children().eq(1).addClass('active');
 
     $('#dog-photo-trigger-delete').click(function () {
         $('.dog-photo-delete-form').each(function (index, form) {

@@ -60,10 +60,10 @@
                 </a>
                 </span>
             </h3>
-            <div th:if="${dog.photos.size() == 0}" class="alert alert-info">
+            <div th:if="${dog.photos.size() &lt; 2}" class="alert alert-info">
                 <p><span th:text="${dog.name}"></span> does not have any additional photos.</p>
             </div>
-            <div th:unless="${dog.photos.size() == 0}" class="pt-2"><!--  d-flex justify-content-around flex-wrap  -->
+            <div th:unless="${dog.photos.size() &lt; 2}" class="pt-2"><!--  d-flex justify-content-around flex-wrap  -->
 <!--                begin carousel-->
                 <div id="dog-photo-carousel" class="carousel slide" data-ride="carousel" data-interval="false">
                     <div class="carousel-inner">
